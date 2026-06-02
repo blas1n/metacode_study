@@ -2,7 +2,7 @@
 
 ## 1. 데이터셋 개요
 
-실제 `BSVibe/bsvibe-app` 코드베이스를 분석해, 개인화 작업 메모리 RAG에 사용할 source-derived seed dataset 을 구성했어요. 사용자 데이터가 아니라 구현 파일, 런타임 배선, 프론트 surface, 운영 문서, 검증 테스트에서 확인한 구조적 사실을 record 로 만들었습니다.
+실제 `BSVibe/bsvibe-app` 코드베이스를 분석해, 개인화 작업 메모리 RAG에 사용할 source-derived seed dataset 을 구성했습니다. 사용자 데이터가 아니라 구현 파일, 런타임 배선, 프론트 surface, 운영 문서, 검증 테스트에서 확인한 구조적 사실을 record 로 만들었습니다.
 
 - 정제된 note 수: **31**
 - RAG chunk 수: **32** (note 당 평균 1.03 chunk, 최대 2)
@@ -12,7 +12,7 @@
 
 ## 2. 정제 자동화 결과
 
-정제 스크립트는 다음을 자동화해요.
+정제 스크립트는 다음을 자동화합니다.
 
 - JSONL record 필수 필드 검증과 ISO-8601 created_at 파싱
 - 이메일, API key (`sk-/pk-/ghp-/github_pat-…`), 로컬 경로 redaction
@@ -93,7 +93,7 @@
 
 ## 6. 상위 태그 / 태그 공출현
 
-가장 자주 묶이는 태그 페어는 RAG 검색 facet 후보예요.
+가장 자주 묶이는 태그 페어는 RAG 검색 facet 후보입니다.
 
 | tag | count |
 | --- | --- |
@@ -153,11 +153,11 @@
 | cohere/embed-multilingual-v3 | 512 | 114 | fit |
 | bge-m3 | 8192 | 114 | fit |
 
-> `fit` 은 _가장 긴 chunk_ 가 truncation 없이 들어가는지 여부예요. 모든 모델에서 fit 이면 chunk 추가 분할은 불필요합니다.
+> `fit` 은 _가장 긴 chunk_ 가 truncation 없이 들어가는지 여부입니다. 모든 모델에서 fit 이면 chunk 추가 분할은 불필요합니다.
 
 ## 9. RAG 적재 관점 분석
 
-다음 주차 외부 DB 구축에서 바로 쓸 수 있도록 `clean_notes.jsonl` 과 `rag_chunks.jsonl` 을 분리해뒀어요.
+다음 주차 외부 DB 구축에서 바로 쓸 수 있도록 `clean_notes.jsonl` 과 `rag_chunks.jsonl` 을 분리해뒀습니다.
 
 - `clean_notes.jsonl`: note 단위 정제 결과. `source_id`, `title`, `content`, `tags`, `verified`, `quality_flags`, `content_sha256` 를 포함.
 - `rag_chunks.jsonl`: vector DB / pgvector 에 그대로 넣는 chunk. `text` 는 embedding 대상, `metadata` 는 filter 및 citation 대상.
@@ -201,7 +201,7 @@ CREATE INDEX rag_chunks_embedding_ivfflat
     WITH (lists = 100);
 ```
 
-검색 쿼리는 보통 다음 패턴이에요.
+검색 쿼리는 보통 다음 패턴입니다.
 
 ```sql
 -- workspace/product/note_type 로 필터링한 뒤 코사인 거리 정렬 + citation 동시 반환
@@ -218,7 +218,7 @@ LIMIT $4;
 
 ## 10. 데이터 특성 정리
 
-seed dataset 은 BSVibe 구현 중 RAG 관련성이 높은 파일을 선별한 작은 데이터셋이에요. 핵심 영역은 다음과 같습니다.
+seed dataset 은 BSVibe 구현 중 RAG 관련성이 높은 파일을 선별한 작은 데이터셋입니다. 핵심 영역은 다음과 같습니다.
 
 - `backend/knowledge` — vault, canonicalization, retrieval, lint, watcher, graph 분석
 - `backend/workflow/application/runtime` — agent runtime, settle/dispatcher 배선
@@ -227,7 +227,7 @@ seed dataset 은 BSVibe 구현 중 RAG 관련성이 높은 파일을 선별한 �
 - `tests/glue` — runtime decision reuse 검증
 - `deploy/` — 운영 런북과 prod compose
 
-분석 결과, BSVibe RAG 데이터는 단순 문서 QA 묶음이 아니에요. workspace-scoped vault, canonical concept, resolved decision, negative pattern, semantic note, ontology correction surface, operational runbook 을 모두 구분해야 해서, 외부 DB 에는 `note_type` 과 `source_path` 를 반드시 보존하고 답변에는 `source_url` 을 citation 으로 노출하는 것이 적절합니다.
+분석 결과, BSVibe RAG 데이터는 단순 문서 QA 묶음이 아닙니다. workspace-scoped vault, canonical concept, resolved decision, negative pattern, semantic note, ontology correction surface, operational runbook 을 모두 구분해야 하므로, 외부 DB 에는 `note_type` 과 `source_path` 를 반드시 보존하고 답변에는 `source_url` 을 citation 으로 노출하는 것이 적절합니다.
 
 ## 11. 소스 코드 링크
 
@@ -267,9 +267,9 @@ seed dataset 은 BSVibe 구현 중 RAG 관련성이 높은 파일을 선별한 �
 
 ## 12. 보완 필요 사항
 
-- 실제 서비스 데이터가 들어오면 `workspace_id`, `user_id` 같은 tenant 분리 필드가 필수예요. 현재는 product 단일 값만 보존.
+- 실제 서비스 데이터가 들어오면 `workspace_id`, `user_id` 같은 tenant 분리 필드가 필수입니다. 현재는 product 단일 값만 보존.
 - 현재 record 는 코드 분석 기반 요약이라, 다음 단계에서 실제 vault note / frontmatter 샘플을 별도 source 로 추가해야 합니다.
-- 의미가 같은 태그를 안정적으로 합치기 위한 synonym dictionary 가 필요해요 (예: `undo-window` / `undo-toast` / `apply-at`).
+- 의미가 같은 태그를 안정적으로 합치기 위한 synonym dictionary 가 필요합니다 (예: `undo-window` / `undo-toast` / `apply-at`).
 - 검색 평가를 위해 질문과 expected `source_url` 을 묶은 retrieval fixture (golden set) 가 필요합니다.
-- 개인화 메모리 특성상 redaction rule 을 이메일/API key/로컬 경로 외에도 전화번호, URL token, 고객명까지 확장해야 해요.
+- 개인화 메모리 특성상 redaction rule 을 이메일/API key/로컬 경로 외에도 전화번호, URL token, 고객명까지 확장해야 합니다.
 - 한국어 문서 ingestion 까지 확장되면 `paragraph_split` 정규식과 token 환산 비율 (현재 영문 가정 0.27) 을 ko/en 분기로 두는 것이 안전합니다.

@@ -1,6 +1,6 @@
 # 2주차 과제: 실제 BSVibe RAG 데이터셋 정제 및 분석
 
-실제 `BSVibe/bsvibe-app` 코드베이스를 분석해, RAG 에 사용할 source-derived seed dataset 을 만들고, 다음 주차 외부 DB 구축에 필요한 정제 자동화와 데이터 분석을 진행했어요. 합성 예시 데이터는 모두 제거했고, 구현 파일·런타임 배선·프론트 컴포넌트·운영 문서·검증 테스트에서 확인한 사실만 record 로 정리했습니다.
+실제 `BSVibe/bsvibe-app` 코드베이스를 분석해, RAG 에 사용할 source-derived seed dataset 을 만들고, 다음 주차 외부 DB 구축에 필요한 정제 자동화와 데이터 분석을 진행했습니다. 합성 예시 데이터는 모두 제거했고, 구현 파일·런타임 배선·프론트 컴포넌트·운영 문서·검증 테스트에서 확인한 사실만 record 로 정리했습니다.
 
 - 분석 대상 repo: `BSVibe/bsvibe-app`
 - 분석 commit: `a6648ace49fa670136e6f865652990517e9865fa` (pinned)
@@ -22,7 +22,7 @@
 
 ## 실행 방법
 
-`metacode_study` 루트에서 실행해요.
+`metacode_study` 루트에서 실행합니다.
 
 ```bash
 source .venv/bin/activate
@@ -49,9 +49,9 @@ python assignments/week2-rag-dataset/scripts/analyze_dataset.py
 
 핵심 결론을 한 단락으로 요약하면:
 
-- BSVibe RAG 는 단순 문서 QA 가 아니라 workspace 별 과거 결정·반복 피드백·canonical concept·negative pattern·ontology correction surface·운영 런북을 모두 다뤄야 해요.
+- BSVibe RAG 는 단순 문서 QA 가 아니라 workspace 별 과거 결정·반복 피드백·canonical concept·negative pattern·ontology correction surface·운영 런북을 모두 다뤄야 합니다.
 - 실제 runtime 은 `KnowledgeFactory` + `CompositeCanonRetriever` 가 canonical concept, resolved decision, negative pattern, semantic note 를 합성해서 사용하고, `SettleWorker` 가 workflow activity 를 vault note 로 흡수하면서 promotion / embedding hook 으로 검색 가능 상태까지 연결합니다.
-- M3a 의 retraction service / undo toast / inspector actions 까지 dataset 에 포함했기 때문에, RAG 응답에 사용된 node 가 사후에 retract 되었는지를 citation 단계에서 검증할 수 있어요.
+- M3a 의 retraction service / undo toast / inspector actions 까지 dataset 에 포함했기 때문에, RAG 응답에 사용된 node 가 사후에 retract 되었는지를 citation 단계에서 검증할 수 있습니다.
 - 다음 주차 외부 DB 에서는 `text` 를 embedding 하고, `metadata` 의 `source_repo` / `source_commit` / `source_path` / `source_url` / `note_type` / `tags` / `verified` 를 filter 와 citation 에 함께 사용하면 됩니다. pgvector DDL 과 검색 쿼리 sketch 는 분석 문서 §9 에 정리했습니다.
 
 ## 사용한 실제 소스 코드 (pinned commit 기준)
@@ -80,7 +80,7 @@ python assignments/week2-rag-dataset/scripts/analyze_dataset.py
 
 ## 다음 단계 (3주차 외부 DB 구축 준비)
 
-분석 문서 §9 의 pgvector DDL 을 그대로 가져가면 돼요. 핵심만 다시 정리하면:
+분석 문서 §9 의 pgvector DDL 을 그대로 가져가면 됩니다. 핵심만 다시 정리하면:
 
 1. `rag_chunks.jsonl` 의 한 줄 = `rag_chunks` 테이블의 한 행으로 1:1 매핑.
 2. embedding 차원은 선택한 모델에 맞춰 `vector(N)` 조정 (bge-m3 → 1024, OpenAI 3-small → 1536).
