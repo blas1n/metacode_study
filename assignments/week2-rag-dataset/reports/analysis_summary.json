@@ -1,0 +1,66 @@
+{
+  "chunk_length_stats": {
+    "max": 148,
+    "mean": 95.9,
+    "median": 91.0,
+    "min": 74
+  },
+  "db_readiness": {
+    "embedding_text_field": "text",
+    "metadata_filters": [
+      "product",
+      "source_type",
+      "note_type",
+      "tags",
+      "verified",
+      "created_at"
+    ],
+    "provenance_fields": [
+      "chunk_id",
+      "note_id",
+      "source_id",
+      "metadata.title"
+    ]
+  },
+  "note_length_stats": {
+    "max": 148,
+    "mean": 95.9,
+    "median": 91.0,
+    "min": 74
+  },
+  "note_type_counts": {
+    "decision_memory": 3,
+    "delivery_evidence": 2,
+    "external_context": 2,
+    "project_knowledge": 2,
+    "raw_request": 2,
+    "repeated_pattern_candidate": 5
+  },
+  "quality_flag_count": 0,
+  "source_counts": {
+    "decision": 3,
+    "delivery_report": 2,
+    "feedback": 5,
+    "github_issue": 2,
+    "project_doc": 2,
+    "user_request": 2
+  },
+  "top_tags": {
+    "approval-queue": 2,
+    "dashboard": 2,
+    "decision": 4,
+    "delivery-report": 2,
+    "github": 2,
+    "metadata": 2,
+    "mobile-ux": 1,
+    "no-fake-done": 2,
+    "proposal-first": 2,
+    "rag": 2,
+    "security": 3,
+    "verification": 5
+  },
+  "total_chunks": 16,
+  "total_notes": 16,
+  "verified_notes": 14,
+  "verified_ratio": 87.5
+}

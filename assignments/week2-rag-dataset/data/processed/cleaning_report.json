@@ -1,0 +1,16 @@
+{
+  "clean_notes": 16,
+  "input_records": 16,
+  "max_chunk_chars": 420,
+  "output_contract": {
+    "clean_notes": "one JSON object per source note with normalized tags, redacted text, provenance, and quality flags",
+    "rag_chunks": "one JSON object per retrievable chunk with embedding-ready text and metadata filters"
+  },
+  "quality_issues": {},
+  "rag_chunks": 16,
+  "redactions": {
+    "email": 1,
+    "local_path": 1,
+    "secret": 1
+  }
+}
