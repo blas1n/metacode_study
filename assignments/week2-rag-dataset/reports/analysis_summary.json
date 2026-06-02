@@ -1,0 +1,166 @@
+{
+  "chunk_length_stats": {
+    "max": 333,
+    "mean": 294.3,
+    "median": 292,
+    "min": 247
+  },
+  "db_readiness": {
+    "embedding_text_field": "text",
+    "metadata_filters": [
+      "product",
+      "source_repo",
+      "source_commit",
+      "source_path",
+      "source_type",
+      "note_type",
+      "tags",
+      "verified",
+      "created_at"
+    ],
+    "provenance_fields": [
+      "chunk_id",
+      "note_id",
+      "source_id",
+      "metadata.title",
+      "metadata.source_url",
+      "metadata.source_path"
+    ]
+  },
+  "note_length_stats": {
+    "max": 333,
+    "mean": 294.3,
+    "median": 292,
+    "min": 247
+  },
+  "note_type_counts": {
+    "implementation_evidence": 9,
+    "project_overview": 1,
+    "runtime_evidence": 2,
+    "surface_evidence": 2,
+    "verification_evidence": 1
+  },
+  "quality_flag_count": 0,
+  "source_counts": {
+    "backend_code": 9,
+    "frontend_code": 2,
+    "readme": 1,
+    "runtime_code": 2,
+    "test_code": 1
+  },
+  "source_links": [
+    {
+      "source_path": "README.md",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/README.md#L1-L90",
+      "title": "BSVibe monorepo layout and local stack"
+    },
+    {
+      "source_path": "backend/knowledge/factory.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/factory.py#L1-L160",
+      "title": "KnowledgeFactory binds knowledge to workspace and region"
+    },
+    {
+      "source_path": "backend/knowledge/retrieval/canon_retriever.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/canon_retriever.py#L1-L131",
+      "title": "Canonical concept retrieval uses promoted active concepts only"
+    },
+    {
+      "source_path": "backend/knowledge/retrieval/resolved_decisions_retriever.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/resolved_decisions_retriever.py#L1-L239",
+      "title": "Resolved decisions are retrieved from settled garden notes"
+    },
+    {
+      "source_path": "backend/knowledge/retrieval/negative_pattern_retriever.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/negative_pattern_retriever.py#L1-L114",
+      "title": "Negative patterns preserve founder rejection feedback"
+    },
+    {
+      "source_path": "backend/knowledge/retrieval/composite_retriever.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/composite_retriever.py#L1-L77",
+      "title": "Composite retriever merges multiple knowledge sources behind one protocol"
+    },
+    {
+      "source_path": "backend/workflow/application/runtime/agent_runtime.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/agent_runtime.py#L204-L326",
+      "title": "Agent runtime wires workspace retriever into execution and knowledge-only route"
+    },
+    {
+      "source_path": "backend/workflow/application/runtime/worker_runtime.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/worker_runtime.py#L168-L200",
+      "title": "Settle worker writes vault notes, promotes concepts, and embeds notes"
+    },
+    {
+      "source_path": "backend/knowledge/ingest/ingest_compiler/_compiler.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler/_compiler.py#L1-L240",
+      "title": "IngestCompiler compiles imported seed content per chunk"
+    },
+    {
+      "source_path": "backend/knowledge/ingest/ingest_compiler/_chunking.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler/_chunking.py#L1-L187",
+      "title": "Chunking budget protects local LLM ingestion"
+    },
+    {
+      "source_path": "backend/knowledge/retrieval/semantic_note_retriever.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/semantic_note_retriever.py#L1-L66",
+      "title": "Semantic note retrieval searches pgvector note embeddings"
+    },
+    {
+      "source_path": "apps/pwa/lib/api/knowledge.ts",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/lib/api/knowledge.ts#L1-L115",
+      "title": "PWA Knowledge API exposes concepts, observations, graph, retract, and correct"
+    },
+    {
+      "source_path": "apps/pwa/components/knowledge/KnowledgeGraphView.tsx",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/KnowledgeGraphView.tsx#L1-L150",
+      "title": "Knowledge graph view presents ontology nodes and inspector actions"
+    },
+    {
+      "source_path": "backend/knowledge/mcp/domain_tools.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/mcp/domain_tools.py#L1-L220",
+      "title": "MCP domain tools define search, graph, tag, and create-note surfaces"
+    },
+    {
+      "source_path": "tests/glue/test_b13_decision_reuse_in_run.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/tests/glue/test_b13_decision_reuse_in_run.py#L1-L311",
+      "title": "Cross-run decision reuse is tested through seed and verification fold"
+    }
+  ],
+  "source_path_counts": {
+    "README.md": 1,
+    "apps/pwa/components/knowledge/KnowledgeGraphView.tsx": 1,
+    "apps/pwa/lib/api/knowledge.ts": 1,
+    "backend/knowledge/factory.py": 1,
+    "backend/knowledge/ingest/ingest_compiler/_chunking.py": 1,
+    "backend/knowledge/ingest/ingest_compiler/_compiler.py": 1,
+    "backend/knowledge/mcp/domain_tools.py": 1,
+    "backend/knowledge/retrieval/canon_retriever.py": 1,
+    "backend/knowledge/retrieval/composite_retriever.py": 1,
+    "backend/knowledge/retrieval/negative_pattern_retriever.py": 1,
+    "backend/knowledge/retrieval/resolved_decisions_retriever.py": 1,
+    "backend/knowledge/retrieval/semantic_note_retriever.py": 1,
+    "backend/workflow/application/runtime/agent_runtime.py": 1,
+    "backend/workflow/application/runtime/worker_runtime.py": 1,
+    "tests/glue/test_b13_decision_reuse_in_run.py": 1
+  },
+  "source_repo_counts": {
+    "BSVibe/bsvibe-app": 15
+  },
+  "top_tags": {
+    "bsvibe-app": 1,
+    "chunking": 2,
+    "correct": 2,
+    "docker-compose": 1,
+    "garden-notes": 2,
+    "pgvector": 2,
+    "retract": 2,
+    "settle-worker": 2,
+    "signal-filtering": 2,
+    "vault": 2,
+    "verification": 3,
+    "workspace-scoping": 3
+  },
+  "total_chunks": 15,
+  "total_notes": 15,
+  "verified_notes": 15,
+  "verified_ratio": 100.0
+}
