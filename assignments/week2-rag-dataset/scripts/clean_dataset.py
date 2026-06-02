@@ -88,6 +88,8 @@ def infer_note_type(source_type: str) -> str:
         "runtime_code": "runtime_evidence",
         "frontend_code": "surface_evidence",
         "test_code": "verification_evidence",
+        "ops_doc": "operational_evidence",
+        "ops_yaml": "operational_evidence",
     }
     return mapping.get(source_type, "source_evidence")
 
@@ -97,7 +99,7 @@ def stable_hash(*parts: str) -> str:
     return hashlib.sha256(joined.encode("utf-8")).hexdigest()[:16]
 
 
-def split_into_chunks(text: str, max_chars: int) -> list[str]:
+def split_into_chunks(text: str, max_chars: int, min_chars: int = 40) -> list[str]:
     paragraphs = [part.strip() for part in re.split(r"\n+|(?<=[.!?。])\s+", text) if part.strip()]
     chunks: list[str] = []
     current = ""
@@ -116,6 +118,11 @@ def split_into_chunks(text: str, max_chars: int) -> list[str]:
             current = ""
     if current:
         chunks.append(current)
+
+    # Absorb a trailing fragment that's too small to retrieve usefully on its own.
+    if len(chunks) >= 2 and len(chunks[-1]) < min_chars:
+        tail = chunks.pop()
+        chunks[-1] = f"{chunks[-1]} {tail}".strip()
     return chunks
 
 

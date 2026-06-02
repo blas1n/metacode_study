@@ -1,9 +1,21 @@
 {
+  "chunk_budget_sweep": {
+    "256": 65,
+    "384": 39,
+    "512": 31,
+    "768": 31
+  },
   "chunk_length_stats": {
-    "max": 333,
-    "mean": 294.3,
-    "median": 292,
-    "min": 247
+    "max": 424,
+    "mean": 329.5,
+    "median": 334.5,
+    "min": 86,
+    "p90": 395
+  },
+  "chunks_per_note": {
+    "max": 2,
+    "mean": 1.03,
+    "multi_chunk_notes": 1
   },
   "db_readiness": {
     "embedding_text_field": "text",
@@ -27,26 +39,60 @@
       "metadata.source_path"
     ]
   },
+  "duplicate_groups": [],
+  "embedding_budget_fit": {
+    "bge-m3": {
+      "approx_max_chunk_tokens": 114,
+      "context_tokens": 8192,
+      "fits_without_truncation": true
+    },
+    "cohere/embed-multilingual-v3": {
+      "approx_max_chunk_tokens": 114,
+      "context_tokens": 512,
+      "fits_without_truncation": true
+    },
+    "openai/text-embedding-3-large": {
+      "approx_max_chunk_tokens": 114,
+      "context_tokens": 8191,
+      "fits_without_truncation": true
+    },
+    "openai/text-embedding-3-small": {
+      "approx_max_chunk_tokens": 114,
+      "context_tokens": 8191,
+      "fits_without_truncation": true
+    }
+  },
   "note_length_stats": {
-    "max": 333,
-    "mean": 294.3,
-    "median": 292,
-    "min": 247
+    "max": 423,
+    "mean": 340.1,
+    "median": 344,
+    "min": 247,
+    "p90": 404
   },
   "note_type_counts": {
-    "implementation_evidence": 9,
+    "implementation_evidence": 18,
+    "operational_evidence": 2,
     "project_overview": 1,
-    "runtime_evidence": 2,
-    "surface_evidence": 2,
+    "runtime_evidence": 4,
+    "surface_evidence": 5,
     "verification_evidence": 1
   },
   "quality_flag_count": 0,
   "source_counts": {
-    "backend_code": 9,
-    "frontend_code": 2,
+    "backend_code": 18,
+    "frontend_code": 5,
+    "ops_doc": 1,
+    "ops_yaml": 1,
     "readme": 1,
-    "runtime_code": 2,
+    "runtime_code": 4,
     "test_code": 1
+  },
+  "source_directory_coverage": {
+    "README.md": 1,
+    "apps": 5,
+    "backend": 22,
+    "deploy": 2,
+    "tests": 1
   },
   "source_links": [
     {
@@ -123,13 +169,105 @@
       "source_path": "tests/glue/test_b13_decision_reuse_in_run.py",
       "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/tests/glue/test_b13_decision_reuse_in_run.py#L1-L311",
       "title": "Cross-run decision reuse is tested through seed and verification fold"
+    },
+    {
+      "source_path": "backend/knowledge/application/retraction_service.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application/retraction_service.py#L1-L366",
+      "title": "RetractionService orchestrates ontology corrections with a 30s undo window"
+    },
+    {
+      "source_path": "backend/knowledge/canonicalization/promotion.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/promotion.py#L1-L304",
+      "title": "GardenObservationPromoter turns recurring garden tags into canonical anchors"
+    },
+    {
+      "source_path": "backend/knowledge/canonicalization/lint.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/lint.py#L1-L210",
+      "title": "canon-lint surfaces orphan tags, alias collisions, and redirect anomalies"
+    },
+    {
+      "source_path": "backend/knowledge/canonicalization/watcher.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/watcher.py#L1-L173",
+      "title": "CanonWatcher bridges external vault edits into the canonicalization index"
+    },
+    {
+      "source_path": "backend/knowledge/graph/analytics.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph/analytics.py#L1-L216",
+      "title": "Graph analytics expose centrality, components, and knowledge gaps"
+    },
+    {
+      "source_path": "backend/knowledge/graph/graph_extractor.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph/graph_extractor.py#L1-L367",
+      "title": "GraphExtractor pulls entities and relations from vault frontmatter and wikilinks"
+    },
+    {
+      "source_path": "backend/knowledge/domain/retraction.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/domain/retraction.py#L1-L108",
+      "title": "RetractionSignal locks the wire shape of every founder-issued correction"
+    },
+    {
+      "source_path": "backend/knowledge/_internal/events.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/_internal/events.py#L1-L185",
+      "title": "EventBus enumerates lifecycle, vault, and ingest events for streaming"
+    },
+    {
+      "source_path": "backend/knowledge/application/audit_events.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application/audit_events.py#L1-L53",
+      "title": "Audit events trace the ontology correction lifecycle through the outbox"
+    },
+    {
+      "source_path": "backend/workflow/application/runtime/settle_runtime.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/settle_runtime.py#L1-L165",
+      "title": "Settle runtime factories build per-settlement extractor and embedding hook"
+    },
+    {
+      "source_path": "backend/workflow/application/runtime/dispatcher.py",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/dispatcher.py#L1-L174",
+      "title": "Runtime dispatcher binds gateway plus cheap-LLM seams to the same per-session pattern"
+    },
+    {
+      "source_path": "apps/pwa/components/knowledge/RetractModal.tsx",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/RetractModal.tsx#L1-L157",
+      "title": "RetractModal renders the pre-flight confirmation for an ontology retract"
+    },
+    {
+      "source_path": "apps/pwa/components/knowledge/InspectorActions.tsx",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/InspectorActions.tsx#L1-L203",
+      "title": "InspectorActions runs the idle to modal to toast state machine for retract and correct"
+    },
+    {
+      "source_path": "apps/pwa/components/knowledge/UndoToast.tsx",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/UndoToast.tsx#L1-L140",
+      "title": "UndoToast derives the 30s countdown from server wall-clock apply_at"
+    },
+    {
+      "source_path": "deploy/compose.prod.yaml",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/deploy/compose.prod.yaml#L1-L115",
+      "title": "compose.prod.yaml overrides dev defaults for prod env-driven startup"
+    },
+    {
+      "source_path": "deploy/README.md",
+      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/deploy/README.md#L1-L164",
+      "title": "Deploy README documents the migrate-on-boot and single-migrator contract"
     }
   ],
   "source_path_counts": {
     "README.md": 1,
+    "apps/pwa/components/knowledge/InspectorActions.tsx": 1,
     "apps/pwa/components/knowledge/KnowledgeGraphView.tsx": 1,
+    "apps/pwa/components/knowledge/RetractModal.tsx": 1,
+    "apps/pwa/components/knowledge/UndoToast.tsx": 1,
     "apps/pwa/lib/api/knowledge.ts": 1,
+    "backend/knowledge/_internal/events.py": 1,
+    "backend/knowledge/application/audit_events.py": 1,
+    "backend/knowledge/application/retraction_service.py": 1,
+    "backend/knowledge/canonicalization/lint.py": 1,
+    "backend/knowledge/canonicalization/promotion.py": 1,
+    "backend/knowledge/canonicalization/watcher.py": 1,
+    "backend/knowledge/domain/retraction.py": 1,
     "backend/knowledge/factory.py": 1,
+    "backend/knowledge/graph/analytics.py": 1,
+    "backend/knowledge/graph/graph_extractor.py": 1,
     "backend/knowledge/ingest/ingest_compiler/_chunking.py": 1,
     "backend/knowledge/ingest/ingest_compiler/_compiler.py": 1,
     "backend/knowledge/mcp/domain_tools.py": 1,
@@ -139,28 +277,87 @@
     "backend/knowledge/retrieval/resolved_decisions_retriever.py": 1,
     "backend/knowledge/retrieval/semantic_note_retriever.py": 1,
     "backend/workflow/application/runtime/agent_runtime.py": 1,
+    "backend/workflow/application/runtime/dispatcher.py": 1,
+    "backend/workflow/application/runtime/settle_runtime.py": 1,
     "backend/workflow/application/runtime/worker_runtime.py": 1,
+    "deploy/README.md": 1,
+    "deploy/compose.prod.yaml": 1,
     "tests/glue/test_b13_decision_reuse_in_run.py": 1
   },
   "source_repo_counts": {
-    "BSVibe/bsvibe-app": 15
+    "BSVibe/bsvibe-app": 31
   },
+  "top_tag_pairs": [
+    {
+      "count": 3,
+      "left": "correct",
+      "right": "retract"
+    },
+    {
+      "count": 2,
+      "left": "garden-notes",
+      "right": "signal-filtering"
+    },
+    {
+      "count": 2,
+      "left": "garden-notes",
+      "right": "verification"
+    },
+    {
+      "count": 2,
+      "left": "signal-filtering",
+      "right": "verification"
+    },
+    {
+      "count": 2,
+      "left": "embedding-hook",
+      "right": "pgvector"
+    },
+    {
+      "count": 2,
+      "left": "idempotency",
+      "right": "undo-window"
+    },
+    {
+      "count": 1,
+      "left": "bsvibe-app",
+      "right": "docker-compose"
+    },
+    {
+      "count": 1,
+      "left": "bsvibe-app",
+      "right": "fastapi"
+    },
+    {
+      "count": 1,
+      "left": "bsvibe-app",
+      "right": "monorepo"
+    },
+    {
+      "count": 1,
+      "left": "bsvibe-app",
+      "right": "nextjs"
+    }
+  ],
   "top_tags": {
-    "bsvibe-app": 1,
-    "chunking": 2,
-    "correct": 2,
-    "docker-compose": 1,
-    "garden-notes": 2,
-    "pgvector": 2,
-    "retract": 2,
-    "settle-worker": 2,
+    "canonicalization": 2,
+    "correct": 3,
+    "docker-compose": 2,
+    "embedding-hook": 2,
+    "garden-notes": 3,
+    "garden-writer": 2,
+    "ontology-correction": 3,
+    "pgvector": 3,
+    "promotion": 2,
+    "retract": 3,
     "signal-filtering": 2,
+    "tombstone": 2,
     "vault": 2,
     "verification": 3,
-    "workspace-scoping": 3
+    "workspace-scoping": 4
   },
-  "total_chunks": 15,
-  "total_notes": 15,
-  "verified_notes": 15,
+  "total_chunks": 32,
+  "total_notes": 31,
+  "verified_notes": 31,
   "verified_ratio": 100.0
 }
