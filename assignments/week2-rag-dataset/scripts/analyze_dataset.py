@@ -314,53 +314,35 @@ def build_report(summary: dict[str, Any]) -> str:
 
     return f"""# 2주차 RAG 데이터셋 정제 및 분석 결과
 
-## 1. 데이터셋 개요
+대상 프로젝트 `BSVibe/bsvibe-app` 의 실제 코드에서 도출한 RAG seed dataset 입니다.
 
-실제 `BSVibe/bsvibe-app` 코드베이스를 분석해, 개인화 작업 메모리 RAG에 사용할 source-derived seed dataset 을 구성했습니다. 사용자 데이터가 아니라 구현 파일, 런타임 배선, 프론트 surface, 운영 문서, 검증 테스트에서 확인한 구조적 사실을 record 로 만들었습니다.
+## 1. 개요
 
-- 정제된 note 수: **{summary["total_notes"]}**
-- RAG chunk 수: **{summary["total_chunks"]}** (note 당 평균 {chunks_per_note["mean"]} chunk, 최대 {chunks_per_note["max"]})
-- 검증 완료 note 비율: {summary["verified_notes"]}/{summary["total_notes"]} ({summary["verified_ratio"]}%)
-- 품질 flag 수: {summary["quality_flag_count"]} · {duplicate_line}
+- note 수: **{summary["total_notes"]}**, chunk 수: **{summary["total_chunks"]}** (note 당 평균 {chunks_per_note["mean"]}, 최대 {chunks_per_note["max"]})
+- verified: {summary["verified_notes"]}/{summary["total_notes"]} ({summary["verified_ratio"]}%) · 품질 flag {summary["quality_flag_count"]} · {duplicate_line}
 - source repo: {", ".join(summary["source_repo_counts"].keys())}
 
-## 2. 정제 자동화 결과
+## 2. 정제 처리
 
-정제 스크립트는 다음을 자동화합니다.
+redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 → `source_type → note_type` 매핑 → provenance (`note_id`, `content_sha256`) 부여 → paragraph 경계 기반 chunk 분할.
 
-- JSONL record 필수 필드 검증과 ISO-8601 created_at 파싱
-- 이메일, API key (`sk-/pk-/ghp-/github_pat-…`), 로컬 경로 redaction
-- 공백 정규화, 태그 소문자/하이픈 형태 정규화
-- `source_type` 기반 `note_type` 자동 매핑 (operational 포함)
-- GitHub `source_url`, `source_path`, `source_commit`, line range 보존
-- 외부 DB 적재용 provenance field (`note_id`, `source_id`, `content_sha256`) 생성
-- embedding 대상 text 를 paragraph 경계에서 chunk 로 분할
-
-## 3. Source / Note Type 분포
+## 3. 분포
 
 {markdown_table(["source_type", "count"], source_rows)}
 
 {markdown_table(["note_type", "count"], note_type_rows)}
 
-## 4. Source 디렉토리 coverage
+{markdown_table(["top-level dir", "count"], directory_rows)}
 
-어느 영역을 얼마나 다뤘는지 한눈에 보기 위한 디렉토리 단위 집계입니다.
-
-{markdown_table(["top-level directory", "count"], directory_rows)}
-
-## 5. Source path 분포
-
-{markdown_table(["source_path", "count"], source_path_rows)}
-
-## 6. 상위 태그 / 태그 공출현
-
-가장 자주 묶이는 태그 페어는 RAG 검색 facet 후보입니다.
+## 4. 태그
 
 {markdown_table(["tag", "count"], tag_rows)}
 
+자주 묶이는 페어:
+
 {markdown_table(["tag_left", "tag_right", "co_occurrence"], tag_pair_rows) if tag_pair_rows else "_공출현 페어 없음._"}
 
-## 7. 길이 분석 (note vs chunk)
+## 5. 길이
 
 {markdown_table(["target", "min", "max", "mean", "median", "p90"], [
     [
@@ -381,56 +363,33 @@ def build_report(summary: dict[str, Any]) -> str:
     ],
 ])}
 
-분할 budget 을 바꿀 때 chunk 수가 어떻게 변하는지 (chunking sensitivity):
+분할 budget 변경 시 chunk 수:
 
 {markdown_table(["budget", "chunks"], chunk_sweep_rows)}
 
-## 8. 임베딩 컨텍스트 적합성
+## 6. 임베딩 컨텍스트 적합성
 
-각 임베딩 모델 컨텍스트 안에 chunk 최대 길이가 들어가는지 추정합니다 (대략 1 token ≈ 3.7 chars 기준).
+대략 1 token ≈ 3.7 chars 가정. `fit` = 가장 긴 chunk 가 truncation 없이 들어가는지.
 
 {markdown_table(["embedding_model", "context_tokens", "approx_max_chunk_tokens", "fit"], embedding_rows)}
 
-> `fit` 은 _가장 긴 chunk_ 가 truncation 없이 들어가는지 여부입니다. 모든 모델에서 fit 이면 chunk 추가 분할은 불필요합니다.
+## 7. 외부 DB 적재 (pgvector)
 
-## 9. RAG 적재 관점 분석
-
-다음 주차 외부 DB 구축에서 바로 쓸 수 있도록 `clean_notes.jsonl` 과 `rag_chunks.jsonl` 을 분리해뒀습니다.
-
-- `clean_notes.jsonl`: note 단위 정제 결과. `source_id`, `title`, `content`, `tags`, `verified`, `quality_flags`, `content_sha256` 를 포함.
-- `rag_chunks.jsonl`: vector DB / pgvector 에 그대로 넣는 chunk. `text` 는 embedding 대상, `metadata` 는 filter 및 citation 대상.
-- 권장 metadata filter: `product`, `source_repo`, `source_commit`, `source_path`, `source_type`, `note_type`, `tags`, `verified`, `created_at`
-- 권장 provenance field: `chunk_id`, `note_id`, `source_id`, `metadata.title`, `metadata.source_url`, `metadata.source_path`
-
-### pgvector 스키마 제안
+- `rag_chunks.jsonl` 한 줄 → `rag_chunks` 한 행 (1:1)
+- embedding 대상: `text` · filter 대상: `product`, `source_repo`, `source_path`, `note_type`, `tags`, `verified`
+- citation: `source_url`, `source_path`, `note_id`
 
 {_pgvector_schema_block()}
 
-## 10. 데이터 특성 정리
-
-seed dataset 은 BSVibe 구현 중 RAG 관련성이 높은 파일을 선별한 작은 데이터셋입니다. 핵심 영역은 다음과 같습니다.
-
-- `backend/knowledge` — vault, canonicalization, retrieval, lint, watcher, graph 분석
-- `backend/workflow/application/runtime` — agent runtime, settle/dispatcher 배선
-- `apps/pwa/components/knowledge` — graph view, retract/correct/undo UI
-- `apps/pwa/lib/api/knowledge.ts` — knowledge API 클라이언트
-- `tests/glue` — runtime decision reuse 검증
-- `deploy/` — 운영 런북과 prod compose
-
-분석 결과, BSVibe RAG 데이터는 단순 문서 QA 묶음이 아닙니다. workspace-scoped vault, canonical concept, resolved decision, negative pattern, semantic note, ontology correction surface, operational runbook 을 모두 구분해야 하므로, 외부 DB 에는 `note_type` 과 `source_path` 를 반드시 보존하고 답변에는 `source_url` 을 citation 으로 노출하는 것이 적절합니다.
-
-## 11. 소스 코드 링크
+## 8. 소스 코드 링크
 
 {markdown_table(["record", "source_path", "link"], source_link_rows)}
 
-## 12. 보완 필요 사항
+## 9. 한계
 
-- 실제 서비스 데이터가 들어오면 `workspace_id`, `user_id` 같은 tenant 분리 필드가 필수입니다. 현재는 product 단일 값만 보존.
-- 현재 record 는 코드 분석 기반 요약이라, 다음 단계에서 실제 vault note / frontmatter 샘플을 별도 source 로 추가해야 합니다.
-- 의미가 같은 태그를 안정적으로 합치기 위한 synonym dictionary 가 필요합니다 (예: `undo-window` / `undo-toast` / `apply-at`).
-- 검색 평가를 위해 질문과 expected `source_url` 을 묶은 retrieval fixture (golden set) 가 필요합니다.
-- 개인화 메모리 특성상 redaction rule 을 이메일/API key/로컬 경로 외에도 전화번호, URL token, 고객명까지 확장해야 합니다.
-- 한국어 문서 ingestion 까지 확장되면 `paragraph_split` 정규식과 token 환산 비율 (현재 영문 가정 0.27) 을 ko/en 분기로 두는 것이 안전합니다.
+- 코드 분석 기반이라 실제 vault note / frontmatter 샘플은 다음 단계에서 추가 필요
+- 실제 서비스 데이터 들어오면 `workspace_id`, `user_id` tenant 필드 필수
+- 검색 평가용 golden set (질문 ↔ expected `source_url`) 미보유
 """
 
 
