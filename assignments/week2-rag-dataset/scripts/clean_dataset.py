@@ -90,6 +90,7 @@ def infer_note_type(source_type: str) -> str:
         "test_code": "verification_evidence",
         "ops_doc": "operational_evidence",
         "ops_yaml": "operational_evidence",
+        "vault_fixture": "vault_fixture",
     }
     return mapping.get(source_type, "source_evidence")
 

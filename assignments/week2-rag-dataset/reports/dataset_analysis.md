@@ -4,8 +4,8 @@
 
 ## 1. 개요
 
-- note 수: **31**, chunk 수: **32** (note 당 평균 1.03, 최대 2)
-- verified: 31/31 (100.0%) · 품질 flag 0 · exact-duplicate group 없음 (content_sha256 기준)
+- note 수: **35**, chunk 수: **37** (note 당 평균 1.06, 최대 2)
+- verified: 35/35 (100.0%) · 품질 flag 0 · exact-duplicate group 없음 (content_sha256 기준)
 - source repo: BSVibe/bsvibe-app
 
 ## 2. 정제 처리
@@ -19,6 +19,7 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 | backend_code | 18 |
 | frontend_code | 5 |
 | runtime_code | 4 |
+| vault_fixture | 4 |
 | readme | 1 |
 | test_code | 1 |
 | ops_yaml | 1 |
@@ -29,23 +30,26 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 | implementation_evidence | 18 |
 | surface_evidence | 5 |
 | runtime_evidence | 4 |
+| vault_fixture | 4 |
 | operational_evidence | 2 |
 | project_overview | 1 |
 | verification_evidence | 1 |
 
 | top-level dir | count |
 | --- | --- |
-| backend | 22 |
+| backend | 23 |
 | apps | 5 |
+| tests | 4 |
 | deploy | 2 |
 | README.md | 1 |
-| tests | 1 |
 
 ## 4. 태그
 
 | tag | count |
 | --- | --- |
+| frontmatter | 5 |
 | workspace-scoping | 4 |
+| vault-fixture | 4 |
 | verification | 3 |
 | garden-notes | 3 |
 | pgvector | 3 |
@@ -58,39 +62,37 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 | canonicalization | 2 |
 | signal-filtering | 2 |
 | tombstone | 2 |
-| embedding-hook | 2 |
-| promotion | 2 |
 
 자주 묶이는 페어:
 
 | tag_left | tag_right | co_occurrence |
 | --- | --- | --- |
+| frontmatter | vault-fixture | 4 |
 | correct | retract | 3 |
 | garden-notes | signal-filtering | 2 |
 | garden-notes | verification | 2 |
 | signal-filtering | verification | 2 |
 | embedding-hook | pgvector | 2 |
 | idempotency | undo-window | 2 |
+| frontmatter | wikilinks | 2 |
 | bsvibe-app | docker-compose | 1 |
 | bsvibe-app | fastapi | 1 |
-| bsvibe-app | monorepo | 1 |
-| bsvibe-app | nextjs | 1 |
 
 ## 5. 길이
 
 | target | min | max | mean | median | p90 |
 | --- | --- | --- | --- | --- | --- |
-| note_content_chars | 247 | 423 | 340.1 | 344 | 404 |
-| chunk_chars | 86 | 424 | 329.5 | 334.5 | 395 |
+| note_content_chars | 247 | 519 | 349.5 | 351 | 416 |
+| chunk_chars | 86 | 424 | 330.6 | 344 | 404 |
 
 분할 budget 변경 시 chunk 수:
 
 | budget | chunks |
 | --- | --- |
-| max_chunk_chars=256 | 65 |
-| max_chunk_chars=384 | 39 |
-| max_chunk_chars=512 | 31 |
-| max_chunk_chars=768 | 31 |
+| max_chunk_chars=256 | 74 |
+| max_chunk_chars=384 | 46 |
+| max_chunk_chars=512 | 36 |
+| max_chunk_chars=768 | 35 |
 
 ## 6. 임베딩 컨텍스트 적합성
 
@@ -169,6 +171,7 @@ LIMIT $4;
 | 4 | [`apps/pwa/components/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/main/apps/pwa/components/knowledge) |
 | 4 | [`backend/workflow/application/runtime`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/workflow/application/runtime) |
 | 3 | [`backend/knowledge/canonicalization`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/canonicalization) |
+| 3 | [`tests/knowledge/graph`](https://github.com/BSVibe/bsvibe-app/tree/main/tests/knowledge/graph) |
 | 2 | [`backend/knowledge/application`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/application) |
 | 2 | [`backend/knowledge/graph`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/graph) |
 | 2 | [`backend/knowledge/ingest/ingest_compiler`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/ingest/ingest_compiler) |
@@ -178,11 +181,18 @@ LIMIT $4;
 | 1 | [`backend/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge) |
 | 1 | [`backend/knowledge/_internal`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/_internal) |
 | 1 | [`backend/knowledge/domain`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/domain) |
+| 1 | [`backend/knowledge/graph/writer_core`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/graph/writer_core) |
 | 1 | [`backend/knowledge/mcp`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/mcp) |
 | 1 | [`tests/glue`](https://github.com/BSVibe/bsvibe-app/tree/main/tests/glue) |
 
-## 9. 한계
+## 9. 검색 평가용 golden set
 
-- 코드 분석 기반이라 실제 vault note / frontmatter 샘플은 다음 단계에서 추가 필요
-- 실제 서비스 데이터 들어오면 `workspace_id`, `user_id` tenant 필드 필수
-- 검색 평가용 golden set (질문 ↔ expected `source_url`) 미보유
+`data/eval/retrieval_golden.jsonl` 에 질문 ↔ expected `source_id` 매핑을 정리했습니다. 다음 주차에 retrieval 정확도 측정 (Recall@k 등) 의 입력으로 사용합니다.
+
+- 질문 수: **15**
+- expected source 총 21 개 → 전부 dataset 안에서 해결됨
+
+
+## 10. 한계
+
+- 실제 서비스 데이터가 들어오면 `workspace_id`, `user_id` 같은 tenant 분리 필드가 필요. 현재는 의도적으로 product 단일 값만 보존.

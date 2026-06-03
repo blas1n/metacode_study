@@ -1,21 +1,21 @@
 {
   "chunk_budget_sweep": {
-    "256": 65,
-    "384": 39,
-    "512": 31,
-    "768": 31
+    "256": 74,
+    "384": 46,
+    "512": 36,
+    "768": 35
   },
   "chunk_length_stats": {
     "max": 424,
-    "mean": 329.5,
-    "median": 334.5,
+    "mean": 330.6,
+    "median": 344,
     "min": 86,
-    "p90": 395
+    "p90": 404
   },
   "chunks_per_note": {
     "max": 2,
-    "mean": 1.03,
-    "multi_chunk_notes": 1
+    "mean": 1.06,
+    "multi_chunk_notes": 2
   },
   "db_readiness": {
     "embedding_text_field": "text",
@@ -62,12 +62,110 @@
       "fits_without_truncation": true
     }
   },
+  "golden_coverage": {
+    "all_covered": true,
+    "rows": [
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-001"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-002"
+      },
+      {
+        "covered": 2,
+        "expected": 2,
+        "missing": [],
+        "qid": "q-003"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-004"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-005"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-006"
+      },
+      {
+        "covered": 2,
+        "expected": 2,
+        "missing": [],
+        "qid": "q-007"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-008"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-009"
+      },
+      {
+        "covered": 3,
+        "expected": 3,
+        "missing": [],
+        "qid": "q-010"
+      },
+      {
+        "covered": 2,
+        "expected": 2,
+        "missing": [],
+        "qid": "q-011"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-012"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-013"
+      },
+      {
+        "covered": 2,
+        "expected": 2,
+        "missing": [],
+        "qid": "q-014"
+      },
+      {
+        "covered": 1,
+        "expected": 1,
+        "missing": [],
+        "qid": "q-015"
+      }
+    ],
+    "total_expected": 21,
+    "total_missing": 0,
+    "total_questions": 15
+  },
   "note_length_stats": {
-    "max": 423,
-    "mean": 340.1,
-    "median": 344,
+    "max": 519,
+    "mean": 349.5,
+    "median": 351,
     "min": 247,
-    "p90": 404
+    "p90": 416
   },
   "note_type_counts": {
     "implementation_evidence": 18,
@@ -75,6 +173,7 @@
     "project_overview": 1,
     "runtime_evidence": 4,
     "surface_evidence": 5,
+    "vault_fixture": 4,
     "verification_evidence": 1
   },
   "quality_flag_count": 0,
@@ -85,14 +184,15 @@
     "ops_yaml": 1,
     "readme": 1,
     "runtime_code": 4,
-    "test_code": 1
+    "test_code": 1,
+    "vault_fixture": 4
   },
   "source_directory_coverage": {
     "README.md": 1,
     "apps": 5,
-    "backend": 22,
+    "backend": 23,
     "deploy": 2,
-    "tests": 1
+    "tests": 4
   },
   "source_folder_links": [
     {
@@ -114,6 +214,11 @@
       "count": 3,
       "folder": "backend/knowledge/canonicalization",
       "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/canonicalization"
+    },
+    {
+      "count": 3,
+      "folder": "tests/knowledge/graph",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/tests/knowledge/graph"
     },
     {
       "count": 2,
@@ -162,6 +267,11 @@
     },
     {
       "count": 1,
+      "folder": "backend/knowledge/graph/writer_core",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/graph/writer_core"
+    },
+    {
+      "count": 1,
       "folder": "backend/knowledge/mcp",
       "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/mcp"
     },
@@ -188,6 +298,7 @@
     "backend/knowledge/factory.py": 1,
     "backend/knowledge/graph/analytics.py": 1,
     "backend/knowledge/graph/graph_extractor.py": 1,
+    "backend/knowledge/graph/writer_core/_io.py": 1,
     "backend/knowledge/ingest/ingest_compiler/_chunking.py": 1,
     "backend/knowledge/ingest/ingest_compiler/_compiler.py": 1,
     "backend/knowledge/mcp/domain_tools.py": 1,
@@ -202,12 +313,18 @@
     "backend/workflow/application/runtime/worker_runtime.py": 1,
     "deploy/README.md": 1,
     "deploy/compose.prod.yaml": 1,
-    "tests/glue/test_b13_decision_reuse_in_run.py": 1
+    "tests/glue/test_b13_decision_reuse_in_run.py": 1,
+    "tests/knowledge/graph/test_graph_extractor.py": 3
   },
   "source_repo_counts": {
-    "BSVibe/bsvibe-app": 31
+    "BSVibe/bsvibe-app": 35
   },
   "top_tag_pairs": [
+    {
+      "count": 4,
+      "left": "frontmatter",
+      "right": "vault-fixture"
+    },
     {
       "count": 3,
       "left": "correct",
@@ -239,6 +356,11 @@
       "right": "undo-window"
     },
     {
+      "count": 2,
+      "left": "frontmatter",
+      "right": "wikilinks"
+    },
+    {
       "count": 1,
       "left": "bsvibe-app",
       "right": "docker-compose"
@@ -247,37 +369,27 @@
       "count": 1,
       "left": "bsvibe-app",
       "right": "fastapi"
-    },
-    {
-      "count": 1,
-      "left": "bsvibe-app",
-      "right": "monorepo"
-    },
-    {
-      "count": 1,
-      "left": "bsvibe-app",
-      "right": "nextjs"
     }
   ],
   "top_tags": {
     "canonicalization": 2,
     "correct": 3,
     "docker-compose": 2,
-    "embedding-hook": 2,
+    "frontmatter": 5,
     "garden-notes": 3,
     "garden-writer": 2,
     "ontology-correction": 3,
     "pgvector": 3,
-    "promotion": 2,
     "retract": 3,
     "signal-filtering": 2,
     "tombstone": 2,
     "vault": 2,
+    "vault-fixture": 4,
     "verification": 3,
     "workspace-scoping": 4
   },
-  "total_chunks": 32,
-  "total_notes": 31,
-  "verified_notes": 31,
+  "total_chunks": 37,
+  "total_notes": 35,
+  "verified_notes": 35,
   "verified_ratio": 100.0
 }

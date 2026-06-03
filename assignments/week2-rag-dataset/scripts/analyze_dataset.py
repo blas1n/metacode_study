@@ -149,6 +149,34 @@ def embedding_budget_fit(chunk_lengths: list[int]) -> dict[str, dict[str, Any]]:
     return fits
 
 
+def golden_coverage(
+    notes: list[dict[str, Any]], golden: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Verify every golden Q's expected_source_ids exist in the dataset."""
+    known_ids = {str(n.get("source_id")) for n in notes if n.get("source_id")}
+    rows: list[dict[str, Any]] = []
+    missing_total = 0
+    for item in golden:
+        expected = [str(x) for x in item.get("expected_source_ids", [])]
+        missing = [sid for sid in expected if sid not in known_ids]
+        missing_total += len(missing)
+        rows.append(
+            {
+                "qid": item.get("qid"),
+                "expected": len(expected),
+                "missing": missing,
+                "covered": len(expected) - len(missing),
+            }
+        )
+    return {
+        "total_questions": len(golden),
+        "total_expected": sum(r["expected"] for r in rows),
+        "total_missing": missing_total,
+        "all_covered": missing_total == 0,
+        "rows": rows,
+    }
+
+
 def analyze(notes: list[dict[str, Any]], chunks: list[dict[str, Any]]) -> dict[str, Any]:
     source_counts = Counter(str(note["source_type"]) for note in notes)
     note_type_counts = Counter(str(note["note_type"]) for note in notes)
@@ -392,18 +420,33 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 
 {markdown_table(["count", "folder"], folder_link_rows)}
 
-## 9. 한계
+## 9. 검색 평가용 golden set
 
-- 코드 분석 기반이라 실제 vault note / frontmatter 샘플은 다음 단계에서 추가 필요
-- 실제 서비스 데이터 들어오면 `workspace_id`, `user_id` tenant 필드 필수
-- 검색 평가용 golden set (질문 ↔ expected `source_url`) 미보유
+`data/eval/retrieval_golden.jsonl` 에 질문 ↔ expected `source_id` 매핑을 정리했습니다. 다음 주차에 retrieval 정확도 측정 (Recall@k 등) 의 입력으로 사용합니다.
+
+{_golden_block(summary.get("golden_coverage"))}
+
+## 10. 한계
+
+- 실제 서비스 데이터가 들어오면 `workspace_id`, `user_id` 같은 tenant 분리 필드가 필요. 현재는 의도적으로 product 단일 값만 보존.
 """
+
+
+def _golden_block(coverage: dict[str, Any] | None) -> str:
+    if not coverage:
+        return "_`data/eval/retrieval_golden.jsonl` 없음._"
+    status = "전부 dataset 안에서 해결됨" if coverage["all_covered"] else f"누락 {coverage['total_missing']} 건"
+    return (
+        f"- 질문 수: **{coverage['total_questions']}**\n"
+        f"- expected source 총 {coverage['total_expected']} 개 → {status}\n"
+    )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--notes", type=Path, default=Path("assignments/week2-rag-dataset/data/processed/clean_notes.jsonl"))
     parser.add_argument("--chunks", type=Path, default=Path("assignments/week2-rag-dataset/data/processed/rag_chunks.jsonl"))
+    parser.add_argument("--golden", type=Path, default=Path("assignments/week2-rag-dataset/data/eval/retrieval_golden.jsonl"))
     parser.add_argument("--summary-out", type=Path, default=Path("assignments/week2-rag-dataset/reports/analysis_summary.json"))
     parser.add_argument("--markdown-out", type=Path, default=Path("assignments/week2-rag-dataset/reports/dataset_analysis.md"))
     args = parser.parse_args()
@@ -411,6 +454,8 @@ def main() -> None:
     notes = load_jsonl(args.notes)
     chunks = load_jsonl(args.chunks)
     summary = analyze(notes, chunks)
+    if args.golden.exists():
+        summary["golden_coverage"] = golden_coverage(notes, load_jsonl(args.golden))
 
     args.summary_out.parent.mkdir(parents=True, exist_ok=True)
     args.summary_out.write_text(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
