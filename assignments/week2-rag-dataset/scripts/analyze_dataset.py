@@ -165,11 +165,10 @@ def analyze(notes: list[dict[str, Any]], chunks: list[dict[str, Any]]) -> dict[s
     for note in notes:
         path = str(note.get("source_path") or "")
         repo = str(note.get("source_repo") or "")
-        commit = str(note.get("source_commit") or "")
-        if not (path and repo and commit):
+        if not (path and repo):
             continue
         folder = os.path.dirname(path) or path
-        tree_url = f"https://github.com/{repo}/tree/{commit}/{folder}"
+        tree_url = f"https://github.com/{repo}/tree/main/{folder}"
         folder_groups[(folder, tree_url)] += 1
     source_folder_links = [
         {"folder": folder, "url": url, "count": count}
@@ -389,7 +388,7 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 
 ## 8. 소스 코드 링크
 
-pinned commit 기준 폴더 단위 링크입니다. 파일별 line range 는 raw/processed JSONL 의 `source_url` 에 보존되어 있습니다.
+폴더 단위 링크 (main 기준). 파일별 commit/line range 는 raw/processed JSONL 의 `source_url` 에 보존되어 있습니다.
 
 {markdown_table(["count", "folder"], folder_link_rows)}
 

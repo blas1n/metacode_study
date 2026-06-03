@@ -161,25 +161,25 @@ LIMIT $4;
 
 ## 8. 소스 코드 링크
 
-pinned commit 기준 폴더 단위 링크입니다. 파일별 line range 는 raw/processed JSONL 의 `source_url` 에 보존되어 있습니다.
+폴더 단위 링크 (main 기준). 파일별 commit/line range 는 raw/processed JSONL 의 `source_url` 에 보존되어 있습니다.
 
 | count | folder |
 | --- | --- |
-| 5 | [`backend/knowledge/retrieval`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval) |
-| 4 | [`apps/pwa/components/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge) |
-| 4 | [`backend/workflow/application/runtime`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime) |
-| 3 | [`backend/knowledge/canonicalization`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization) |
-| 2 | [`backend/knowledge/application`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application) |
-| 2 | [`backend/knowledge/graph`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph) |
-| 2 | [`backend/knowledge/ingest/ingest_compiler`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler) |
-| 2 | [`deploy`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/deploy) |
-| 1 | [`README.md`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/README.md) |
-| 1 | [`apps/pwa/lib/api`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/lib/api) |
-| 1 | [`backend/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge) |
-| 1 | [`backend/knowledge/_internal`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/_internal) |
-| 1 | [`backend/knowledge/domain`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/domain) |
-| 1 | [`backend/knowledge/mcp`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/mcp) |
-| 1 | [`tests/glue`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/tests/glue) |
+| 5 | [`backend/knowledge/retrieval`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/retrieval) |
+| 4 | [`apps/pwa/components/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/main/apps/pwa/components/knowledge) |
+| 4 | [`backend/workflow/application/runtime`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/workflow/application/runtime) |
+| 3 | [`backend/knowledge/canonicalization`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/canonicalization) |
+| 2 | [`backend/knowledge/application`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/application) |
+| 2 | [`backend/knowledge/graph`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/graph) |
+| 2 | [`backend/knowledge/ingest/ingest_compiler`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/ingest/ingest_compiler) |
+| 2 | [`deploy`](https://github.com/BSVibe/bsvibe-app/tree/main/deploy) |
+| 1 | [`README.md`](https://github.com/BSVibe/bsvibe-app/tree/main/README.md) |
+| 1 | [`apps/pwa/lib/api`](https://github.com/BSVibe/bsvibe-app/tree/main/apps/pwa/lib/api) |
+| 1 | [`backend/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge) |
+| 1 | [`backend/knowledge/_internal`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/_internal) |
+| 1 | [`backend/knowledge/domain`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/domain) |
+| 1 | [`backend/knowledge/mcp`](https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/mcp) |
+| 1 | [`tests/glue`](https://github.com/BSVibe/bsvibe-app/tree/main/tests/glue) |
 
 ## 9. 한계
 

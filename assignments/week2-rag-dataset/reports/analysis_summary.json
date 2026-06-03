@@ -98,77 +98,77 @@
     {
       "count": 5,
       "folder": "backend/knowledge/retrieval",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/retrieval"
     },
     {
       "count": 4,
       "folder": "apps/pwa/components/knowledge",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/apps/pwa/components/knowledge"
     },
     {
       "count": 4,
       "folder": "backend/workflow/application/runtime",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/workflow/application/runtime"
     },
     {
       "count": 3,
       "folder": "backend/knowledge/canonicalization",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/canonicalization"
     },
     {
       "count": 2,
       "folder": "backend/knowledge/application",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/application"
     },
     {
       "count": 2,
       "folder": "backend/knowledge/graph",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/graph"
     },
     {
       "count": 2,
       "folder": "backend/knowledge/ingest/ingest_compiler",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/ingest/ingest_compiler"
     },
     {
       "count": 2,
       "folder": "deploy",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/deploy"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/deploy"
     },
     {
       "count": 1,
       "folder": "README.md",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/README.md"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/README.md"
     },
     {
       "count": 1,
       "folder": "apps/pwa/lib/api",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/lib/api"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/apps/pwa/lib/api"
     },
     {
       "count": 1,
       "folder": "backend/knowledge",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge"
     },
     {
       "count": 1,
       "folder": "backend/knowledge/_internal",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/_internal"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/_internal"
     },
     {
       "count": 1,
       "folder": "backend/knowledge/domain",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/domain"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/domain"
     },
     {
       "count": 1,
       "folder": "backend/knowledge/mcp",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/mcp"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/backend/knowledge/mcp"
     },
     {
       "count": 1,
       "folder": "tests/glue",
-      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/tests/glue"
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/main/tests/glue"
     }
   ],
   "source_path_counts": {
