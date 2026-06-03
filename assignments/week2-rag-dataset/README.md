@@ -1,10 +1,9 @@
 # 2주차 과제: BSVibe RAG 데이터셋 정제 및 분석
 
-대상 프로젝트인 `BSVibe/bsvibe-app` 코드베이스에서 도출한 RAG seed dataset 을 정제하고, 다음 주차 외부 DB 구축을 위한 분석을 진행했습니다.
+`bsvibe-app` 코드베이스에서 도출한 RAG seed dataset 을 정제
 
-- 분석 commit: `a6648ace49fa670136e6f865652990517e9865fa` (pinned)
 - record 35 / chunk 37 (코드 31 + vault frontmatter fixture 4)
-- 검색 평가용 golden set 15 문항 (모두 dataset 안에서 해결)
+- 검색 평가용 golden set 15 문항
 
 ## 폴더 구조
 
