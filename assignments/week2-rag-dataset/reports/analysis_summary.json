@@ -94,161 +94,81 @@
     "deploy": 2,
     "tests": 1
   },
-  "source_links": [
+  "source_folder_links": [
     {
-      "source_path": "README.md",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/README.md#L1-L90",
-      "title": "BSVibe monorepo layout and local stack"
+      "count": 5,
+      "folder": "backend/knowledge/retrieval",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval"
     },
     {
-      "source_path": "backend/knowledge/factory.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/factory.py#L1-L160",
-      "title": "KnowledgeFactory binds knowledge to workspace and region"
+      "count": 4,
+      "folder": "apps/pwa/components/knowledge",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge"
     },
     {
-      "source_path": "backend/knowledge/retrieval/canon_retriever.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/canon_retriever.py#L1-L131",
-      "title": "Canonical concept retrieval uses promoted active concepts only"
+      "count": 4,
+      "folder": "backend/workflow/application/runtime",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime"
     },
     {
-      "source_path": "backend/knowledge/retrieval/resolved_decisions_retriever.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/resolved_decisions_retriever.py#L1-L239",
-      "title": "Resolved decisions are retrieved from settled garden notes"
+      "count": 3,
+      "folder": "backend/knowledge/canonicalization",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization"
     },
     {
-      "source_path": "backend/knowledge/retrieval/negative_pattern_retriever.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/negative_pattern_retriever.py#L1-L114",
-      "title": "Negative patterns preserve founder rejection feedback"
+      "count": 2,
+      "folder": "backend/knowledge/application",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application"
     },
     {
-      "source_path": "backend/knowledge/retrieval/composite_retriever.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/composite_retriever.py#L1-L77",
-      "title": "Composite retriever merges multiple knowledge sources behind one protocol"
+      "count": 2,
+      "folder": "backend/knowledge/graph",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph"
     },
     {
-      "source_path": "backend/workflow/application/runtime/agent_runtime.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/agent_runtime.py#L204-L326",
-      "title": "Agent runtime wires workspace retriever into execution and knowledge-only route"
+      "count": 2,
+      "folder": "backend/knowledge/ingest/ingest_compiler",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler"
     },
     {
-      "source_path": "backend/workflow/application/runtime/worker_runtime.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/worker_runtime.py#L168-L200",
-      "title": "Settle worker writes vault notes, promotes concepts, and embeds notes"
+      "count": 2,
+      "folder": "deploy",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/deploy"
     },
     {
-      "source_path": "backend/knowledge/ingest/ingest_compiler/_compiler.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler/_compiler.py#L1-L240",
-      "title": "IngestCompiler compiles imported seed content per chunk"
+      "count": 1,
+      "folder": "README.md",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/README.md"
     },
     {
-      "source_path": "backend/knowledge/ingest/ingest_compiler/_chunking.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler/_chunking.py#L1-L187",
-      "title": "Chunking budget protects local LLM ingestion"
+      "count": 1,
+      "folder": "apps/pwa/lib/api",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/lib/api"
     },
     {
-      "source_path": "backend/knowledge/retrieval/semantic_note_retriever.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/semantic_note_retriever.py#L1-L66",
-      "title": "Semantic note retrieval searches pgvector note embeddings"
+      "count": 1,
+      "folder": "backend/knowledge",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge"
     },
     {
-      "source_path": "apps/pwa/lib/api/knowledge.ts",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/lib/api/knowledge.ts#L1-L115",
-      "title": "PWA Knowledge API exposes concepts, observations, graph, retract, and correct"
+      "count": 1,
+      "folder": "backend/knowledge/_internal",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/_internal"
     },
     {
-      "source_path": "apps/pwa/components/knowledge/KnowledgeGraphView.tsx",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/KnowledgeGraphView.tsx#L1-L150",
-      "title": "Knowledge graph view presents ontology nodes and inspector actions"
+      "count": 1,
+      "folder": "backend/knowledge/domain",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/domain"
     },
     {
-      "source_path": "backend/knowledge/mcp/domain_tools.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/mcp/domain_tools.py#L1-L220",
-      "title": "MCP domain tools define search, graph, tag, and create-note surfaces"
+      "count": 1,
+      "folder": "backend/knowledge/mcp",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/mcp"
     },
     {
-      "source_path": "tests/glue/test_b13_decision_reuse_in_run.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/tests/glue/test_b13_decision_reuse_in_run.py#L1-L311",
-      "title": "Cross-run decision reuse is tested through seed and verification fold"
-    },
-    {
-      "source_path": "backend/knowledge/application/retraction_service.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application/retraction_service.py#L1-L366",
-      "title": "RetractionService orchestrates ontology corrections with a 30s undo window"
-    },
-    {
-      "source_path": "backend/knowledge/canonicalization/promotion.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/promotion.py#L1-L304",
-      "title": "GardenObservationPromoter turns recurring garden tags into canonical anchors"
-    },
-    {
-      "source_path": "backend/knowledge/canonicalization/lint.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/lint.py#L1-L210",
-      "title": "canon-lint surfaces orphan tags, alias collisions, and redirect anomalies"
-    },
-    {
-      "source_path": "backend/knowledge/canonicalization/watcher.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/watcher.py#L1-L173",
-      "title": "CanonWatcher bridges external vault edits into the canonicalization index"
-    },
-    {
-      "source_path": "backend/knowledge/graph/analytics.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph/analytics.py#L1-L216",
-      "title": "Graph analytics expose centrality, components, and knowledge gaps"
-    },
-    {
-      "source_path": "backend/knowledge/graph/graph_extractor.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph/graph_extractor.py#L1-L367",
-      "title": "GraphExtractor pulls entities and relations from vault frontmatter and wikilinks"
-    },
-    {
-      "source_path": "backend/knowledge/domain/retraction.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/domain/retraction.py#L1-L108",
-      "title": "RetractionSignal locks the wire shape of every founder-issued correction"
-    },
-    {
-      "source_path": "backend/knowledge/_internal/events.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/_internal/events.py#L1-L185",
-      "title": "EventBus enumerates lifecycle, vault, and ingest events for streaming"
-    },
-    {
-      "source_path": "backend/knowledge/application/audit_events.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application/audit_events.py#L1-L53",
-      "title": "Audit events trace the ontology correction lifecycle through the outbox"
-    },
-    {
-      "source_path": "backend/workflow/application/runtime/settle_runtime.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/settle_runtime.py#L1-L165",
-      "title": "Settle runtime factories build per-settlement extractor and embedding hook"
-    },
-    {
-      "source_path": "backend/workflow/application/runtime/dispatcher.py",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/dispatcher.py#L1-L174",
-      "title": "Runtime dispatcher binds gateway plus cheap-LLM seams to the same per-session pattern"
-    },
-    {
-      "source_path": "apps/pwa/components/knowledge/RetractModal.tsx",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/RetractModal.tsx#L1-L157",
-      "title": "RetractModal renders the pre-flight confirmation for an ontology retract"
-    },
-    {
-      "source_path": "apps/pwa/components/knowledge/InspectorActions.tsx",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/InspectorActions.tsx#L1-L203",
-      "title": "InspectorActions runs the idle to modal to toast state machine for retract and correct"
-    },
-    {
-      "source_path": "apps/pwa/components/knowledge/UndoToast.tsx",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/UndoToast.tsx#L1-L140",
-      "title": "UndoToast derives the 30s countdown from server wall-clock apply_at"
-    },
-    {
-      "source_path": "deploy/compose.prod.yaml",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/deploy/compose.prod.yaml#L1-L115",
-      "title": "compose.prod.yaml overrides dev defaults for prod env-driven startup"
-    },
-    {
-      "source_path": "deploy/README.md",
-      "source_url": "https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/deploy/README.md#L1-L164",
-      "title": "Deploy README documents the migrate-on-boot and single-migrator contract"
+      "count": 1,
+      "folder": "tests/glue",
+      "url": "https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/tests/glue"
     }
   ],
   "source_path_counts": {

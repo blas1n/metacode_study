@@ -31,5 +31,5 @@ python assignments/week2-rag-dataset/scripts/analyze_dataset.py
 자세한 내용은 [reports/dataset_analysis.md](reports/dataset_analysis.md) 참고. 핵심만 요약하면:
 
 - 정제는 redaction (이메일/API key/로컬 경로), 태그·공백 정규화, `source_type → note_type` 매핑, chunk 분할까지 자동화
-- 외부 DB (pgvector) 적재용 스키마와 검색 쿼리 sketch 는 분석 보고서 §9 에 포함
+- 외부 DB (pgvector) 적재용 스키마와 검색 쿼리 sketch 는 분석 보고서 7. 외부 DB 적재 섹션에 포함
 - 검증 100%, 중복 0, 품질 flag 0

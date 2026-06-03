@@ -161,39 +161,25 @@ LIMIT $4;
 
 ## 8. 소스 코드 링크
 
-| record | source_path | link |
-| --- | --- | --- |
-| BSVibe monorepo layout and local stack | README.md | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/README.md#L1-L90) |
-| KnowledgeFactory binds knowledge to workspace and region | backend/knowledge/factory.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/factory.py#L1-L160) |
-| Canonical concept retrieval uses promoted active concepts only | backend/knowledge/retrieval/canon_retriever.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/canon_retriever.py#L1-L131) |
-| Resolved decisions are retrieved from settled garden notes | backend/knowledge/retrieval/resolved_decisions_retriever.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/resolved_decisions_retriever.py#L1-L239) |
-| Negative patterns preserve founder rejection feedback | backend/knowledge/retrieval/negative_pattern_retriever.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/negative_pattern_retriever.py#L1-L114) |
-| Composite retriever merges multiple knowledge sources behind one protocol | backend/knowledge/retrieval/composite_retriever.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/composite_retriever.py#L1-L77) |
-| Agent runtime wires workspace retriever into execution and knowledge-only route | backend/workflow/application/runtime/agent_runtime.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/agent_runtime.py#L204-L326) |
-| Settle worker writes vault notes, promotes concepts, and embeds notes | backend/workflow/application/runtime/worker_runtime.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/worker_runtime.py#L168-L200) |
-| IngestCompiler compiles imported seed content per chunk | backend/knowledge/ingest/ingest_compiler/_compiler.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler/_compiler.py#L1-L240) |
-| Chunking budget protects local LLM ingestion | backend/knowledge/ingest/ingest_compiler/_chunking.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler/_chunking.py#L1-L187) |
-| Semantic note retrieval searches pgvector note embeddings | backend/knowledge/retrieval/semantic_note_retriever.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval/semantic_note_retriever.py#L1-L66) |
-| PWA Knowledge API exposes concepts, observations, graph, retract, and correct | apps/pwa/lib/api/knowledge.ts | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/lib/api/knowledge.ts#L1-L115) |
-| Knowledge graph view presents ontology nodes and inspector actions | apps/pwa/components/knowledge/KnowledgeGraphView.tsx | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/KnowledgeGraphView.tsx#L1-L150) |
-| MCP domain tools define search, graph, tag, and create-note surfaces | backend/knowledge/mcp/domain_tools.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/mcp/domain_tools.py#L1-L220) |
-| Cross-run decision reuse is tested through seed and verification fold | tests/glue/test_b13_decision_reuse_in_run.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/tests/glue/test_b13_decision_reuse_in_run.py#L1-L311) |
-| RetractionService orchestrates ontology corrections with a 30s undo window | backend/knowledge/application/retraction_service.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application/retraction_service.py#L1-L366) |
-| GardenObservationPromoter turns recurring garden tags into canonical anchors | backend/knowledge/canonicalization/promotion.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/promotion.py#L1-L304) |
-| canon-lint surfaces orphan tags, alias collisions, and redirect anomalies | backend/knowledge/canonicalization/lint.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/lint.py#L1-L210) |
-| CanonWatcher bridges external vault edits into the canonicalization index | backend/knowledge/canonicalization/watcher.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization/watcher.py#L1-L173) |
-| Graph analytics expose centrality, components, and knowledge gaps | backend/knowledge/graph/analytics.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph/analytics.py#L1-L216) |
-| GraphExtractor pulls entities and relations from vault frontmatter and wikilinks | backend/knowledge/graph/graph_extractor.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph/graph_extractor.py#L1-L367) |
-| RetractionSignal locks the wire shape of every founder-issued correction | backend/knowledge/domain/retraction.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/domain/retraction.py#L1-L108) |
-| EventBus enumerates lifecycle, vault, and ingest events for streaming | backend/knowledge/_internal/events.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/_internal/events.py#L1-L185) |
-| Audit events trace the ontology correction lifecycle through the outbox | backend/knowledge/application/audit_events.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application/audit_events.py#L1-L53) |
-| Settle runtime factories build per-settlement extractor and embedding hook | backend/workflow/application/runtime/settle_runtime.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/settle_runtime.py#L1-L165) |
-| Runtime dispatcher binds gateway plus cheap-LLM seams to the same per-session pattern | backend/workflow/application/runtime/dispatcher.py | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime/dispatcher.py#L1-L174) |
-| RetractModal renders the pre-flight confirmation for an ontology retract | apps/pwa/components/knowledge/RetractModal.tsx | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/RetractModal.tsx#L1-L157) |
-| InspectorActions runs the idle to modal to toast state machine for retract and correct | apps/pwa/components/knowledge/InspectorActions.tsx | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/InspectorActions.tsx#L1-L203) |
-| UndoToast derives the 30s countdown from server wall-clock apply_at | apps/pwa/components/knowledge/UndoToast.tsx | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge/UndoToast.tsx#L1-L140) |
-| compose.prod.yaml overrides dev defaults for prod env-driven startup | deploy/compose.prod.yaml | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/deploy/compose.prod.yaml#L1-L115) |
-| Deploy README documents the migrate-on-boot and single-migrator contract | deploy/README.md | [source](https://github.com/BSVibe/bsvibe-app/blob/a6648ace49fa670136e6f865652990517e9865fa/deploy/README.md#L1-L164) |
+pinned commit 기준 폴더 단위 링크입니다. 파일별 line range 는 raw/processed JSONL 의 `source_url` 에 보존되어 있습니다.
+
+| count | folder |
+| --- | --- |
+| 5 | [`backend/knowledge/retrieval`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/retrieval) |
+| 4 | [`apps/pwa/components/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/components/knowledge) |
+| 4 | [`backend/workflow/application/runtime`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/workflow/application/runtime) |
+| 3 | [`backend/knowledge/canonicalization`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/canonicalization) |
+| 2 | [`backend/knowledge/application`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/application) |
+| 2 | [`backend/knowledge/graph`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/graph) |
+| 2 | [`backend/knowledge/ingest/ingest_compiler`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/ingest/ingest_compiler) |
+| 2 | [`deploy`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/deploy) |
+| 1 | [`README.md`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/README.md) |
+| 1 | [`apps/pwa/lib/api`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/apps/pwa/lib/api) |
+| 1 | [`backend/knowledge`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge) |
+| 1 | [`backend/knowledge/_internal`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/_internal) |
+| 1 | [`backend/knowledge/domain`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/domain) |
+| 1 | [`backend/knowledge/mcp`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/backend/knowledge/mcp) |
+| 1 | [`tests/glue`](https://github.com/BSVibe/bsvibe-app/tree/a6648ace49fa670136e6f865652990517e9865fa/tests/glue) |
 
 ## 9. 한계
 

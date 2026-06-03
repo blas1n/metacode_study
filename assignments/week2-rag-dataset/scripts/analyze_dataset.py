@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import statistics
 from collections import Counter, defaultdict
@@ -160,14 +161,19 @@ def analyze(notes: list[dict[str, Any]], chunks: list[dict[str, Any]]) -> dict[s
     note_lengths = [len(str(note["content"])) for note in notes]
     chunks_per_note = Counter(chunk["note_id"] for chunk in chunks)
     multi_chunk_notes = sum(1 for c in chunks_per_note.values() if c > 1)
-    source_links = [
-        {
-            "title": note["title"],
-            "source_path": note.get("source_path", ""),
-            "source_url": note.get("source_url", ""),
-        }
-        for note in notes
-        if note.get("source_url")
+    folder_groups: dict[tuple[str, str], int] = defaultdict(int)
+    for note in notes:
+        path = str(note.get("source_path") or "")
+        repo = str(note.get("source_repo") or "")
+        commit = str(note.get("source_commit") or "")
+        if not (path and repo and commit):
+            continue
+        folder = os.path.dirname(path) or path
+        tree_url = f"https://github.com/{repo}/tree/{commit}/{folder}"
+        folder_groups[(folder, tree_url)] += 1
+    source_folder_links = [
+        {"folder": folder, "url": url, "count": count}
+        for (folder, url), count in sorted(folder_groups.items(), key=lambda x: (-x[1], x[0][0]))
     ]
 
     return {
@@ -196,7 +202,7 @@ def analyze(notes: list[dict[str, Any]], chunks: list[dict[str, Any]]) -> dict[s
         },
         "chunk_budget_sweep": chunk_budget_sweep(notes, CHUNK_BUDGET_SWEEP),
         "embedding_budget_fit": embedding_budget_fit(chunk_lengths),
-        "source_links": source_links,
+        "source_folder_links": source_folder_links,
         "db_readiness": {
             "metadata_filters": [
                 "product",
@@ -296,9 +302,9 @@ def build_report(summary: dict[str, Any]) -> str:
         ]
         for model, info in summary["embedding_budget_fit"].items()
     ]
-    source_link_rows = [
-        [item["title"], item["source_path"], f"[source]({item['source_url']})"]
-        for item in summary["source_links"]
+    folder_link_rows = [
+        [item["count"], f"[`{item['folder']}`]({item['url']})"]
+        for item in summary["source_folder_links"]
     ]
 
     duplicates = summary["duplicate_groups"]
@@ -383,7 +389,9 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 
 ## 8. 소스 코드 링크
 
-{markdown_table(["record", "source_path", "link"], source_link_rows)}
+pinned commit 기준 폴더 단위 링크입니다. 파일별 line range 는 raw/processed JSONL 의 `source_url` 에 보존되어 있습니다.
+
+{markdown_table(["count", "folder"], folder_link_rows)}
 
 ## 9. 한계
 
