@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 from collections import Counter
 from datetime import datetime
@@ -81,6 +82,98 @@ def validate_record(record: dict[str, Any]) -> list[str]:
     return issues
 
 
+# 아래 자동 태그 추출은 bsvibe-app 의 settle_worker 에서 가져온 패턴.
+# 직접 룰을 만드는 대신 실제 운영 코드가 쓰는 normalization·structural-tag 거름·
+# 추출 순서·8개 cap 을 그대로 따라가, 다음 주차 외부 DB 가 같은 concept-id 문법
+# (Handoff §2: ^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$) 으로 promotion 까지 이어갈 수 있게 함.
+# Source: backend/knowledge/infrastructure/workers/settle_worker.py @ a6648ac
+_AUTO_NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
+_AUTO_CONCEPT_ID_LEADING_RE = re.compile(r"^[a-z]")
+_STRUCTURAL_TAGS: frozenset[str] = frozenset({"settle", "verified-run"})
+_MAX_CONTENT_TAGS = 8
+_MIN_SUMMARY_TOKEN_LEN = 3
+_SUMMARY_STOPWORDS: frozenset[str] = frozenset(
+    {
+        "the", "and", "for", "with", "from", "into", "onto", "this", "that",
+        "these", "those", "have", "has", "had", "was", "were", "are", "but",
+        "not", "via", "per", "out", "off", "its", "our", "your", "their",
+        "added", "add", "fixed", "fix", "wired", "wire", "made", "make",
+        "set", "got", "get", "ran", "run", "use", "used", "new", "now",
+        "all", "any", "can", "did", "done", "then", "than", "step", "work",
+    }
+)
+
+
+def _normalize_concept_tag(raw: str) -> str:
+    """settle_worker._normalize_tag 의 이식.
+
+    casefold → 비-alnum run 을 하이픈 한 개로 → edge hyphen strip → 구조 태그/숫자
+    선두 reject. promoter 가 그대로 받을 수 있는 concept-id candidate 만 통과.
+    """
+    if not isinstance(raw, str):
+        return ""
+    normalized = _AUTO_NON_ALNUM_RE.sub("-", raw.casefold()).strip("-")
+    if not normalized or normalized in _STRUCTURAL_TAGS:
+        return ""
+    if not _AUTO_CONCEPT_ID_LEADING_RE.match(normalized):
+        return ""
+    return normalized
+
+
+def _tags_from_artifact_path(source_path: str) -> list[str]:
+    """settle_worker._tags_from_artifact_refs 와 동일 — 경로 모든 part 의 stem 을 태그화."""
+    tags: list[str] = []
+    if not source_path:
+        return tags
+    posix = source_path.replace("\\", "/")
+    for part in posix.split("/"):
+        stem = os.path.splitext(part)[0]
+        tag = _normalize_concept_tag(stem)
+        if tag:
+            tags.append(tag)
+    return tags
+
+
+def _tags_from_text(text: str) -> list[str]:
+    """settle_worker._tags_from_summary 이식 — content/title 의 살아남는 토큰만."""
+    tags: list[str] = []
+    if not text:
+        return tags
+    for token in _AUTO_NON_ALNUM_RE.split(text.casefold()):
+        if len(token) < _MIN_SUMMARY_TOKEN_LEN or token in _SUMMARY_STOPWORDS:
+            continue
+        tag = _normalize_concept_tag(token)
+        if not tag or tag in _SUMMARY_STOPWORDS:
+            continue
+        tags.append(tag)
+    return tags
+
+
+def _tags_from_product(product: str) -> list[str]:
+    """settle_worker._tags_from_product — 1개만 emit."""
+    tag = _normalize_concept_tag(product)
+    return [tag] if tag else []
+
+
+def derive_auto_tags(record: dict[str, Any]) -> list[str]:
+    """settle_worker.derive_content_tags 의 순서를 그대로 따름.
+
+    1. product (강한 cluster key) →
+    2. title (founder intent 격으로 사용) →
+    3. source_path (artifact-ref stems) →
+    4. content (summary terms).
+
+    first-wins dedupe + _MAX_CONTENT_TAGS 만큼 cap.
+    """
+    ordered: list[str] = []
+    ordered.extend(_tags_from_product(str(record.get("product", ""))))
+    ordered.extend(_tags_from_text(str(record.get("title", ""))))
+    ordered.extend(_tags_from_artifact_path(str(record.get("source_path", ""))))
+    ordered.extend(_tags_from_text(str(record.get("content", ""))))
+    deduped = list(dict.fromkeys(ordered))
+    return deduped[:_MAX_CONTENT_TAGS]
+
+
 def infer_note_type(source_type: str) -> str:
     mapping = {
         "readme": "project_overview",
@@ -132,6 +225,7 @@ def clean_records(records: list[dict[str, Any]], max_chunk_chars: int) -> tuple[
     chunks: list[dict[str, Any]] = []
     issue_counter: Counter[str] = Counter()
     redaction_counter: Counter[str] = Counter()
+    auto_tag_counter = Counter()
 
     for record in records:
         issues = validate_record(record)
@@ -143,7 +237,23 @@ def clean_records(records: list[dict[str, Any]], max_chunk_chars: int) -> tuple[
         redaction_counter["secret"] += len(SECRET_RE.findall(raw_content))
         redaction_counter["local_path"] += len(LOCAL_PATH_RE.findall(raw_content))
 
-        tags = sorted({normalize_tag(str(tag)) for tag in record.get("tags", []) if normalize_tag(str(tag))})
+        manual_tags = [
+            normalize_tag(str(tag))
+            for tag in record.get("tags", [])
+            if normalize_tag(str(tag))
+        ]
+        manual_tags = list(dict.fromkeys(manual_tags))  # first-wins dedupe, 순서 보존
+
+        # settle_worker.derive_content_tags 와 동일한 규칙으로 보조 태그 추출.
+        auto_tags = derive_auto_tags(record)
+        auto_tags_new = [t for t in auto_tags if t not in manual_tags]
+
+        merged_tags = list(dict.fromkeys(manual_tags + auto_tags))
+        auto_tag_counter["manual_total"] += len(manual_tags)
+        auto_tag_counter["auto_total"] += len(auto_tags)
+        auto_tag_counter["auto_added_new"] += len(auto_tags_new)
+        auto_tag_counter["merged_total"] += len(merged_tags)
+
         content = normalize_text(raw_content)
         title = normalize_text(raw_title)
         note_type = infer_note_type(str(record.get("source_type", "")))
@@ -163,7 +273,9 @@ def clean_records(records: list[dict[str, Any]], max_chunk_chars: int) -> tuple[
             "note_type": note_type,
             "title": title,
             "content": content,
-            "tags": tags,
+            "tags": merged_tags,
+            "manual_tags": manual_tags,
+            "auto_tags": auto_tags,
             "verified": bool(record.get("verified", False)),
             "quality_flags": issues,
             "content_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
@@ -186,7 +298,7 @@ def clean_records(records: list[dict[str, Any]], max_chunk_chars: int) -> tuple[
                         "source_type": clean_note["source_type"],
                         "note_type": note_type,
                         "title": title,
-                        "tags": tags,
+                        "tags": merged_tags,
                         "verified": clean_note["verified"],
                         **source_metadata,
                     },
@@ -199,6 +311,14 @@ def clean_records(records: list[dict[str, Any]], max_chunk_chars: int) -> tuple[
         "rag_chunks": len(chunks),
         "quality_issues": dict(sorted(issue_counter.items())),
         "redactions": dict(sorted(redaction_counter.items())),
+        "tagging": {
+            "rule_source": "backend/knowledge/infrastructure/workers/settle_worker.py @ a6648ac",
+            "max_content_tags_cap": _MAX_CONTENT_TAGS,
+            "manual_tags_total": auto_tag_counter["manual_total"],
+            "auto_tags_total": auto_tag_counter["auto_total"],
+            "auto_tags_added_new": auto_tag_counter["auto_added_new"],
+            "merged_tags_total": auto_tag_counter["merged_total"],
+        },
         "max_chunk_chars": max_chunk_chars,
         "output_contract": {
             "clean_notes": "one JSON object per source note with normalized tags, redacted text, provenance, and quality flags",

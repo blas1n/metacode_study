@@ -319,73 +319,127 @@
   "source_repo_counts": {
     "BSVibe/bsvibe-app": 35
   },
+  "tagging": {
+    "auto_new_contributions": 252,
+    "auto_overlap_with_manual": 28,
+    "auto_total": 280,
+    "avg_per_note": {
+      "auto": 8,
+      "manual": 6.14,
+      "merged": 13.34
+    },
+    "manual_total": 215,
+    "merged_total": 467,
+    "top_auto_only": [
+      [
+        "bsvibe",
+        35
+      ],
+      [
+        "backend",
+        8
+      ],
+      [
+        "knowledge",
+        6
+      ],
+      [
+        "note",
+        5
+      ],
+      [
+        "runtime",
+        3
+      ],
+      [
+        "seed",
+        3
+      ],
+      [
+        "graph",
+        3
+      ],
+      [
+        "ontology",
+        3
+      ],
+      [
+        "vault",
+        3
+      ],
+      [
+        "local",
+        2
+      ]
+    ]
+  },
   "top_tag_pairs": [
     {
+      "count": 8,
+      "left": "backend",
+      "right": "bsvibe"
+    },
+    {
+      "count": 6,
+      "left": "bsvibe",
+      "right": "knowledge"
+    },
+    {
+      "count": 5,
+      "left": "bsvibe",
+      "right": "vault"
+    },
+    {
+      "count": 5,
+      "left": "bsvibe",
+      "right": "note"
+    },
+    {
+      "count": 5,
+      "left": "bsvibe",
+      "right": "ontology"
+    },
+    {
+      "count": 5,
+      "left": "bsvibe",
+      "right": "frontmatter"
+    },
+    {
       "count": 4,
-      "left": "frontmatter",
-      "right": "vault-fixture"
+      "left": "bsvibe",
+      "right": "workspace-scoping"
     },
     {
-      "count": 3,
-      "left": "correct",
+      "count": 4,
+      "left": "bsvibe",
+      "right": "verification"
+    },
+    {
+      "count": 4,
+      "left": "bsvibe",
+      "right": "graph"
+    },
+    {
+      "count": 4,
+      "left": "bsvibe",
       "right": "retract"
-    },
-    {
-      "count": 2,
-      "left": "garden-notes",
-      "right": "signal-filtering"
-    },
-    {
-      "count": 2,
-      "left": "garden-notes",
-      "right": "verification"
-    },
-    {
-      "count": 2,
-      "left": "signal-filtering",
-      "right": "verification"
-    },
-    {
-      "count": 2,
-      "left": "embedding-hook",
-      "right": "pgvector"
-    },
-    {
-      "count": 2,
-      "left": "idempotency",
-      "right": "undo-window"
-    },
-    {
-      "count": 2,
-      "left": "frontmatter",
-      "right": "wikilinks"
-    },
-    {
-      "count": 1,
-      "left": "bsvibe-app",
-      "right": "docker-compose"
-    },
-    {
-      "count": 1,
-      "left": "bsvibe-app",
-      "right": "fastapi"
     }
   ],
   "top_tags": {
-    "canonicalization": 2,
-    "correct": 3,
-    "docker-compose": 2,
+    "backend": 8,
+    "bsvibe": 35,
+    "canonicalization": 3,
+    "concepts": 3,
     "frontmatter": 5,
-    "garden-notes": 3,
-    "garden-writer": 2,
-    "ontology-correction": 3,
-    "pgvector": 3,
-    "retract": 3,
-    "signal-filtering": 2,
-    "tombstone": 2,
-    "vault": 2,
+    "graph": 4,
+    "knowledge": 6,
+    "note": 5,
+    "ontology": 5,
+    "retract": 4,
+    "retriever": 3,
+    "vault": 5,
     "vault-fixture": 4,
-    "verification": 3,
+    "verification": 4,
     "workspace-scoping": 4
   },
   "total_chunks": 37,

@@ -21,5 +21,13 @@
     "source_line_end",
     "source_url",
     "secondary_source_url"
-  ]
+  ],
+  "tagging": {
+    "auto_tags_added_new": 252,
+    "auto_tags_total": 280,
+    "manual_tags_total": 215,
+    "max_content_tags_cap": 8,
+    "merged_tags_total": 467,
+    "rule_source": "backend/knowledge/infrastructure/workers/settle_worker.py @ a6648ac"
+  }
 }

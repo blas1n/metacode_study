@@ -45,38 +45,64 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 
 ## 4. 태그
 
+수기 태그 + 자동 태그를 결합합니다. 자동 태그 추출은 bsvibe-app 의 `backend/knowledge/infrastructure/workers/settle_worker.py` (`derive_content_tags`) 가 운영에서 쓰는 규칙을 그대로 따랐습니다. **product → title → source_path stems → content terms** 순으로 추출, first-wins dedupe, 8개 cap.
+
+- 수기 태그 총 **215** (평균 6.14개/note)
+- 자동 태그 총 **280** (평균 8개/note)
+  - 수기와 겹친 항목: 28
+  - 자동이 새로 더한 항목: **252**
+- 머지 후 총 **467** (평균 13.34개/note)
+
+자동만 채워준 상위 태그:
+
+| auto-only tag | count |
+| --- | --- |
+| bsvibe | 35 |
+| backend | 8 |
+| knowledge | 6 |
+| note | 5 |
+| runtime | 3 |
+| seed | 3 |
+| graph | 3 |
+| ontology | 3 |
+| vault | 3 |
+| local | 2 |
+
+
+전체 태그 빈도 상위:
+
 | tag | count |
 | --- | --- |
+| bsvibe | 35 |
+| backend | 8 |
+| knowledge | 6 |
+| vault | 5 |
+| note | 5 |
+| ontology | 5 |
 | frontmatter | 5 |
 | workspace-scoping | 4 |
+| verification | 4 |
+| graph | 4 |
+| retract | 4 |
 | vault-fixture | 4 |
-| verification | 3 |
-| garden-notes | 3 |
-| pgvector | 3 |
-| correct | 3 |
-| retract | 3 |
-| ontology-correction | 3 |
-| docker-compose | 2 |
-| garden-writer | 2 |
-| vault | 2 |
-| canonicalization | 2 |
-| signal-filtering | 2 |
-| tombstone | 2 |
+| retriever | 3 |
+| canonicalization | 3 |
+| concepts | 3 |
 
 자주 묶이는 페어:
 
 | tag_left | tag_right | co_occurrence |
 | --- | --- | --- |
-| frontmatter | vault-fixture | 4 |
-| correct | retract | 3 |
-| garden-notes | signal-filtering | 2 |
-| garden-notes | verification | 2 |
-| signal-filtering | verification | 2 |
-| embedding-hook | pgvector | 2 |
-| idempotency | undo-window | 2 |
-| frontmatter | wikilinks | 2 |
-| bsvibe-app | docker-compose | 1 |
-| bsvibe-app | fastapi | 1 |
+| backend | bsvibe | 8 |
+| bsvibe | knowledge | 6 |
+| bsvibe | vault | 5 |
+| bsvibe | note | 5 |
+| bsvibe | ontology | 5 |
+| bsvibe | frontmatter | 5 |
+| bsvibe | workspace-scoping | 4 |
+| bsvibe | verification | 4 |
+| bsvibe | graph | 4 |
+| bsvibe | retract | 4 |
 
 ## 5. 길이
 

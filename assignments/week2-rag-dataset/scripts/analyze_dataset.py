@@ -177,6 +177,34 @@ def golden_coverage(
     }
 
 
+def tagging_breakdown(notes: list[dict[str, Any]]) -> dict[str, Any]:
+    """manual / auto / merged 태그 분포를 종합."""
+    manual = [t for n in notes for t in n.get("manual_tags", [])]
+    auto = [t for n in notes for t in n.get("auto_tags", [])]
+    merged = [t for n in notes for t in n.get("tags", [])]
+    overlap = sum(1 for n in notes for t in n.get("auto_tags", []) if t in n.get("manual_tags", []))
+    per_note = [
+        {
+            "manual": len(n.get("manual_tags", [])),
+            "auto": len(n.get("auto_tags", [])),
+            "merged": len(n.get("tags", [])),
+        }
+        for n in notes
+    ]
+    avg = lambda key: round(statistics.mean([p[key] for p in per_note]), 2) if per_note else 0
+    return {
+        "manual_total": len(manual),
+        "auto_total": len(auto),
+        "merged_total": len(merged),
+        "auto_overlap_with_manual": overlap,
+        "auto_new_contributions": len(auto) - overlap,
+        "avg_per_note": {"manual": avg("manual"), "auto": avg("auto"), "merged": avg("merged")},
+        "top_auto_only": Counter(
+            t for n in notes for t in n.get("auto_tags", []) if t not in n.get("manual_tags", [])
+        ).most_common(10),
+    }
+
+
 def analyze(notes: list[dict[str, Any]], chunks: list[dict[str, Any]]) -> dict[str, Any]:
     source_counts = Counter(str(note["source_type"]) for note in notes)
     note_type_counts = Counter(str(note["note_type"]) for note in notes)
@@ -215,6 +243,7 @@ def analyze(notes: list[dict[str, Any]], chunks: list[dict[str, Any]]) -> dict[s
         "source_directory_coverage": source_directory_coverage(notes),
         "source_path_counts": dict(source_path_counts.most_common()),
         "source_repo_counts": dict(source_repo_counts.most_common()),
+        "tagging": tagging_breakdown(notes),
         "top_tags": dict(tag_counts.most_common(15)),
         "top_tag_pairs": [
             {"left": left, "right": right, "count": count}
@@ -369,6 +398,12 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 
 ## 4. 태그
 
+수기 태그 + 자동 태그를 결합합니다. 자동 태그 추출은 bsvibe-app 의 `backend/knowledge/infrastructure/workers/settle_worker.py` (`derive_content_tags`) 가 운영에서 쓰는 규칙을 그대로 따랐습니다. **product → title → source_path stems → content terms** 순으로 추출, first-wins dedupe, 8개 cap.
+
+{_tagging_block(summary["tagging"])}
+
+전체 태그 빈도 상위:
+
 {markdown_table(["tag", "count"], tag_rows)}
 
 자주 묶이는 페어:
@@ -430,6 +465,20 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 
 - 실제 서비스 데이터가 들어오면 `workspace_id`, `user_id` 같은 tenant 분리 필드가 필요. 현재는 의도적으로 product 단일 값만 보존.
 """
+
+
+def _tagging_block(tagging: dict[str, Any]) -> str:
+    avg = tagging["avg_per_note"]
+    top_auto_rows = [[t, c] for t, c in tagging["top_auto_only"]]
+    top_section = markdown_table(["auto-only tag", "count"], top_auto_rows) if top_auto_rows else "_없음._"
+    return (
+        f"- 수기 태그 총 **{tagging['manual_total']}** (평균 {avg['manual']}개/note)\n"
+        f"- 자동 태그 총 **{tagging['auto_total']}** (평균 {avg['auto']}개/note)\n"
+        f"  - 수기와 겹친 항목: {tagging['auto_overlap_with_manual']}\n"
+        f"  - 자동이 새로 더한 항목: **{tagging['auto_new_contributions']}**\n"
+        f"- 머지 후 총 **{tagging['merged_total']}** (평균 {avg['merged']}개/note)\n\n"
+        f"자동만 채워준 상위 태그:\n\n{top_section}\n"
+    )
 
 
 def _golden_block(coverage: dict[str, Any] | None) -> str:
