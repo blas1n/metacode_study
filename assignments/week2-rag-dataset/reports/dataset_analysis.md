@@ -10,7 +10,7 @@
 
 ## 2. 정제 처리
 
-redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 → `source_type → note_type` 매핑 → provenance (`note_id`, `content_sha256`) 부여 → paragraph 경계 기반 chunk 분할.
+redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 → `source_type → note_type` 매핑 → **bsvibe-app `settle_worker.derive_content_tags` 규칙으로 자동 태그 추가** → provenance (`note_id`, `content_sha256`) 부여 → paragraph 경계 기반 chunk 분할.
 
 ## 3. 분포
 
