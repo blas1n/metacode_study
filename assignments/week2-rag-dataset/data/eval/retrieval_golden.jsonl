@@ -1,0 +1,15 @@
+{"qid":"q-001","question":"BSVibe 모노레포는 어떤 구성으로 돌아가나요?","expected_source_ids":["bsvibe-src-001"],"note_type_hint":["project_overview"]}
+{"qid":"q-002","question":"workspace 단위로 vault와 retriever를 어떻게 묶나요?","expected_source_ids":["bsvibe-src-002"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-003","question":"이미 결정된 내용을 다음 run에서 재사용하려면 어디를 봐야 하나요?","expected_source_ids":["bsvibe-src-004","bsvibe-src-015"],"note_type_hint":["implementation_evidence","verification_evidence"]}
+{"qid":"q-004","question":"파운더가 거절한 접근(부정 사례)은 어디에 저장되고 어떻게 검색되나요?","expected_source_ids":["bsvibe-src-005"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-005","question":"canonical concept, decision, negative pattern을 한 번에 합치는 retriever는 무엇인가요?","expected_source_ids":["bsvibe-src-006"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-006","question":"agent runtime은 workspace retriever를 어떻게 주입하나요?","expected_source_ids":["bsvibe-src-007"],"note_type_hint":["runtime_evidence"]}
+{"qid":"q-007","question":"settle 단계에서 vault 노트를 어떻게 흡수하고 임베딩하나요?","expected_source_ids":["bsvibe-src-008","bsvibe-src-025"],"note_type_hint":["runtime_evidence"]}
+{"qid":"q-008","question":"ingest 시 chunk 크기 한도를 어떻게 잡나요?","expected_source_ids":["bsvibe-src-010"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-009","question":"semantic 검색은 어떤 컬럼/인덱스로 동작하나요?","expected_source_ids":["bsvibe-src-011"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-010","question":"파운더가 잘못된 노드를 retract하면 어떤 흐름으로 처리되나요?","expected_source_ids":["bsvibe-src-016","bsvibe-src-022","bsvibe-src-024"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-011","question":"undo 30초 카운트다운은 어디서 어떻게 계산되나요?","expected_source_ids":["bsvibe-src-029","bsvibe-src-028"],"note_type_hint":["surface_evidence"]}
+{"qid":"q-012","question":"garden 관찰이 canonical concept으로 승격되는 과정은요?","expected_source_ids":["bsvibe-src-017"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-013","question":"alias collision이나 redirect cycle 같은 카논 품질 문제는 어떻게 감지하나요?","expected_source_ids":["bsvibe-src-018"],"note_type_hint":["implementation_evidence"]}
+{"qid":"q-014","question":"prod 환경에서 마이그레이션이 worker와 충돌하지 않게 하려면 어떻게 해야 하나요?","expected_source_ids":["bsvibe-src-031","bsvibe-src-030"],"note_type_hint":["operational_evidence"]}
+{"qid":"q-015","question":"fact 노트 frontmatter는 어떻게 생겼나요?","expected_source_ids":["bsvibe-vault-001"],"note_type_hint":["vault_fixture"]}
