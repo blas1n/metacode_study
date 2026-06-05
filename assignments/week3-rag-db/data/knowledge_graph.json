@@ -1,0 +1,3553 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "name": "BSVibe",
+      "entity_type": "product",
+      "entity_types": [
+        "product"
+      ],
+      "id": "bsvibe"
+    },
+    {
+      "name": "FastAPI",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "fastapi"
+    },
+    {
+      "name": "Next.js",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "next.js"
+    },
+    {
+      "name": "Docker Compose",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "docker compose"
+    },
+    {
+      "name": "backend health probe",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "backend health probe"
+    },
+    {
+      "name": "PWA entrypoint",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "pwa entrypoint"
+    },
+    {
+      "name": "test commands",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "test commands"
+    },
+    {
+      "name": "source-derived RAG",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "source-derived rag"
+    },
+    {
+      "name": "KnowledgeFactory",
+      "entity_type": "component",
+      "entity_types": [
+        "component",
+        "tool"
+      ],
+      "id": "knowledgefactory"
+    },
+    {
+      "name": "Vault",
+      "entity_type": "object",
+      "entity_types": [
+        "object",
+        "storage",
+        "component"
+      ],
+      "id": "vault"
+    },
+    {
+      "name": "GardenWriter",
+      "entity_type": "object",
+      "entity_types": [
+        "object",
+        "tool"
+      ],
+      "id": "gardenwriter"
+    },
+    {
+      "name": "retriever",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "retriever"
+    },
+    {
+      "name": "runtime components",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "runtime components"
+    },
+    {
+      "name": "RAG metadata",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "rag metadata"
+    },
+    {
+      "name": "workspace scoping",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown"
+      ],
+      "id": "workspace scoping"
+    },
+    {
+      "name": "CanonConceptRetriever",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "canonconceptretriever"
+    },
+    {
+      "name": "canonicalization index",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "canonicalization index"
+    },
+    {
+      "name": "active concept display statements",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "active concept display statements"
+    },
+    {
+      "name": "dataset",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "dataset"
+    },
+    {
+      "name": "ResolvedDecisionsRetriever",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "resolveddecisionsretriever"
+    },
+    {
+      "name": "decision_resolution notes",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "decision_resolution notes"
+    },
+    {
+      "name": "garden/seedling",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "garden/seedling"
+    },
+    {
+      "name": "BSVibe RAG",
+      "entity_type": "product",
+      "entity_types": [
+        "product"
+      ],
+      "id": "bsvibe rag"
+    },
+    {
+      "name": "decision memories",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown"
+      ],
+      "id": "decision memories"
+    },
+    {
+      "name": "NegativePatternRetriever",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "negativepatternretriever"
+    },
+    {
+      "name": "negative_pattern garden notes",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "negative_pattern garden notes"
+    },
+    {
+      "name": "founder",
+      "entity_type": "person",
+      "entity_types": [
+        "person"
+      ],
+      "id": "founder"
+    },
+    {
+      "name": "deliverable",
+      "entity_type": "product",
+      "entity_types": [
+        "product"
+      ],
+      "id": "deliverable"
+    },
+    {
+      "name": "avoid guidance",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "avoid guidance"
+    },
+    {
+      "name": "signal overlap",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "signal overlap"
+    },
+    {
+      "name": "rejected approaches",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "rejected approaches"
+    },
+    {
+      "name": "generic notes",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "generic notes"
+    },
+    {
+      "name": "CompositeCanonRetriever",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "compositecanonretriever"
+    },
+    {
+      "name": "CanonRetriever",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "canonretriever"
+    },
+    {
+      "name": "RAG dataset",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept",
+        "product"
+      ],
+      "id": "rag dataset"
+    },
+    {
+      "name": "note_type",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "note_type"
+    },
+    {
+      "name": "source_type",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "source_type"
+    },
+    {
+      "name": "canonical concepts",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "canonical concepts"
+    },
+    {
+      "name": "decisions",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "decisions"
+    },
+    {
+      "name": "negative patterns",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "negative patterns"
+    },
+    {
+      "name": "agent runtime",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "agent runtime"
+    },
+    {
+      "name": "SemanticNoteRetriever",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "semanticnoteretriever"
+    },
+    {
+      "name": "executor/native loops",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "executor/native loops"
+    },
+    {
+      "name": "knowledge_only frames",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "knowledge_only frames"
+    },
+    {
+      "name": "KnowledgeAnswerOrchestrator",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "knowledgeanswerorchestrator"
+    },
+    {
+      "name": "RAG context",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "rag context"
+    },
+    {
+      "name": "Worker runtime",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "worker runtime"
+    },
+    {
+      "name": "SettleWorker",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "settleworker"
+    },
+    {
+      "name": "KnowledgeSettleSink",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "knowledgesettlesink"
+    },
+    {
+      "name": "entity extractor fallback",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "entity extractor fallback"
+    },
+    {
+      "name": "garden promoter factory",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "garden promoter factory"
+    },
+    {
+      "name": "note embedding hook",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "note embedding hook"
+    },
+    {
+      "name": "workflow activity",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "workflow activity"
+    },
+    {
+      "name": "vault knowledge",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "vault knowledge"
+    },
+    {
+      "name": "vector-searchable notes",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "vector-searchable notes"
+    },
+    {
+      "name": "IngestCompiler",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool",
+        "component"
+      ],
+      "id": "ingestcompiler"
+    },
+    {
+      "name": "seed items",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "seed items"
+    },
+    {
+      "name": "chunks",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "chunks"
+    },
+    {
+      "name": "progress events",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "progress events"
+    },
+    {
+      "name": "related context",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "related context"
+    },
+    {
+      "name": "LLM",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "llm"
+    },
+    {
+      "name": "notes",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "notes"
+    },
+    {
+      "name": "cleaned data",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "cleaned data"
+    },
+    {
+      "name": "chunk-level provenance",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "chunk-level provenance"
+    },
+    {
+      "name": "chunking module",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "chunking module"
+    },
+    {
+      "name": "Ollama budgets",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "ollama budgets"
+    },
+    {
+      "name": "RAG data cleaning rules",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "rag data cleaning rules"
+    },
+    {
+      "name": "local-model constraints",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "local-model constraints"
+    },
+    {
+      "name": "NoteVectorBackend",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "notevectorbackend"
+    },
+    {
+      "name": "PgNoteVectorBackend",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "pgnotevectorbackend"
+    },
+    {
+      "name": "note_embeddings",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "note_embeddings"
+    },
+    {
+      "name": "workspace_id",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "workspace_id"
+    },
+    {
+      "name": "embedding_model",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "embedding_model"
+    },
+    {
+      "name": "pgvector cosine distance",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "pgvector cosine distance"
+    },
+    {
+      "name": "semantic search",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "semantic search"
+    },
+    {
+      "name": "similarity-filtered",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "similarity-filtered"
+    },
+    {
+      "name": "workspace-scoped",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "workspace-scoped"
+    },
+    {
+      "name": "PWA knowledge API",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "pwa knowledge api"
+    },
+    {
+      "name": "/api/v1/inside",
+      "entity_type": "endpoint",
+      "entity_types": [
+        "endpoint"
+      ],
+      "id": "/api/v1/inside"
+    },
+    {
+      "name": "observations",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "observations"
+    },
+    {
+      "name": "graph data",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "graph data"
+    },
+    {
+      "name": "concept detail",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "concept detail"
+    },
+    {
+      "name": "retract/correct actions",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "retract/correct actions"
+    },
+    {
+      "name": "undo",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "undo"
+    },
+    {
+      "name": "inspection and correction workflows",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "inspection and correction workflows"
+    },
+    {
+      "name": "KnowledgeGraphView",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "knowledgegraphview"
+    },
+    {
+      "name": "graph",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "graph"
+    },
+    {
+      "name": "correction metadata",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "correction metadata"
+    },
+    {
+      "name": "analysis",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "analysis"
+    },
+    {
+      "name": "knowledge MCP domain tools",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "knowledge mcp domain tools"
+    },
+    {
+      "name": "search_knowledge",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "search_knowledge"
+    },
+    {
+      "name": "get_note",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "get_note"
+    },
+    {
+      "name": "get_graph_context",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "get_graph_context"
+    },
+    {
+      "name": "list_recent",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "list_recent"
+    },
+    {
+      "name": "list_by_tag",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "list_by_tag"
+    },
+    {
+      "name": "list_tags",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "list_tags"
+    },
+    {
+      "name": "browse_communities",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "browse_communities"
+    },
+    {
+      "name": "browse_entity",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "browse_entity"
+    },
+    {
+      "name": "create_note",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "create_note"
+    },
+    {
+      "name": "RAG data",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "rag data"
+    },
+    {
+      "name": "path",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "path"
+    },
+    {
+      "name": "preview",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "preview"
+    },
+    {
+      "name": "tags",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "tags"
+    },
+    {
+      "name": "graph context",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "graph context"
+    },
+    {
+      "name": "audit source",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "audit source"
+    },
+    {
+      "name": "B13 glue test",
+      "entity_type": "test",
+      "entity_types": [
+        "test"
+      ],
+      "id": "b13 glue test"
+    },
+    {
+      "name": "API",
+      "entity_type": "interface",
+      "entity_types": [
+        "interface",
+        "component"
+      ],
+      "id": "api"
+    },
+    {
+      "name": "KnowledgeFactory retriever",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "knowledgefactory retriever"
+    },
+    {
+      "name": "decision memory",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "decision memory"
+    },
+    {
+      "name": "first-turn LLM messages",
+      "entity_type": "data",
+      "entity_types": [
+        "data"
+      ],
+      "id": "first-turn llm messages"
+    },
+    {
+      "name": "verification contract",
+      "entity_type": "document",
+      "entity_types": [
+        "document"
+      ],
+      "id": "verification contract"
+    },
+    {
+      "name": "RetractionService",
+      "entity_type": "service",
+      "entity_types": [
+        "service"
+      ],
+      "id": "retractionservice"
+    },
+    {
+      "name": "RetractionSignal",
+      "entity_type": "signal",
+      "entity_types": [
+        "signal",
+        "component"
+      ],
+      "id": "retractionsignal"
+    },
+    {
+      "name": "ontology_corrections",
+      "entity_type": "database",
+      "entity_types": [
+        "database"
+      ],
+      "id": "ontology_corrections"
+    },
+    {
+      "name": "apply_pending",
+      "entity_type": "function",
+      "entity_types": [
+        "function"
+      ],
+      "id": "apply_pending"
+    },
+    {
+      "name": "tombstone",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "tombstone"
+    },
+    {
+      "name": "signal id",
+      "entity_type": "identifier",
+      "entity_types": [
+        "identifier"
+      ],
+      "id": "signal id"
+    },
+    {
+      "name": "_garden_lock",
+      "entity_type": "lock",
+      "entity_types": [
+        "lock"
+      ],
+      "id": "_garden_lock"
+    },
+    {
+      "name": "canon merges",
+      "entity_type": "process",
+      "entity_types": [
+        "process"
+      ],
+      "id": "canon merges"
+    },
+    {
+      "name": "settle writes",
+      "entity_type": "process",
+      "entity_types": [
+        "process"
+      ],
+      "id": "settle writes"
+    },
+    {
+      "name": "Issue",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown"
+      ],
+      "id": "issue"
+    },
+    {
+      "name": "GardenObservationPromoter",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "gardenobservationpromoter"
+    },
+    {
+      "name": "garden notes",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "garden notes"
+    },
+    {
+      "name": "structural tags",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "structural tags"
+    },
+    {
+      "name": "create-concept actions",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "create-concept actions"
+    },
+    {
+      "name": "deterministic trigram-Jaccard proposer",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "deterministic trigram-jaccard proposer"
+    },
+    {
+      "name": "lexical variants",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "lexical variants"
+    },
+    {
+      "name": "merge-concepts proposals",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "merge-concepts proposals"
+    },
+    {
+      "name": "Safe Mode",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "safe mode"
+    },
+    {
+      "name": "permissive mode",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "permissive mode"
+    },
+    {
+      "name": "lint module",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "lint module"
+    },
+    {
+      "name": "note store",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "note store"
+    },
+    {
+      "name": "orphan garden tags",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "orphan garden tags"
+    },
+    {
+      "name": "alias collisions",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "alias collisions"
+    },
+    {
+      "name": "active concepts",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "active concepts"
+    },
+    {
+      "name": "redirect chain anomalies",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "redirect chain anomalies"
+    },
+    {
+      "name": "cycles",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "cycles"
+    },
+    {
+      "name": "missing targets",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "missing targets"
+    },
+    {
+      "name": "severity",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "severity"
+    },
+    {
+      "name": "error",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "error"
+    },
+    {
+      "name": "warning",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "warning"
+    },
+    {
+      "name": "canon-lint plugin",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "canon-lint plugin"
+    },
+    {
+      "name": "markdown report",
+      "entity_type": "product",
+      "entity_types": [
+        "product"
+      ],
+      "id": "markdown report"
+    },
+    {
+      "name": "CanonWatcher",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "canonwatcher"
+    },
+    {
+      "name": "watchdog Observer",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "watchdog observer"
+    },
+    {
+      "name": "CanonicalizationIndexSubscriber",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "canonicalizationindexsubscriber"
+    },
+    {
+      "name": "runtime_config.canon_watcher_enabled",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "runtime_config.canon_watcher_enabled"
+    },
+    {
+      "name": "SaaS deployments",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "saas deployments"
+    },
+    {
+      "name": "NOTE_UPDATED",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown",
+        "event"
+      ],
+      "id": "note_updated"
+    },
+    {
+      "name": "NOTE_DELETED",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown",
+        "event"
+      ],
+      "id": "note_deleted"
+    },
+    {
+      "name": "affected paths",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown"
+      ],
+      "id": "affected paths"
+    },
+    {
+      "name": "analytics module",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "analytics module"
+    },
+    {
+      "name": "GraphBackend",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "graphbackend"
+    },
+    {
+      "name": "NetworkX",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "networkx"
+    },
+    {
+      "name": "scipy",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "scipy"
+    },
+    {
+      "name": "numpy",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "numpy"
+    },
+    {
+      "name": "UI",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "ui"
+    },
+    {
+      "name": "hub nodes",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "hub nodes"
+    },
+    {
+      "name": "thin communities",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "thin communities"
+    },
+    {
+      "name": "god nodes",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "god nodes"
+    },
+    {
+      "name": "knowledge gaps",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "knowledge gaps"
+    },
+    {
+      "name": "GraphExtractor",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "graphextractor"
+    },
+    {
+      "name": "vault notes",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "vault notes"
+    },
+    {
+      "name": "GraphEntity",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "graphentity"
+    },
+    {
+      "name": "GraphRelationship",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "graphrelationship"
+    },
+    {
+      "name": "graph backend",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "graph backend"
+    },
+    {
+      "name": "analytics",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "analytics"
+    },
+    {
+      "name": "PWA knowledge view",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "pwa knowledge view"
+    },
+    {
+      "name": "Pydantic model",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "pydantic model"
+    },
+    {
+      "name": "Identity",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "identity"
+    },
+    {
+      "name": "node_ref",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "node_ref"
+    },
+    {
+      "name": "apply_at",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "apply_at"
+    },
+    {
+      "name": "issued_at",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "issued_at"
+    },
+    {
+      "name": "Reason",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "reason"
+    },
+    {
+      "name": "frozen contract",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "frozen contract"
+    },
+    {
+      "name": "audit record",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "audit record"
+    },
+    {
+      "name": "EventBus module",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "eventbus module"
+    },
+    {
+      "name": "EventType enums",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "eventtype enums"
+    },
+    {
+      "name": "plugin lifecycle",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "plugin lifecycle"
+    },
+    {
+      "name": "skill lifecycle",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "skill lifecycle"
+    },
+    {
+      "name": "vault writes",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "vault writes"
+    },
+    {
+      "name": "SEED_WRITTEN",
+      "entity_type": "event",
+      "entity_types": [
+        "event"
+      ],
+      "id": "seed_written"
+    },
+    {
+      "name": "GARDEN_WRITTEN",
+      "entity_type": "event",
+      "entity_types": [
+        "event"
+      ],
+      "id": "garden_written"
+    },
+    {
+      "name": "ACTION_LOGGED",
+      "entity_type": "event",
+      "entity_types": [
+        "event"
+      ],
+      "id": "action_logged"
+    },
+    {
+      "name": "vault mutations",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "vault mutations"
+    },
+    {
+      "name": "scheduler triggers",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "scheduler triggers"
+    },
+    {
+      "name": "agent tool calls",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "agent tool calls"
+    },
+    {
+      "name": "ingest compile batch events",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "ingest compile batch events"
+    },
+    {
+      "name": "audit_events module",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "audit_events module"
+    },
+    {
+      "name": "AuditEventBase",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "auditeventbase"
+    },
+    {
+      "name": "ontology.correction.requested",
+      "entity_type": "event type",
+      "entity_types": [
+        "event type"
+      ],
+      "id": "ontology.correction.requested"
+    },
+    {
+      "name": "ontology.correction.undone",
+      "entity_type": "event type",
+      "entity_types": [
+        "event type"
+      ],
+      "id": "ontology.correction.undone"
+    },
+    {
+      "name": "ontology.correction.applied",
+      "entity_type": "event type",
+      "entity_types": [
+        "event type"
+      ],
+      "id": "ontology.correction.applied"
+    },
+    {
+      "name": "workspace",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "workspace"
+    },
+    {
+      "name": "actor",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "actor"
+    },
+    {
+      "name": "node attribution",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "node attribution"
+    },
+    {
+      "name": "settle_runtime",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "settle_runtime"
+    },
+    {
+      "name": "build_settle_entity_extractor_factory",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "build_settle_entity_extractor_factory"
+    },
+    {
+      "name": "GatewayDispatcher",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "gatewaydispatcher"
+    },
+    {
+      "name": "build_note_embed_hook",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "build_note_embed_hook"
+    },
+    {
+      "name": "deployment embedder",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "deployment embedder"
+    },
+    {
+      "name": "pgvector note_embeddings",
+      "entity_type": "product",
+      "entity_types": [
+        "product"
+      ],
+      "id": "pgvector note_embeddings"
+    },
+    {
+      "name": "vault path",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "vault path"
+    },
+    {
+      "name": "dispatcher",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "dispatcher"
+    },
+    {
+      "name": "_GatewayCompileLlm",
+      "entity_type": "adapter",
+      "entity_types": [
+        "adapter"
+      ],
+      "id": "_gatewaycompilellm"
+    },
+    {
+      "name": "_GatewayFrameLlm",
+      "entity_type": "adapter",
+      "entity_types": [
+        "adapter"
+      ],
+      "id": "_gatewayframellm"
+    },
+    {
+      "name": "settle entity extractor",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "settle entity extractor"
+    },
+    {
+      "name": "frame stage",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "frame stage"
+    },
+    {
+      "name": "workspace/account/model identity triple",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "workspace/account/model identity triple"
+    },
+    {
+      "name": "per-stage feature wiring",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown"
+      ],
+      "id": "per-stage feature wiring"
+    },
+    {
+      "name": "RetractModal",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "retractmodal"
+    },
+    {
+      "name": "node name",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "node name"
+    },
+    {
+      "name": "UI state",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "ui state"
+    },
+    {
+      "name": "POST",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "post"
+    },
+    {
+      "name": "toast wiring",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "toast wiring"
+    },
+    {
+      "name": "parent",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "parent"
+    },
+    {
+      "name": "retract",
+      "entity_type": "action",
+      "entity_types": [
+        "action"
+      ],
+      "id": "retract"
+    },
+    {
+      "name": "correct",
+      "entity_type": "action",
+      "entity_types": [
+        "action"
+      ],
+      "id": "correct"
+    },
+    {
+      "name": "undo affordance",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "undo affordance"
+    },
+    {
+      "name": "InspectorActions",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "inspectoractions"
+    },
+    {
+      "name": "Inside view inspector panel",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "inside view inspector panel"
+    },
+    {
+      "name": "M3a write endpoints",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "m3a write endpoints"
+    },
+    {
+      "name": "Correct button",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "correct button"
+    },
+    {
+      "name": "Retract button",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "retract button"
+    },
+    {
+      "name": "modals",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "modals"
+    },
+    {
+      "name": "30 second undo toast",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "30 second undo toast"
+    },
+    {
+      "name": "state machine",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "state machine"
+    },
+    {
+      "name": "panel host",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "panel host"
+    },
+    {
+      "name": "node ref",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "node ref"
+    },
+    {
+      "name": "onAfterApply hook",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "onafterapply hook"
+    },
+    {
+      "name": "UndoToast",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "undotoast"
+    },
+    {
+      "name": "stale modal",
+      "entity_type": "component",
+      "entity_types": [
+        "component"
+      ],
+      "id": "stale modal"
+    },
+    {
+      "name": "compose.prod.yaml",
+      "entity_type": "file",
+      "entity_types": [
+        "file"
+      ],
+      "id": "compose.prod.yaml"
+    },
+    {
+      "name": "compose.yaml",
+      "entity_type": "file",
+      "entity_types": [
+        "file"
+      ],
+      "id": "compose.yaml"
+    },
+    {
+      "name": "BSVIBE_DATABASE_URL",
+      "entity_type": "variable",
+      "entity_types": [
+        "variable"
+      ],
+      "id": "bsvibe_database_url"
+    },
+    {
+      "name": "redis url",
+      "entity_type": "variable",
+      "entity_types": [
+        "variable"
+      ],
+      "id": "redis url"
+    },
+    {
+      "name": "KMS key",
+      "entity_type": "variable",
+      "entity_types": [
+        "variable"
+      ],
+      "id": "kms key"
+    },
+    {
+      "name": "Supabase config",
+      "entity_type": "variable",
+      "entity_types": [
+        "variable"
+      ],
+      "id": "supabase config"
+    },
+    {
+      "name": "public Postgres",
+      "entity_type": "service",
+      "entity_types": [
+        "service"
+      ],
+      "id": "public postgres"
+    },
+    {
+      "name": "Redis",
+      "entity_type": "service",
+      "entity_types": [
+        "service"
+      ],
+      "id": "redis"
+    },
+    {
+      "name": "docker-compose !reset tag",
+      "entity_type": "tag",
+      "entity_types": [
+        "tag"
+      ],
+      "id": "docker-compose !reset tag"
+    },
+    {
+      "name": "BSVIBE_WORKER_MODE",
+      "entity_type": "variable",
+      "entity_types": [
+        "variable"
+      ],
+      "id": "bsvibe_worker_mode"
+    },
+    {
+      "name": "db_polling",
+      "entity_type": "mode",
+      "entity_types": [
+        "mode"
+      ],
+      "id": "db_polling"
+    },
+    {
+      "name": "GIT_SHA",
+      "entity_type": "variable",
+      "entity_types": [
+        "variable"
+      ],
+      "id": "git_sha"
+    },
+    {
+      "name": "deploy/README.md",
+      "entity_type": "document",
+      "entity_types": [
+        "document"
+      ],
+      "id": "deploy/readme.md"
+    },
+    {
+      "name": "backend image",
+      "entity_type": "image",
+      "entity_types": [
+        "image"
+      ],
+      "id": "backend image"
+    },
+    {
+      "name": "alembic",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "alembic"
+    },
+    {
+      "name": "uvicorn",
+      "entity_type": "tool",
+      "entity_types": [
+        "tool"
+      ],
+      "id": "uvicorn"
+    },
+    {
+      "name": "worker container",
+      "entity_type": "container",
+      "entity_types": [
+        "container"
+      ],
+      "id": "worker container"
+    },
+    {
+      "name": "python -m backend.workers",
+      "entity_type": "command",
+      "entity_types": [
+        "command"
+      ],
+      "id": "python -m backend.workers"
+    },
+    {
+      "name": "runbook",
+      "entity_type": "document",
+      "entity_types": [
+        "document"
+      ],
+      "id": "runbook"
+    },
+    {
+      "name": "prerequisites",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "prerequisites"
+    },
+    {
+      "name": "env-file workflow",
+      "entity_type": "workflow",
+      "entity_types": [
+        "workflow"
+      ],
+      "id": "env-file workflow"
+    },
+    {
+      "name": "PWA Vercel split",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "pwa vercel split"
+    },
+    {
+      "name": "Blasin",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "blasin"
+    },
+    {
+      "name": "AX Team Lead",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "ax team lead"
+    },
+    {
+      "name": "fact-blasin-backend-dev",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "fact-blasin-backend-dev"
+    },
+    {
+      "name": "fact",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "fact"
+    },
+    {
+      "name": "2024-06",
+      "entity_type": "date",
+      "entity_types": [
+        "date"
+      ],
+      "id": "2024-06"
+    },
+    {
+      "name": "pgvector",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "pgvector"
+    },
+    {
+      "name": "subject/predicate/object semantics",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "subject/predicate/object semantics"
+    },
+    {
+      "name": "event",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "event"
+    },
+    {
+      "name": "Team Standup",
+      "entity_type": "event",
+      "entity_types": [
+        "event"
+      ],
+      "id": "team standup"
+    },
+    {
+      "name": "Alice",
+      "entity_type": "attendee",
+      "entity_types": [
+        "attendee",
+        "person"
+      ],
+      "id": "alice"
+    },
+    {
+      "name": "Bob",
+      "entity_type": "attendee",
+      "entity_types": [
+        "attendee",
+        "person"
+      ],
+      "id": "bob"
+    },
+    {
+      "name": "Project X",
+      "entity_type": "project",
+      "entity_types": [
+        "project"
+      ],
+      "id": "project x"
+    },
+    {
+      "name": "episodic",
+      "entity_type": "knowledge_layer",
+      "entity_types": [
+        "knowledge_layer"
+      ],
+      "id": "episodic"
+    },
+    {
+      "name": "Charlie",
+      "entity_type": "person",
+      "entity_types": [
+        "person"
+      ],
+      "id": "charlie"
+    },
+    {
+      "name": "seed",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "seed"
+    },
+    {
+      "name": "calendar/google-calendar",
+      "entity_type": "source",
+      "entity_types": [
+        "source"
+      ],
+      "id": "calendar/google-calendar"
+    },
+    {
+      "name": "time-windowed retrieval",
+      "entity_type": "concept",
+      "entity_types": [
+        "concept"
+      ],
+      "id": "time-windowed retrieval"
+    },
+    {
+      "name": "captured_at",
+      "entity_type": "unknown",
+      "entity_types": [
+        "unknown"
+      ],
+      "id": "captured_at"
+    }
+  ],
+  "links": [
+    {
+      "rel_type": "uses",
+      "source": "bsvibe",
+      "target": "fastapi",
+      "key": "uses"
+    },
+    {
+      "rel_type": "uses",
+      "source": "bsvibe",
+      "target": "next.js",
+      "key": "uses"
+    },
+    {
+      "rel_type": "uses",
+      "source": "bsvibe",
+      "target": "docker compose",
+      "key": "uses"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "bsvibe",
+      "target": "backend health probe",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "bsvibe",
+      "target": "pwa entrypoint",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "bsvibe",
+      "target": "test commands",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "source-derived rag",
+      "target": "bsvibe",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "knowledgefactory",
+      "target": "vault",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "knowledgefactory",
+      "target": "gardenwriter",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "knowledgefactory",
+      "target": "retriever",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "composes",
+      "source": "knowledgefactory",
+      "target": "semanticnoteretriever",
+      "key": "composes"
+    },
+    {
+      "rel_type": "produces",
+      "source": "gardenwriter",
+      "target": "seed",
+      "key": "produces"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "retriever",
+      "target": "runtime components",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag metadata",
+      "target": "calendar/google-calendar",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag metadata",
+      "target": "captured_at",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "workspace scoping",
+      "target": "rag metadata",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "resolves",
+      "source": "canonconceptretriever",
+      "target": "canonicalization index",
+      "key": "resolves"
+    },
+    {
+      "rel_type": "produces",
+      "source": "canonconceptretriever",
+      "target": "active concept display statements",
+      "key": "produces"
+    },
+    {
+      "rel_type": "part_of",
+      "source": "active concept display statements",
+      "target": "dataset",
+      "key": "part_of"
+    },
+    {
+      "rel_type": "uses",
+      "source": "resolveddecisionsretriever",
+      "target": "decision_resolution notes",
+      "key": "uses"
+    },
+    {
+      "rel_type": "part_of",
+      "source": "decision_resolution notes",
+      "target": "garden/seedling",
+      "key": "part_of"
+    },
+    {
+      "rel_type": "produces",
+      "source": "decision memories",
+      "target": "bsvibe rag",
+      "key": "produces"
+    },
+    {
+      "rel_type": "reads",
+      "source": "negativepatternretriever",
+      "target": "negative_pattern garden notes",
+      "key": "reads"
+    },
+    {
+      "rel_type": "surfaces",
+      "source": "negative_pattern garden notes",
+      "target": "avoid guidance",
+      "key": "surfaces"
+    },
+    {
+      "rel_type": "discards",
+      "source": "founder",
+      "target": "deliverable",
+      "key": "discards"
+    },
+    {
+      "rel_type": "means",
+      "source": "signal overlap",
+      "target": "rejected approaches",
+      "key": "means"
+    },
+    {
+      "rel_type": "modeled_as",
+      "source": "rejected approaches",
+      "target": "generic notes",
+      "key": "modeled_as"
+    },
+    {
+      "rel_type": "combines",
+      "source": "compositecanonretriever",
+      "target": "canonretriever",
+      "key": "combines"
+    },
+    {
+      "rel_type": "tracks",
+      "source": "rag dataset",
+      "target": "note_type",
+      "key": "tracks"
+    },
+    {
+      "rel_type": "tracks",
+      "source": "rag dataset",
+      "target": "source_type",
+      "key": "tracks"
+    },
+    {
+      "rel_type": "ranks",
+      "source": "rag dataset",
+      "target": "canonical concepts",
+      "key": "ranks"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag dataset",
+      "target": "canonical concepts",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "ranks",
+      "source": "rag dataset",
+      "target": "decisions",
+      "key": "ranks"
+    },
+    {
+      "rel_type": "ranks",
+      "source": "rag dataset",
+      "target": "negative patterns",
+      "key": "ranks"
+    },
+    {
+      "rel_type": "preserves",
+      "source": "rag dataset",
+      "target": "inspection and correction workflows",
+      "key": "preserves"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag dataset",
+      "target": "observations",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag dataset",
+      "target": "graph data",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag dataset",
+      "target": "concept detail",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag dataset",
+      "target": "retract/correct actions",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "rag dataset",
+      "target": "undo",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "agent runtime",
+      "target": "knowledgefactory",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "injects",
+      "source": "semanticnoteretriever",
+      "target": "executor/native loops",
+      "key": "injects"
+    },
+    {
+      "rel_type": "uses",
+      "source": "semanticnoteretriever",
+      "target": "notevectorbackend",
+      "key": "uses"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "semanticnoteretriever",
+      "target": "semantic search",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "routes_to",
+      "source": "executor/native loops",
+      "target": "knowledge_only frames",
+      "key": "routes_to"
+    },
+    {
+      "rel_type": "routes_to",
+      "source": "knowledge_only frames",
+      "target": "knowledgeanswerorchestrator",
+      "key": "routes_to"
+    },
+    {
+      "rel_type": "verifies",
+      "source": "rag context",
+      "target": "agent runtime",
+      "key": "verifies"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "worker runtime",
+      "target": "settleworker",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "part_of",
+      "source": "settleworker",
+      "target": "knowledgesettlesink",
+      "key": "part_of"
+    },
+    {
+      "rel_type": "part_of",
+      "source": "settleworker",
+      "target": "entity extractor fallback",
+      "key": "part_of"
+    },
+    {
+      "rel_type": "part_of",
+      "source": "settleworker",
+      "target": "garden promoter factory",
+      "key": "part_of"
+    },
+    {
+      "rel_type": "part_of",
+      "source": "settleworker",
+      "target": "note embedding hook",
+      "key": "part_of"
+    },
+    {
+      "rel_type": "drains",
+      "source": "settleworker",
+      "target": "vault",
+      "key": "drains"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "settleworker",
+      "target": "build_settle_entity_extractor_factory",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "produces",
+      "source": "workflow activity",
+      "target": "vault knowledge",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "workflow activity",
+      "target": "vector-searchable notes",
+      "key": "produces"
+    },
+    {
+      "rel_type": "uses",
+      "source": "ingestcompiler",
+      "target": "seed items",
+      "key": "uses"
+    },
+    {
+      "rel_type": "produces",
+      "source": "ingestcompiler",
+      "target": "chunks",
+      "key": "produces"
+    },
+    {
+      "rel_type": "emits",
+      "source": "ingestcompiler",
+      "target": "progress events",
+      "key": "emits"
+    },
+    {
+      "rel_type": "finds",
+      "source": "ingestcompiler",
+      "target": "related context",
+      "key": "finds"
+    },
+    {
+      "rel_type": "plans updates with",
+      "source": "ingestcompiler",
+      "target": "llm",
+      "key": "plans updates with"
+    },
+    {
+      "rel_type": "writes",
+      "source": "ingestcompiler",
+      "target": "notes",
+      "key": "writes"
+    },
+    {
+      "rel_type": "routes_to",
+      "source": "ingestcompiler",
+      "target": "gatewaydispatcher",
+      "key": "routes_to"
+    },
+    {
+      "rel_type": "verifies",
+      "source": "chunks",
+      "target": "subject/predicate/object semantics",
+      "key": "verifies"
+    },
+    {
+      "rel_type": "retains",
+      "source": "cleaned data",
+      "target": "chunk-level provenance",
+      "key": "retains"
+    },
+    {
+      "rel_type": "uses",
+      "source": "chunking module",
+      "target": "ollama budgets",
+      "key": "uses"
+    },
+    {
+      "rel_type": "supports",
+      "source": "chunking module",
+      "target": "rag data cleaning rules",
+      "key": "supports"
+    },
+    {
+      "rel_type": "supports",
+      "source": "chunking module",
+      "target": "local-model constraints",
+      "key": "supports"
+    },
+    {
+      "rel_type": "stores",
+      "source": "pgnotevectorbackend",
+      "target": "note_embeddings",
+      "key": "stores"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "pgnotevectorbackend",
+      "target": "workspace_id",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "pgnotevectorbackend",
+      "target": "embedding_model",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "uses",
+      "source": "pgnotevectorbackend",
+      "target": "pgvector cosine distance",
+      "key": "uses"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "semantic search",
+      "target": "similarity-filtered",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "semantic search",
+      "target": "workspace-scoped",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "uses",
+      "source": "pwa knowledge api",
+      "target": "/api/v1/inside",
+      "key": "uses"
+    },
+    {
+      "rel_type": "uses",
+      "source": "knowledgegraphview",
+      "target": "/api/v1/inside",
+      "key": "uses"
+    },
+    {
+      "rel_type": "produces",
+      "source": "knowledgegraphview",
+      "target": "graph",
+      "key": "produces"
+    },
+    {
+      "rel_type": "verifies",
+      "source": "knowledgegraphview",
+      "target": "correction metadata",
+      "key": "verifies"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "correction metadata",
+      "target": "analysis",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "search_knowledge",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "get_note",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "get_graph_context",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "list_recent",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "list_by_tag",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "list_tags",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "browse_communities",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "browse_entity",
+      "key": "defines"
+    },
+    {
+      "rel_type": "defines",
+      "source": "knowledge mcp domain tools",
+      "target": "create_note",
+      "key": "defines"
+    },
+    {
+      "rel_type": "preserves",
+      "source": "rag data",
+      "target": "path",
+      "key": "preserves"
+    },
+    {
+      "rel_type": "preserves",
+      "source": "rag data",
+      "target": "preview",
+      "key": "preserves"
+    },
+    {
+      "rel_type": "preserves",
+      "source": "rag data",
+      "target": "tags",
+      "key": "preserves"
+    },
+    {
+      "rel_type": "preserves",
+      "source": "rag data",
+      "target": "graph context",
+      "key": "preserves"
+    },
+    {
+      "rel_type": "preserves",
+      "source": "rag data",
+      "target": "audit source",
+      "key": "preserves"
+    },
+    {
+      "rel_type": "uses",
+      "source": "b13 glue test",
+      "target": "api",
+      "key": "uses"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "b13 glue test",
+      "target": "knowledgefactory retriever",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "produces",
+      "source": "b13 glue test",
+      "target": "decision memory",
+      "key": "produces"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "decision memory",
+      "target": "first-turn llm messages",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "decision memory",
+      "target": "verification contract",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "produces",
+      "source": "retractionservice",
+      "target": "retractionsignal",
+      "key": "produces"
+    },
+    {
+      "rel_type": "persists",
+      "source": "retractionservice",
+      "target": "ontology_corrections",
+      "key": "persists"
+    },
+    {
+      "rel_type": "uses",
+      "source": "retractionsignal",
+      "target": "pydantic model",
+      "key": "uses"
+    },
+    {
+      "rel_type": "uses",
+      "source": "apply_pending",
+      "target": "tombstone",
+      "key": "uses"
+    },
+    {
+      "rel_type": "routes_to",
+      "source": "apply_pending",
+      "target": "gardenwriter",
+      "key": "routes_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "signal id",
+      "target": "issue",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "signal id",
+      "target": "undo",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "_garden_lock",
+      "target": "canon merges",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "_garden_lock",
+      "target": "settle writes",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "uses",
+      "source": "gardenobservationpromoter",
+      "target": "garden notes",
+      "key": "uses"
+    },
+    {
+      "rel_type": "drops",
+      "source": "gardenobservationpromoter",
+      "target": "structural tags",
+      "key": "drops"
+    },
+    {
+      "rel_type": "seeds",
+      "source": "gardenobservationpromoter",
+      "target": "create-concept actions",
+      "key": "seeds"
+    },
+    {
+      "rel_type": "runs",
+      "source": "gardenobservationpromoter",
+      "target": "deterministic trigram-jaccard proposer",
+      "key": "runs"
+    },
+    {
+      "rel_type": "emits",
+      "source": "gardenobservationpromoter",
+      "target": "merge-concepts proposals",
+      "key": "emits"
+    },
+    {
+      "rel_type": "detects",
+      "source": "deterministic trigram-jaccard proposer",
+      "target": "lexical variants",
+      "key": "detects"
+    },
+    {
+      "rel_type": "keeps",
+      "source": "safe mode",
+      "target": "merge-concepts proposals",
+      "key": "keeps"
+    },
+    {
+      "rel_type": "auto-applies",
+      "source": "permissive mode",
+      "target": "merge-concepts proposals",
+      "key": "auto-applies"
+    },
+    {
+      "rel_type": "scopes",
+      "source": "lint module",
+      "target": "canonicalization index",
+      "key": "scopes"
+    },
+    {
+      "rel_type": "scopes",
+      "source": "lint module",
+      "target": "note store",
+      "key": "scopes"
+    },
+    {
+      "rel_type": "produces",
+      "source": "lint module",
+      "target": "orphan garden tags",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "lint module",
+      "target": "alias collisions",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "lint module",
+      "target": "redirect chain anomalies",
+      "key": "produces"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "lint module",
+      "target": "severity",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "verifies",
+      "source": "lint module",
+      "target": "vault",
+      "key": "verifies"
+    },
+    {
+      "rel_type": "uses",
+      "source": "lint module",
+      "target": "canon-lint plugin",
+      "key": "uses"
+    },
+    {
+      "rel_type": "produces",
+      "source": "canon-lint plugin",
+      "target": "markdown report",
+      "key": "produces"
+    },
+    {
+      "rel_type": "uses",
+      "source": "canonwatcher",
+      "target": "watchdog observer",
+      "key": "uses"
+    },
+    {
+      "rel_type": "produces",
+      "source": "canonwatcher",
+      "target": "note_updated",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "canonwatcher",
+      "target": "note_deleted",
+      "key": "produces"
+    },
+    {
+      "rel_type": "verifies",
+      "source": "canonicalizationindexsubscriber",
+      "target": "affected paths",
+      "key": "verifies"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "saas deployments",
+      "target": "runtime_config.canon_watcher_enabled",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "routes_to",
+      "source": "saas deployments",
+      "target": "api",
+      "key": "routes_to"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "analytics module",
+      "target": "graphbackend",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "uses",
+      "source": "analytics module",
+      "target": "networkx",
+      "key": "uses"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "analytics module",
+      "target": "ui",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "analytics module",
+      "target": "scipy",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "analytics module",
+      "target": "numpy",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "ui",
+      "target": "hub nodes",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "ui",
+      "target": "thin communities",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "ui",
+      "target": "god nodes",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "ui",
+      "target": "knowledge gaps",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "produces",
+      "source": "graphextractor",
+      "target": "vault notes",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "graphextractor",
+      "target": "graphentity",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "graphextractor",
+      "target": "graphrelationship",
+      "key": "produces"
+    },
+    {
+      "rel_type": "delivers",
+      "source": "graphextractor",
+      "target": "graph backend",
+      "key": "delivers"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "graph backend",
+      "target": "analytics",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "graph backend",
+      "target": "pwa knowledge view",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "identity",
+      "target": "retractionsignal",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "node_ref",
+      "target": "retractionsignal",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "apply_at",
+      "target": "issued_at",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "apply_at",
+      "target": "retractionsignal",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "produces",
+      "source": "frozen contract",
+      "target": "audit record",
+      "key": "produces"
+    },
+    {
+      "rel_type": "defines",
+      "source": "eventbus module",
+      "target": "eventtype enums",
+      "key": "defines"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "eventtype enums",
+      "target": "plugin lifecycle",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "eventtype enums",
+      "target": "skill lifecycle",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "eventtype enums",
+      "target": "vault writes",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "eventtype enums",
+      "target": "vault mutations",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "eventtype enums",
+      "target": "scheduler triggers",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "eventtype enums",
+      "target": "agent tool calls",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "eventtype enums",
+      "target": "ingest compile batch events",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "vault writes",
+      "target": "seed_written",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "vault writes",
+      "target": "garden_written",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "vault writes",
+      "target": "action_logged",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "vault mutations",
+      "target": "note_updated",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "vault mutations",
+      "target": "note_deleted",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "audit_events module",
+      "target": "auditeventbase",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "produces",
+      "source": "auditeventbase",
+      "target": "ontology.correction.requested",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "auditeventbase",
+      "target": "ontology.correction.undone",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "auditeventbase",
+      "target": "ontology.correction.applied",
+      "key": "produces"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "ontology.correction.requested",
+      "target": "workspace",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "ontology.correction.requested",
+      "target": "actor",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "ontology.correction.requested",
+      "target": "node attribution",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "settle_runtime",
+      "target": "build_settle_entity_extractor_factory",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "produces",
+      "source": "build_settle_entity_extractor_factory",
+      "target": "ingestcompiler",
+      "key": "produces"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "gatewaydispatcher",
+      "target": "workspace",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "gatewaydispatcher",
+      "target": "_gatewaycompilellm",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "gatewaydispatcher",
+      "target": "_gatewayframellm",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "uses",
+      "source": "build_note_embed_hook",
+      "target": "deployment embedder",
+      "key": "uses"
+    },
+    {
+      "rel_type": "upserts",
+      "source": "build_note_embed_hook",
+      "target": "pgvector note_embeddings",
+      "key": "upserts"
+    },
+    {
+      "rel_type": "keyed_by",
+      "source": "pgvector note_embeddings",
+      "target": "vault path",
+      "key": "keyed_by"
+    },
+    {
+      "rel_type": "constructs",
+      "source": "dispatcher",
+      "target": "gatewaydispatcher",
+      "key": "constructs"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "_gatewaycompilellm",
+      "target": "settle entity extractor",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "_gatewayframellm",
+      "target": "frame stage",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "workspace/account/model identity triple",
+      "target": "per-stage feature wiring",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "retractmodal",
+      "target": "node name",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "owns",
+      "source": "retractmodal",
+      "target": "ui state",
+      "key": "owns"
+    },
+    {
+      "rel_type": "delivers",
+      "source": "parent",
+      "target": "post",
+      "key": "delivers"
+    },
+    {
+      "rel_type": "delivers",
+      "source": "parent",
+      "target": "toast wiring",
+      "key": "delivers"
+    },
+    {
+      "rel_type": "produces",
+      "source": "retract",
+      "target": "undo affordance",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "correct",
+      "target": "undo affordance",
+      "key": "produces"
+    },
+    {
+      "rel_type": "binds",
+      "source": "inspectoractions",
+      "target": "inside view inspector panel",
+      "key": "binds"
+    },
+    {
+      "rel_type": "binds",
+      "source": "inspectoractions",
+      "target": "m3a write endpoints",
+      "key": "binds"
+    },
+    {
+      "rel_type": "produces",
+      "source": "inspectoractions",
+      "target": "correct button",
+      "key": "produces"
+    },
+    {
+      "rel_type": "produces",
+      "source": "inspectoractions",
+      "target": "retract button",
+      "key": "produces"
+    },
+    {
+      "rel_type": "drives",
+      "source": "inspectoractions",
+      "target": "modals",
+      "key": "drives"
+    },
+    {
+      "rel_type": "owns",
+      "source": "inspectoractions",
+      "target": "30 second undo toast",
+      "key": "owns"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "state machine",
+      "target": "panel host",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "state machine",
+      "target": "node ref",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "state machine",
+      "target": "onafterapply hook",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "undotoast",
+      "target": "retractionsignal",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "undotoast",
+      "target": "stale modal",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "compose.prod.yaml",
+      "target": "compose.yaml",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "compose.prod.yaml",
+      "target": "bsvibe_database_url",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "compose.prod.yaml",
+      "target": "redis url",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "compose.prod.yaml",
+      "target": "kms key",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "compose.prod.yaml",
+      "target": "supabase config",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "drops",
+      "source": "compose.prod.yaml",
+      "target": "public postgres",
+      "key": "drops"
+    },
+    {
+      "rel_type": "drops",
+      "source": "compose.prod.yaml",
+      "target": "redis",
+      "key": "drops"
+    },
+    {
+      "rel_type": "uses",
+      "source": "compose.prod.yaml",
+      "target": "docker-compose !reset tag",
+      "key": "uses"
+    },
+    {
+      "rel_type": "sets",
+      "source": "compose.prod.yaml",
+      "target": "bsvibe_worker_mode",
+      "key": "sets"
+    },
+    {
+      "rel_type": "pins",
+      "source": "compose.prod.yaml",
+      "target": "git_sha",
+      "key": "pins"
+    },
+    {
+      "rel_type": "uses",
+      "source": "backend image",
+      "target": "alembic",
+      "key": "uses"
+    },
+    {
+      "rel_type": "uses",
+      "source": "backend image",
+      "target": "uvicorn",
+      "key": "uses"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "backend image",
+      "target": "worker container",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "uses",
+      "source": "worker container",
+      "target": "python -m backend.workers",
+      "key": "uses"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "runbook",
+      "target": "prerequisites",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "runbook",
+      "target": "env-file workflow",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "exposes",
+      "source": "runbook",
+      "target": "pwa vercel split",
+      "key": "exposes"
+    },
+    {
+      "rel_type": "has_role",
+      "source": "blasin",
+      "target": "ax team lead",
+      "key": "has_role"
+    },
+    {
+      "rel_type": "supersedes",
+      "source": "fact",
+      "target": "fact-blasin-backend-dev",
+      "key": "supersedes"
+    },
+    {
+      "rel_type": "produces",
+      "source": "pgvector",
+      "target": "chunks",
+      "key": "produces"
+    },
+    {
+      "rel_type": "attends",
+      "source": "team standup",
+      "target": "alice",
+      "key": "attends"
+    },
+    {
+      "rel_type": "attends",
+      "source": "team standup",
+      "target": "bob",
+      "key": "attends"
+    },
+    {
+      "rel_type": "belongs_to",
+      "source": "team standup",
+      "target": "project x",
+      "key": "belongs_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "bob",
+      "target": "alice",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "related_to",
+      "source": "bob",
+      "target": "charlie",
+      "key": "related_to"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "seed",
+      "target": "calendar/google-calendar",
+      "key": "depends_on"
+    },
+    {
+      "rel_type": "depends_on",
+      "source": "time-windowed retrieval",
+      "target": "rag metadata",
+      "key": "depends_on"
+    }
+  ]
+}
