@@ -34,4 +34,5 @@ python assignments/week2-rag-dataset/scripts/analyze_dataset.py
 - 정제는 redaction (이메일/API key/로컬 경로), 태그·공백 정규화, `source_type → note_type` 매핑, 자동 태깅, chunk 분할까지 자동화
 - 자동 태깅은 bsvibe-app `settle_worker.derive_content_tags` 규칙을 그대로 이식 (수기 215 + 자동 280 → 머지 467)
 - 외부 DB (pgvector) 적재용 스키마와 검색 쿼리 sketch 는 분석 보고서 7. 외부 DB 적재 섹션에 포함
+- BM25 sparse baseline 측정: Recall@1=53%, Recall@5=90%, Recall@10=90% (다음 주차 dense embedding 이 넘어야 할 floor)
 - 검증 100%, 중복 0, 품질 flag 0

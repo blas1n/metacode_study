@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import statistics
@@ -147,6 +148,124 @@ def embedding_budget_fit(chunk_lengths: list[int]) -> dict[str, dict[str, Any]]:
             "fits_without_truncation": approx_max_tokens <= ctx_tokens,
         }
     return fits
+
+
+# BM25 baseline: pure stdlib 로 다음 주차 dense embedding 이 넘어야 할 floor 를 측정.
+# 토큰화는 영문 alnum + 한글 보존 (분할 정규식이 [^a-z0-9가-힣]+).
+_BM25_TOKEN_RE = re.compile(r"[^a-z0-9가-힣]+")
+_BM25_STOPWORDS: frozenset[str] = frozenset(
+    {
+        # 영문 기능어 (settle_worker 의 stopword 와 일부 겹침)
+        "the", "and", "for", "with", "from", "into", "onto", "this", "that",
+        "these", "those", "have", "has", "had", "was", "were", "are", "but",
+        "not", "via", "per", "out", "off", "its", "our", "your", "their",
+        "use", "used", "new", "now", "all", "any", "can", "did", "done",
+        "then", "than", "what", "when", "where", "why", "how", "which",
+        # 한국어 의문/연결어 (질문 노이즈 제거용)
+        "어떻게", "어떤", "어디", "어디서", "어디에", "무엇", "무엇을",
+        "있나요", "있는지", "있는", "있다", "없는", "없다", "없나요",
+        "하나요", "하는", "할지", "되나요", "되는", "되어", "돼요",
+        "그리고", "또한", "하지만", "그러나", "어떻게요", "있을까요",
+        "어떻게나", "어떤지", "있을지", "되는지", "되는가", "할까요",
+        "기준", "관련", "관련된", "주로", "대신", "그대로", "다음",
+        "이번", "현재", "당시", "지금", "처음", "마지막", "통해", "위해",
+        "통한", "위한", "같은", "같이", "다르게", "이렇게", "저렇게",
+    }
+)
+_BM25_K1 = 1.5
+_BM25_B = 0.75
+
+
+def _bm25_tokens(text: str) -> list[str]:
+    tokens = _BM25_TOKEN_RE.split(text.casefold())
+    return [t for t in tokens if t and len(t) >= 2 and t not in _BM25_STOPWORDS]
+
+
+def _build_bm25_corpus(chunks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """doc = chunk.text + title + tags. title/tags 가 짧아 자연스럽게 가중치 ↑."""
+    docs: list[dict[str, Any]] = []
+    for chunk in chunks:
+        metadata = chunk.get("metadata") or {}
+        tag_text = " ".join(str(t) for t in metadata.get("tags") or [])
+        merged = " ".join([str(chunk.get("text") or ""), str(metadata.get("title") or ""), tag_text])
+        docs.append(
+            {
+                "chunk_id": chunk.get("chunk_id"),
+                "source_id": chunk.get("source_id"),
+                "tokens": _bm25_tokens(merged),
+            }
+        )
+    return docs
+
+
+def _bm25_ranked_source_ids(
+    docs: list[dict[str, Any]], query_tokens: list[str]
+) -> list[tuple[str, float]]:
+    """모든 chunk 점수 → source_id 기준 max score 로 묶고 내림차순 정렬."""
+    if not docs or not query_tokens:
+        return []
+    n = len(docs)
+    avgdl = sum(len(d["tokens"]) for d in docs) / n if n else 0.0
+    df: Counter[str] = Counter()
+    for doc in docs:
+        for token in set(doc["tokens"]):
+            df[token] += 1
+    by_source: dict[str, float] = {}
+    for doc in docs:
+        dl = len(doc["tokens"])
+        if not dl:
+            continue
+        tf = Counter(doc["tokens"])
+        score = 0.0
+        for term in query_tokens:
+            n_q = df.get(term, 0)
+            if not n_q:
+                continue
+            idf = math.log((n - n_q + 0.5) / (n_q + 0.5) + 1)
+            f = tf.get(term, 0)
+            if not f:
+                continue
+            denom = f + _BM25_K1 * (1 - _BM25_B + _BM25_B * dl / avgdl)
+            score += idf * (f * (_BM25_K1 + 1)) / denom
+        sid = str(doc["source_id"])
+        if score > by_source.get(sid, float("-inf")):
+            by_source[sid] = score
+    return sorted(by_source.items(), key=lambda x: -x[1])
+
+
+def evaluate_retrieval_bm25(
+    chunks: list[dict[str, Any]],
+    golden: list[dict[str, Any]],
+    ks: tuple[int, ...] = (1, 3, 5, 10),
+) -> dict[str, Any]:
+    """golden 15문항에 대해 BM25 baseline 의 Recall@k 산출 (macro-average)."""
+    docs = _build_bm25_corpus(chunks)
+    rows: list[dict[str, Any]] = []
+    aggregate = {k: 0.0 for k in ks}
+    for item in golden:
+        query_tokens = _bm25_tokens(str(item.get("question") or ""))
+        expected = set(str(s) for s in item.get("expected_source_ids") or [])
+        ranked = [sid for sid, _ in _bm25_ranked_source_ids(docs, query_tokens)]
+        per_q: dict[str, Any] = {
+            "qid": item.get("qid"),
+            "expected_count": len(expected),
+            "top_ranked": ranked[: max(ks)] if ks else ranked,
+        }
+        for k in ks:
+            top_k = set(ranked[:k])
+            hit_ratio = len(top_k & expected) / len(expected) if expected else 0.0
+            aggregate[k] += hit_ratio
+            per_q[f"recall@{k}"] = round(hit_ratio, 3)
+        rows.append(per_q)
+    total = len(golden) or 1
+    return {
+        "ks": list(ks),
+        "summary": {f"recall@{k}": round(aggregate[k] / total, 3) for k in ks},
+        "per_question": rows,
+        "doc_count": len(docs),
+        "avg_doc_tokens": round(statistics.mean([len(d["tokens"]) for d in docs]), 1) if docs else 0,
+        "params": {"k1": _BM25_K1, "b": _BM25_B, "doc_composition": "text + title + tags"},
+    }
 
 
 def golden_coverage(
@@ -461,7 +580,13 @@ redaction (이메일 / API key / 로컬 경로) → 공백·태그 정규화 →
 
 {_golden_block(summary.get("golden_coverage"))}
 
-## 10. 한계
+## 10. 검색 top-k baseline (BM25)
+
+다음 주차 dense embedding retrieval 이 넘어야 할 sparse floor 를 잡기 위해, pure-stdlib BM25 (k1=1.5, b=0.75) 를 golden 15문항에 적용했습니다. doc = `chunk.text + title + tags`, 점수는 같은 source_id 안에서 max 로 묶고 source_id 기준 top-k 를 산출합니다. macro-Recall (질문별 expected 중 top-k 안에 잡힌 비율의 평균).
+
+{_bm25_block(summary.get("bm25_baseline"))}
+
+## 11. 한계
 
 - 실제 서비스 데이터가 들어오면 `workspace_id`, `user_id` 같은 tenant 분리 필드가 필요. 현재는 의도적으로 product 단일 값만 보존.
 """
@@ -478,6 +603,31 @@ def _tagging_block(tagging: dict[str, Any]) -> str:
         f"  - 자동이 새로 더한 항목: **{tagging['auto_new_contributions']}**\n"
         f"- 머지 후 총 **{tagging['merged_total']}** (평균 {avg['merged']}개/note)\n\n"
         f"자동만 채워준 상위 태그:\n\n{top_section}\n"
+    )
+
+
+def _bm25_block(bm25: dict[str, Any] | None) -> str:
+    if not bm25:
+        return "_golden set 또는 chunk 없음 — baseline 산출 불가._"
+    ks = bm25["ks"]
+    summary_rows = [[f"Recall@{k}", bm25["summary"][f"recall@{k}"]] for k in ks]
+    per_q_rows = [
+        [
+            row["qid"],
+            row["expected_count"],
+            row.get(f"recall@{ks[0]}", 0),
+            row.get(f"recall@{ks[1]}" if len(ks) > 1 else f"recall@{ks[0]}", 0),
+            row.get(f"recall@{ks[2]}" if len(ks) > 2 else f"recall@{ks[0]}", 0),
+            row.get(f"recall@{ks[3]}" if len(ks) > 3 else f"recall@{ks[0]}", 0),
+        ]
+        for row in bm25["per_question"]
+    ]
+    header = ["qid", "expected"] + [f"R@{k}" for k in ks]
+    return (
+        f"- doc 수: {bm25['doc_count']} (chunk 단위, 평균 토큰 {bm25['avg_doc_tokens']}개)\n\n"
+        f"{markdown_table(['metric', 'value'], summary_rows)}\n\n"
+        f"질문별 breakdown:\n\n"
+        f"{markdown_table(header, per_q_rows)}\n"
     )
 
 
@@ -504,7 +654,9 @@ def main() -> None:
     chunks = load_jsonl(args.chunks)
     summary = analyze(notes, chunks)
     if args.golden.exists():
-        summary["golden_coverage"] = golden_coverage(notes, load_jsonl(args.golden))
+        golden_rows = load_jsonl(args.golden)
+        summary["golden_coverage"] = golden_coverage(notes, golden_rows)
+        summary["bm25_baseline"] = evaluate_retrieval_bm25(chunks, golden_rows)
 
     args.summary_out.parent.mkdir(parents=True, exist_ok=True)
     args.summary_out.write_text(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
