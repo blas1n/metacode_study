@@ -89,6 +89,25 @@ python assignments/week3-rag-db/scripts/bm25_baseline.py
 3. **다음 단계 비교 기준** — 향후 hybrid (sparse + dense) 나 rerank 도입 시 이 두 지표가
    비교 기준이 됩니다.
 
+### ⑤ 실제 top-K 살펴보기 (대표 3문항)
+
+aggregate 만 보면 "어떤 방식으로 맞히고 틀리는지" 가 안 보여, 노트북 §⑤ 에 대표 3문항의 top-5 를
+sparse 와 dense 나란히 출력했습니다. 핵심 패턴만 옮기면:
+
+```
+[q-010] 파운더가 잘못된 노드를 retract하면 어떤 흐름으로 처리되나요?
+  expected: bsvibe-src-016, bsvibe-src-022, bsvibe-src-024
+  sparse(BM25) top-5  →  모두 score 0.00 (lexical 매칭 실패)
+                         retract하면 / 잘못된 / 흐름으로 같은 한영 혼합 토큰이
+                         tokenizer 에서 분리되지 않아 매칭할 어휘 없음
+  dense(pgvector) top-5 →  의미 단위로 retract 흐름 (M3a service / signal /
+                          audit_events) 을 회수 → 정답 hit
+```
+
+→ q-010 은 **lexical 검색이 원리적으로 풀 수 없는 케이스**. dense embedding 이 메우는 영역의
+가장 명확한 정성 증거입니다. 다른 두 picks (`q-001`, `q-007`) 는 둘 다 정답을 회수하지만
+sparse 의 마진이 좁다는 점이 함께 보입니다.
+
 ---
 
 ## 2. GraphRAG (NetworkX + LLM triplet)
