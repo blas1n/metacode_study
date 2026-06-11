@@ -86,6 +86,7 @@ def validate_record(record: dict[str, Any]) -> list[str]:
 # 직접 룰을 만드는 대신 실제 운영 코드가 쓰는 normalization·structural-tag 거름·
 # 추출 순서·8개 cap 을 그대로 따라가, 다음 주차 외부 DB 가 같은 concept-id 문법
 # (Handoff §2: ^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$) 으로 promotion 까지 이어갈 수 있게 함.
+# Source: backend/knowledge/infrastructure/workers/settle_worker.py @ a6648ac
 _AUTO_NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
 _AUTO_CONCEPT_ID_LEADING_RE = re.compile(r"^[a-z]")
 _STRUCTURAL_TAGS: frozenset[str] = frozenset({"settle", "verified-run"})
