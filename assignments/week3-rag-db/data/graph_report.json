@@ -1,0 +1,16 @@
+{
+  "chunks": 37,
+  "raw_entity_mentions": 290,
+  "distinct_raw_surfaces": 267,
+  "after_normalize": 266,
+  "after_alias": 266,
+  "autocreated_from_relationships": 6,
+  "nodes": 272,
+  "edges": 226,
+  "components": 49,
+  "largest_component": 66,
+  "largest_component_pct": 24.3,
+  "rejected_entities": 0,
+  "rejected_relationships": 0,
+  "parse_failures": 0
+}

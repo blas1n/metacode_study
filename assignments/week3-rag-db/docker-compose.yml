@@ -1,0 +1,31 @@
+# Week3 RAG 외부 DB — 전용 pgvector 컨테이너.
+#
+# bsvibe-app 과 동일한 이미지(pgvector/pgvector:pg16)를 쓰되, 스터디 격리를 위해
+# 별도 포트(5433) · 별도 DB · 별도 볼륨으로 띄웁니다. bsvibe 운영 컨테이너
+# (5442/15442)와 충돌하지 않습니다.
+#
+#   docker compose -f assignments/week3-rag-db/docker-compose.yml up -d
+#
+# 접속 DSN (scripts/notebooks 에서 RAG_DB_DSN 으로 주입):
+#   postgresql+asyncpg://rag:rag@localhost:5433/rag_week3
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: week3-rag-postgres
+    environment:
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: rag
+      POSTGRES_DB: rag_week3
+    ports:
+      - "5433:5432"
+    volumes:
+      - week3_rag_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag -d rag_week3"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  week3_rag_pgdata:
