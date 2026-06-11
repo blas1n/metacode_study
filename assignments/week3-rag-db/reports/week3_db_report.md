@@ -46,9 +46,27 @@ KO 질문↔EN 문서 cross-lingual 갭으로 top-1 코사인 평균이 0.401 (m
 DB 적재 count : 37   (SELECT count(*) FROM rag_chunks)
 ```
 
-### ③ 유사도 검색 (golden 15문항)
+### ③ 유사도 검색 1차 테스트 (similarity_search_with_score, EN 5쿼리) ✅
 
-2주차 검색 평가셋을 그대로 사용. 각 질문을 임베딩해 top-5 코사인 검색:
+루브릭 ③ — 본문과 관련 있는 임의의 쿼리에 대해 top-K 와 유사도 점수가 상식적인 수준
+(코사인 ≥ 0.7) 으로 나오는지. 본문은 영어 코드 분석이라 1차 테스트는 EN 쿼리로 진행.
+
+| top-1 sim | source_id | query |
+| --- | --- | --- |
+| **0.768** | bsvibe-src-001 | BSVibe monorepo FastAPI Next.js Docker Compose stack |
+| **0.721** | bsvibe-src-002 | KnowledgeFactory per-workspace retriever construction |
+| **0.708** | bsvibe-src-008 | SettleWorker vault notes promotion embedding hook |
+| **0.759** | bsvibe-src-011 | pgvector cosine note embeddings semantic search backend |
+| **0.712** | bsvibe-src-016 | RetractionService ontology correction undo window tombstone |
+
+5/5 쿼리에서 **정답 문서가 top-1, 코사인 0.71~0.77 로 루브릭 기준 (≥ 0.7) 충족**. 차순위는 0.47~0.62 로
+명확히 분리. 노트북 §③ 에 ``similarity_search_with_score`` 동등 호출인
+``await store.search(query=emb, limit=K)`` (코사인 거리 ``embedding <=> CAST(:qv AS vector)`` 기반)
+의 실측 출력을 embed 했습니다.
+
+### ④ 골든셋 평가 (KO 15문항, cross-lingual 확장)
+
+1차 EN 테스트보다 더 어려운 KO 질의셋으로 cross-lingual 한계까지 평가:
 
 | 지표 | 값 |
 | --- | --- |
@@ -71,7 +89,7 @@ text-embedding-3-small 시절 갭 0.26 (0.456 vs 0.716) → bge-m3 에서 0.13 (
 절반 가까이 줄었습니다. 랭킹은 두 언어 모두 동일 정답을 회수하므로, 검색 품질 판단은
 **Hit@k / MRR** 우선이라는 결론은 그대로 유효합니다.
 
-### ④ sparse baseline (BM25) 비교 — dense 도입 정당화
+### ⑤ sparse baseline (BM25) 비교 — dense 도입 정량 정당화
 
 "Hit@3 = 100%" 라는 절대값만 보면 dense embedding 이 얼마나 기여했는지 가늠하기 어려워서,
 동일 데이터셋·동일 평가셋에 **순수 stdlib BM25** (k1=1.5, b=0.75, doc = `text + title + tags`)
@@ -97,7 +115,7 @@ python assignments/week3-rag-db/scripts/bm25_baseline.py
 3. **다음 단계 비교 기준** — 향후 hybrid (sparse + dense) 나 rerank 도입 시 이 두 지표가
    비교 기준이 됩니다.
 
-### ⑤ 실제 top-K 살펴보기 (대표 3문항)
+### ⑥ 실제 top-K 살펴보기 (대표 3문항)
 
 aggregate 만 보면 "어떤 방식으로 맞히고 틀리는지" 가 안 보여, 노트북 §⑤ 에 대표 3문항의 top-5 를
 sparse / dense 둘 다 실측한 출력으로 embed 했습니다. 핵심 케이스 (`q-010`):

@@ -50,9 +50,9 @@ cd assignments/week3-rag-db && python -m pytest tests/ -q
 ## 검증 결과 요약
 
 **VectorRAG** — ① `vector(1024)` == 모델 차원 == 행 stamp dimension == 쿼리 임베딩 길이 ✅
-② 37 chunk == 37 rows ✅ ③ golden 15문항 Hit@1 93.3% / Hit@3 100% / MRR 0.956,
-top-1 코사인 mean **0.590** (bge-m3 멀티링구얼 도입으로 cross-lingual 갭 0.26→0.13 으로 축소).
-④ sparse BM25 baseline 비교: Hit@1 60%→93.3%(+33.3%p), Hit@3 73.3%→100%(+26.7%p),
+② 37 chunk == 37 rows ✅ ③ 1차 EN 5쿼리 모두 top-1 코사인 **0.71~0.77 (≥ 0.7 충족)** ✅
+④ KO 골든 15문항 Hit@1 93.3% / Hit@3 100% / MRR 0.956 (cross-lingual 갭 0.26→0.13 축소).
+⑤ sparse BM25 baseline 비교: Hit@1 60%→93.3%(+33.3%p), Hit@3 73.3%→100%(+26.7%p),
 MRR 0.692→0.956(+0.264) — dense 도입 정량 정당화.
 
 **GraphRAG** — ① triplet None/빈값 방어(거부 카운트) + 깨진 JSON 안전 처리, 실빌드 거부 0 ·
