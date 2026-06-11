@@ -51,18 +51,44 @@ DB 적재 count : 37   (SELECT count(*) FROM rag_chunks)
 루브릭 ③ — 본문과 관련 있는 임의의 쿼리에 대해 top-K 와 유사도 점수가 상식적인 수준
 (코사인 ≥ 0.7) 으로 나오는지. 본문은 영어 코드 분석이라 1차 테스트는 EN 쿼리로 진행.
 
-| top-1 sim | source_id | query |
-| --- | --- | --- |
-| **0.768** | bsvibe-src-001 | BSVibe monorepo FastAPI Next.js Docker Compose stack |
-| **0.721** | bsvibe-src-002 | KnowledgeFactory per-workspace retriever construction |
-| **0.708** | bsvibe-src-008 | SettleWorker vault notes promotion embedding hook |
-| **0.759** | bsvibe-src-011 | pgvector cosine note embeddings semantic search backend |
-| **0.712** | bsvibe-src-016 | RetractionService ontology correction undo window tombstone |
+5/5 쿼리에서 정답 문서가 top-1, 코사인 0.71~0.77 로 루브릭 기준 (≥ 0.7) 충족. 차순위는 0.47~0.62 로
+명확히 분리됩니다. 어떤 문서가 회수됐는지 source_id + title 까지 같이 표시:
 
-5/5 쿼리에서 **정답 문서가 top-1, 코사인 0.71~0.77 로 루브릭 기준 (≥ 0.7) 충족**. 차순위는 0.47~0.62 로
-명확히 분리. 노트북 §③ 에 ``similarity_search_with_score`` 동등 호출인
-``await store.search(query=emb, limit=K)`` (코사인 거리 ``embedding <=> CAST(:qv AS vector)`` 기반)
-의 실측 출력을 embed 했습니다.
+```
+✅ Q: BSVibe monorepo FastAPI Next.js Docker Compose stack
+   sim=0.768  bsvibe-src-001  BSVibe monorepo layout and local stack
+   sim=0.579  bsvibe-src-030  compose.prod.yaml overrides dev defaults for prod env-driven startup
+   sim=0.471  bsvibe-src-026  Runtime dispatcher binds gateway plus cheap-LLM seams
+
+✅ Q: KnowledgeFactory per-workspace retriever construction
+   sim=0.721  bsvibe-src-002  KnowledgeFactory binds knowledge to workspace and region
+   sim=0.575  bsvibe-src-007  Agent runtime wires workspace retriever into execution and knowledge-only route
+   sim=0.535  bsvibe-src-008  Settle worker writes vault notes, promotes concepts, and embeds notes
+
+✅ Q: SettleWorker vault notes promotion embedding hook
+   sim=0.708  bsvibe-src-008  Settle worker writes vault notes, promotes concepts, and embeds notes
+   sim=0.622  bsvibe-src-025  Settle runtime factories build per-settlement extractor and embedding hook
+   sim=0.513  bsvibe-src-015  Cross-run decision reuse is tested through seed and verification fold
+
+✅ Q: pgvector cosine note embeddings semantic search backend
+   sim=0.759  bsvibe-src-011  Semantic note retrieval searches pgvector note embeddings
+   sim=0.519  bsvibe-src-008  Settle worker writes vault notes, promotes concepts, and embeds notes
+   sim=0.512  bsvibe-vault-001  Fact note frontmatter — typed triple with supersedes chain
+
+✅ Q: RetractionService ontology correction undo window tombstone
+   sim=0.712  bsvibe-src-016  RetractionService orchestrates ontology corrections with a 30s undo window
+   sim=0.584  bsvibe-src-029  UndoToast derives the 30s countdown from server wall-clock apply_at
+   sim=0.537  bsvibe-src-028  InspectorActions runs the idle to modal to toast state machine for retract and correct
+```
+
+차순위 결과의 정성 점검: 모든 케이스에서 차순위 문서도 같은 주제 영역의 인접 문서가 회수됩니다.
+예) `BSVibe stack` 질의 → 1위 src-001(전체 layout) / 2위 src-030(prod compose 설정) / 3위 src-026
+(runtime dispatcher) — 모두 "운영/구성" 카테고리. `RetractionService` 질의 → 1위 src-016(서비스 자체)
+/ 2위 src-029(UndoToast UI) / 3위 src-028(InspectorActions UI) — 모두 ontology correction 영역.
+랜덤한 잡음이 아니라 **주제적으로 인접한 문서가 차순위로 배치**되고, 정답 문서는 충분한 마진으로
+1위. 노트북 §③ 셀에 ``similarity_search_with_score`` 동등 호출인
+``await store.search(query=emb, limit=K)`` (코사인 거리 ``embedding <=> CAST(:qv AS vector)``) 의
+실측 출력을 그대로 embed 했습니다.
 
 ### ④ 골든셋 평가 (KO 15문항, cross-lingual 확장)
 
