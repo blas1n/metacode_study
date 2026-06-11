@@ -63,6 +63,32 @@ EN (동일 의미)     top1_sim=0.716  src=bsvibe-src-002   ← 같은 정답 �
 절대값이 ~0.26 깎이므로, 검색 품질 판단은 **랭킹 기반 지표(Hit@k/MRR)** 가 더 신뢰할 신호입니다.
 Hit@3 = 100% 로 모든 질문이 top-3 안에 정답을 회수합니다.
 
+### ④ sparse baseline (BM25) 비교 — dense 도입 정당화
+
+"Hit@3 = 100%" 라는 절대값만 보면 dense embedding 이 얼마나 기여했는지 가늠하기 어려워서,
+동일 데이터셋·동일 평가셋에 **순수 stdlib BM25** (k1=1.5, b=0.75, doc = `text + title + tags`)
+를 sparse baseline 으로 돌렸습니다. 재현:
+
+```bash
+python assignments/week3-rag-db/scripts/bm25_baseline.py
+```
+
+| 지표 | sparse (BM25) | dense (text-embedding-3-small) | gain |
+| --- | --- | --- | --- |
+| Hit@1 | 60.0% | **80.0%** | **+20.0%p** |
+| Hit@3 | 73.3% | **100.0%** | **+26.7%p** |
+| MRR | 0.692 | **0.878** | **+0.186** |
+
+해석:
+1. **BM25 도 만만치 않다** — 코드/식별자가 풍부한 데이터셋이라 `pgvector`, `settle`,
+   `frontmatter`, `canonical` 같은 영문 키워드가 한국어 질문에 그대로 섞여 lexical
+   매칭이 잘 됩니다 (sparse 만으로도 Hit@3 73%).
+2. **dense 가 메우는 것** — sparse 가 못 잡은 케이스는 한영 혼합 토큰(`retract하면`)
+   처럼 형태소 분리가 필요한 질문이나, 동일 개념의 어휘 다양성 (e.g. "negative pattern"
+   ↔ "거절한 접근"). dense embedding 이 의미 유사도로 메워 Hit@3 100% 달성.
+3. **다음 단계 비교 기준** — 향후 hybrid (sparse + dense) 나 rerank 도입 시 이 두 지표가
+   비교 기준이 됩니다.
+
 ---
 
 ## 2. GraphRAG (NetworkX + LLM triplet)

@@ -16,6 +16,7 @@
 | `scripts/build_vector_db.py` | VectorRAG 빌드 + 차원/count 검증 CLI |
 | `scripts/graph_store.py` | triplet 추출 + NetworkX 그래프 (bsvibe `graph` 이식) |
 | `scripts/build_graph_db.py` | GraphRAG 빌드 + 토폴로지/시각화 CLI |
+| `scripts/bm25_baseline.py` | sparse BM25 baseline (dense 와 동일 metric 으로 비교) |
 | `notebooks/01_vector_rag.ipynb` | VectorRAG 검증 (차원·count·유사도) |
 | `notebooks/02_graph_rag.ipynb` | GraphRAG 검증 (무결성·dedup·토폴로지) |
 | `reports/week3_db_report.md` | 검증 보고서 |
@@ -36,6 +37,9 @@ docker compose -f assignments/week3-rag-db/docker-compose.yml up -d
 python assignments/week3-rag-db/scripts/build_vector_db.py
 python assignments/week3-rag-db/scripts/build_graph_db.py
 
+# sparse baseline (dense 와 비교)
+python assignments/week3-rag-db/scripts/bm25_baseline.py
+
 # 테스트
 cd assignments/week3-rag-db && python -m pytest tests/ -q
 ```
@@ -45,6 +49,8 @@ cd assignments/week3-rag-db && python -m pytest tests/ -q
 **VectorRAG** — ① `vector(1536)` == 모델 차원 == 행 stamp dimension == 쿼리 임베딩 길이 ✅
 ② 37 chunk == 37 rows ✅ ③ golden 15문항 Hit@1 80% / Hit@3 100% / MRR 0.878.
 한국어 질의↔영어 문서 cross-lingual 갭(KO 0.456 vs EN 0.716)을 정량 확인.
+④ sparse BM25 baseline 비교: Hit@1 60%→80%(+20%p), Hit@3 73.3%→100%(+26.7%p),
+MRR 0.692→0.878(+0.186) — dense 도입 정량 정당화.
 
 **GraphRAG** — ① triplet None/빈값 방어(거부 카운트) + 깨진 JSON 안전 처리, 실빌드 거부 0 ·
 빈 노드 0 ✅ ② 5종 표기 → 1 노드 통합(`normalize_name` + alias) ✅ ③ 272 노드 / 226 엣지 /
