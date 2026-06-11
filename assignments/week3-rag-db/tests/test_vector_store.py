@@ -103,7 +103,7 @@ async def test_upsert_stamps_model_and_dimension(mock_session, sample_entry):
     params = mock_session.execute.await_args.args[1]
     # dimension 은 임베딩 길이로 stamp
     assert params["dimension"] == len(sample_entry.embedding)
-    assert params["embedding_model"] == "text-embedding-3-small"
+    assert params["embedding_model"] == "ollama/bge-m3"
     # 임베딩은 pgvector 리터럴 문자열로 bind
     assert params["embedding"] == to_pgvector_literal(sample_entry.embedding)
 

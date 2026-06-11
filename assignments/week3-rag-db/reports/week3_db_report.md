@@ -14,7 +14,7 @@
 
 | 영역 | 구현 | bsvibe 원본 |
 | --- | --- | --- |
-| 임베딩 | `litellm.aembedding` (text-embedding-3-small, 1536d) | `embedding/provider.py` |
+| 임베딩 | `litellm.aembedding` (bge-m3 via Ollama, 1024d, 멀티링구얼) | `embedding/provider.py` |
 | 저장/검색 | SQLAlchemy async + asyncpg + pgvector raw `text()` SQL | `embedding/storage/pg.py` |
 | 코사인 | `embedding <=> CAST(:qv AS vector)`, similarity = `1 - distance` | 동상 |
 
@@ -24,11 +24,17 @@
 모두 일치:
 
 ```
-DB vector() 컬럼 차원      : 1536
-행에 stamp된 (model, dim)  : [{'embedding_model': 'text-embedding-3-small', 'dimension': 1536}]
-실제 쿼리 임베딩 길이       : 1536
-→ vector(1536) == dimension 1536 == len(query_emb) 1536, model=text-embedding-3-small
+DB vector() 컬럼 차원      : 1024
+행에 stamp된 (model, dim)  : [{'embedding_model': 'ollama/bge-m3', 'dimension': 1024}]
+실제 쿼리 임베딩 길이       : 1024
+→ vector(1024) == dimension 1024 == len(query_emb) 1024, model=ollama/bge-m3
 ```
+
+**모델 선정 — 왜 bge-m3 인가**: 초기 빌드는 `text-embedding-3-small` (1536d) 로 잡았으나
+KO 질문↔EN 문서 cross-lingual 갭으로 top-1 코사인 평균이 0.401 (min 0.306) 에 머물러
+'코사인 0.5+' 기준을 못 맞췄습니다. 멀티링구얼 임베딩 **BAAI/bge-m3** (100+ 언어, 1024d) 로
+교체 → top-1 코사인 평균 **0.401 → 0.590** (+0.189), Hit@1 **80% → 93.3%**, MRR **0.878 → 0.956**
+로 동시에 향상. bsvibe-app prod 가 Ollama 임베딩 스택을 쓰는 것과도 컨벤션이 맞습니다.
 
 모델명·차원을 **모든 행에 stamp** 하는 것은 bsvibe 의 stale-embedding 감지 패턴(모델 교체 시
 재임베딩 트리거)을 이식한 것입니다.
@@ -46,22 +52,24 @@ DB 적재 count : 37   (SELECT count(*) FROM rag_chunks)
 
 | 지표 | 값 |
 | --- | --- |
-| Hit@1 | **80.0%** |
-| Hit@3 | **100.0%** |
-| MRR | **0.878** |
-| top-1 코사인 (min/mean/max) | 0.306 / 0.401 / 0.558 |
+| Hit@1 | **93.3%** (14/15) |
+| Hit@3 | **100.0%** (15/15) |
+| MRR | **0.956** |
+| top-1 코사인 (min/mean/max) | 0.498 / 0.590 / 0.688 |
 
-**정성 분석 — cross-lingual 갭**: golden 질문은 한국어, 문서는 영어입니다. 랭킹은 정확하지만
-절대 코사인이 0.7 기준보다 낮게 나오는 경향이 있어, 동일 질문을 영어로도 던져 비교:
+15문항 중 14문항이 top-1 에 정답, 1문항(q-012)이 top-3 에 회수. top-1 코사인 평균 0.590 으로
+KO↔EN 임에도 0.5+ 대역 안정.
+
+**정성 분석 — cross-lingual 갭 (잔존)**: bge-m3 도입 후에도 KO 질문은 EN 질문 대비 약간 낮습니다.
 
 ```
-KO (원본)        top1_sim=0.456  src=bsvibe-src-002
-EN (동일 의미)     top1_sim=0.716  src=bsvibe-src-002   ← 같은 정답 문서
+KO (원본)        top1_sim=0.598  src=bsvibe-src-002
+EN (동일 의미)     top1_sim=0.727  src=bsvibe-src-002   ← 같은 정답 문서
 ```
 
-→ '코사인 0.7 이상' 절대 기준은 monolingual(EN↔EN) 가정입니다. KO↔EN 에서는 동일 정답이라도
-절대값이 ~0.26 깎이므로, 검색 품질 판단은 **랭킹 기반 지표(Hit@k/MRR)** 가 더 신뢰할 신호입니다.
-Hit@3 = 100% 로 모든 질문이 top-3 안에 정답을 회수합니다.
+text-embedding-3-small 시절 갭 0.26 (0.456 vs 0.716) → bge-m3 에서 0.13 (0.598 vs 0.727) 으로
+절반 가까이 줄었습니다. 랭킹은 두 언어 모두 동일 정답을 회수하므로, 검색 품질 판단은
+**Hit@k / MRR** 우선이라는 결론은 그대로 유효합니다.
 
 ### ④ sparse baseline (BM25) 비교 — dense 도입 정당화
 
@@ -73,11 +81,11 @@ Hit@3 = 100% 로 모든 질문이 top-3 안에 정답을 회수합니다.
 python assignments/week3-rag-db/scripts/bm25_baseline.py
 ```
 
-| 지표 | sparse (BM25) | dense (text-embedding-3-small) | gain |
+| 지표 | sparse (BM25) | dense (bge-m3, 1024d) | gain |
 | --- | --- | --- | --- |
-| Hit@1 | 60.0% | **80.0%** | **+20.0%p** |
+| Hit@1 | 60.0% | **93.3%** | **+33.3%p** |
 | Hit@3 | 73.3% | **100.0%** | **+26.7%p** |
-| MRR | 0.692 | **0.878** | **+0.186** |
+| MRR | 0.692 | **0.956** | **+0.264** |
 
 해석:
 1. **BM25 도 만만치 않다** — 코드/식별자가 풍부한 데이터셋이라 `pgvector`, `settle`,
@@ -106,16 +114,17 @@ sparse / dense 둘 다 실측한 출력으로 embed 했습니다. 핵심 케이�
     5. bsvibe-src-005   score=0.00
 
   dense(pgvector) top-5:
-    1. bsvibe-src-027   sim=0.310      RetractModal (관련 surface)
-    2. bsvibe-src-016   sim=0.297  ✓   RetractionService (M3a 서비스)
-    3. bsvibe-src-022   sim=0.290  ✓   RetractionSignal (도메인 모델)
-    4. bsvibe-src-029   sim=0.251      UndoToast (관련 UI)
-    5. bsvibe-src-005   sim=0.230      Negative patterns
+    1. bsvibe-src-022   sim=0.541  ✓   RetractionSignal (도메인 모델, Hit@1!)
+    2. bsvibe-src-005   sim=0.532      Negative patterns
+    3. bsvibe-src-027   sim=0.512      RetractModal (관련 surface)
+    4. bsvibe-src-029   sim=0.502      UndoToast (관련 UI)
+    5. bsvibe-src-016   sim=0.486  ✓   RetractionService (M3a 서비스)
 ```
 
-→ sparse 가 0/3 인 케이스를 dense 가 2/3 회수. **lexical 한계 + cross-lingual + 어휘 다양성을
-한 번에 보여주는 결정적 사례**입니다. `q-001`, `q-007` 도 동일 포맷으로 노트북에 출력 — 두
-경우는 sparse 도 정답을 잡지만 dense 의 sim 마진이 명확히 큽니다 (q-001: 0.500 vs 차순위 0.316).
+→ sparse 가 0/3 인 케이스를 dense 가 2/3 회수, **정답 중 하나가 rank 1**. lexical 한계 +
+cross-lingual + 어휘 다양성을 한 번에 보여주는 결정적 사례입니다. `q-001`, `q-007` 도 동일 포맷으로
+노트북에 출력 — 두 경우는 sparse 도 정답을 잡지만 dense 의 sim 마진이 명확히 큽니다
+(q-001: 0.607 vs 차순위 0.441).
 
 ---
 

@@ -38,7 +38,7 @@ def sample_entry(sample_chunk: Chunk) -> VectorEntry:
     return VectorEntry(
         chunk=sample_chunk,
         embedding=[0.1, 0.2, 0.3],
-        embedding_model="text-embedding-3-small",
+        embedding_model="ollama/bge-m3",
     )
 
 

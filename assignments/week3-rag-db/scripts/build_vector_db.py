@@ -65,7 +65,8 @@ async def build(dsn: str, chunks_path: Path) -> dict:
     try:
         async with AsyncSession(engine) as session:
             store = RagVectorStore(session)
-            await store.create_schema()
+            # 모델/차원 변경 시 안전하게 새로 빌드. 운영 환경이면 false 로.
+            await store.create_schema(drop_existing=True)
             await store.upsert(entries)
             await session.commit()
             db_count = await store.count()

@@ -28,11 +28,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = structlog.get_logger(__name__)
 
-# 과제에서 검증할 임베딩 모델·차원 (루브릭: 모델·차원 일치 검증)
-EMBED_MODEL = "text-embedding-3-small"
-EMBED_DIM = 1536
+# 과제에서 검증할 임베딩 모델·차원 (루브릭: 모델·차원 일치 검증).
+#
+# 초기 빌드는 OpenAI text-embedding-3-small (1536d) 로 잡았으나 KO 질의↔EN 문서
+# cross-lingual 갭으로 top-1 코사인이 0.3~0.5 에 머물러, 멀티링구얼 임베딩
+# bge-m3 (BAAI, 100+ 언어, 1024d) 로 교체했습니다. bsvibe-app prod 가
+# Ollama 임베딩 스택을 쓰는 것과도 컨벤션이 맞습니다.
+EMBED_MODEL = "ollama/bge-m3"
+EMBED_DIM = 1024
 
-# bsvibe EmbeddingSettings.max_input_length 와 같은 역할 — 과도하게 긴 입력 절단
+# bsvibe EmbeddingSettings.max_input_length 와 같은 역할 — 과도하게 긴 입력 절단.
+# bge-m3 는 최대 8192 토큰을 지원하므로 그대로 유지.
 MAX_INPUT_LENGTH = 8192
 
 
@@ -122,12 +128,18 @@ class RagVectorStore:
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    async def create_schema(self) -> None:
+    async def create_schema(self, *, drop_existing: bool = False) -> None:
         """vector 확장 + rag_chunks 테이블 + 인덱스 생성 (idempotent).
 
-        스키마는 2주차 보고서 §7 을 그대로 옮기되 차원만 ``vector(1536)`` 으로
-        고정 — text-embedding-3-small 의 차원과 일치(루브릭 ①).
+        스키마는 2주차 보고서 §7 을 그대로 옮기되 차원은 ``EMBED_DIM`` 으로
+        고정 — bge-m3(1024d) 등 모델 차원과 일치 (루브릭 ①).
+
+        ``drop_existing=True`` 면 모델 차원 변경 시 기존 테이블·인덱스를 DROP 후
+        재생성. CI/스터디 환경에서 차원이 바뀌면 ``ALTER TABLE`` 이 까다로워
+        DROP-RECREATE 가 안전합니다.
         """
+        if drop_existing:
+            await self._session.execute(text("DROP TABLE IF EXISTS rag_chunks CASCADE"))
         statements = [
             "CREATE EXTENSION IF NOT EXISTS vector",
             f"""
