@@ -1,0 +1,701 @@
+{
+  "baseline": {
+    "overall": {
+      "n": 20,
+      "mean_faithfulness": 2.8,
+      "mean_relevance": 3.0,
+      "mean_completeness": 2.2,
+      "mean_citation": 1.2,
+      "mean_total": 9.2,
+      "mean_normalized": 0.767
+    },
+    "per_question": [
+      {
+        "qid": "q-001",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately reflects the structure and components of the BSVibe monorepo as described in the grounding snippets, but it does not fully cover all key facts from the expected source_id."
+      },
+      {
+        "qid": "q-002",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the role of KnowledgeFactory in binding vaults and retrievers, but it does not fully cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-003",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately reflects the information from the grounding snippets, particularly about the KnowledgeFactory retriever and its role in reusing decisions, but it only cites one source instead of both expected sources."
+      },
+      {
+        "qid": "q-004",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the role of NegativePatternRetriever and its relation to negative_pattern garden notes, but it does not fully cover all key facts from the expected source. It cites the relevant source but lacks citations for"
+      },
+      {
+        "qid": "q-005",
+        "difficulty": "simple_fact",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 0,
+        "total": 7,
+        "normalized": 0.583,
+        "comment": "The answer correctly identifies the retrievers but does not cite the expected source_id, and it lacks coverage of all key facts from the grounding."
+      },
+      {
+        "qid": "q-006",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the injection of the workspace-scoped KnowledgeFactory retriever into executor/native loops, but it does not cover the optional composition of SemanticNoteRetriever or the routing of knowledge_only frames."
+      },
+      {
+        "qid": "q-007",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the process of absorbing and embedding vault notes using the specified factories, but it does not fully cover all key facts from both expected source_ids."
+      },
+      {
+        "qid": "q-008",
+        "difficulty": "simple_fact",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 1,
+        "citation": 0,
+        "total": 6,
+        "normalized": 0.5,
+        "comment": "The answer provides relevant information about setting chunk size in IngestCompiler but does not cite the required source_id and lacks coverage of key facts from the expected source."
+      },
+      {
+        "qid": "q-009",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the functionality of NoteVectorBackend and its role in semantic search, but it does not cover all key facts from the expected source and lacks proper citation."
+      },
+      {
+        "qid": "q-010",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 3,
+        "total": 12,
+        "normalized": 1.0,
+        "comment": "The answer accurately reflects the processes described in the grounding snippets, directly addresses the question, covers all key facts from the expected sources, and includes proper citations."
+      },
+      {
+        "qid": "q-011",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 3,
+        "total": 12,
+        "normalized": 1.0,
+        "comment": "The answer accurately reflects the information from the grounding snippets, directly addresses the question, covers all key facts from the expected sources, and includes proper citations."
+      },
+      {
+        "qid": "q-012",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 1,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the process of how garden observations are promoted to canonical concepts based on the provided source, but it only cites one source instead of all expected ones."
+      },
+      {
+        "qid": "q-013",
+        "difficulty": "simple_fact",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer primarily discusses CanonWatcher, which is relevant but does not fully address the detection of alias collisions and redirect cycles as described in the expected source. It cites one source but misses key details from the expecte"
+      },
+      {
+        "qid": "q-014",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the separation of the Alembic upgrade process and the worker container's entrypoint, but it does not fully cover the key facts from both expected source_ids, particularly the details from [bsvibe-src-030]. It"
+      },
+      {
+        "qid": "q-015",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 1,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the frontmatter structure for a fact note as per the provided source, but it only cites one source instead of all expected ones."
+      },
+      {
+        "qid": "q-016",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the differences between CanonRetriever and NegativePatternRetriever based on the grounding snippets, but it does not fully cover all key facts from the expected sources."
+      },
+      {
+        "qid": "q-017",
+        "difficulty": "compare",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 1,
+        "citation": 0,
+        "total": 6,
+        "normalized": 0.5,
+        "comment": "The answer provides some relevant details about the native loop and short-circuit path but lacks citations and does not fully cover the expected source."
+      },
+      {
+        "qid": "q-018",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 0,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer accurately describes the procedures of SettleWorker and IngestCompiler based on the grounding snippets, but it fails to cite any source_ids and does not cover all key facts from the expected sources."
+      },
+      {
+        "qid": "q-019",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 2,
+        "total": 11,
+        "normalized": 0.917,
+        "comment": "The answer accurately describes the functions of canon_watcher and canon-lint based on the provided snippets, addressing the question directly and covering all key facts from the expected sources, but it lacks explicit citations for the sou"
+      },
+      {
+        "qid": "q-020",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 2,
+        "total": 11,
+        "normalized": 0.917,
+        "comment": "The answer accurately describes the differences in frontmatter between event notes and fact notes, covering all key facts from the expected sources, but it lacks direct citations from the grounding snippets."
+      }
+    ]
+  },
+  "exp1_hybrid": {
+    "overall": {
+      "n": 20,
+      "mean_faithfulness": 3.0,
+      "mean_relevance": 3.0,
+      "mean_completeness": 2.35,
+      "mean_citation": 1.45,
+      "mean_total": 9.8,
+      "mean_normalized": 0.817
+    },
+    "per_question": [
+      {
+        "qid": "q-001",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 3,
+        "total": 12,
+        "normalized": 1.0,
+        "comment": "The answer accurately reflects the information from the grounding snippets, directly addresses the question, covers all key facts from the expected source, and includes proper citations."
+      },
+      {
+        "qid": "q-002",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 1,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately reflects the information from the grounding snippets, directly addresses the question, covers key facts from the expected source, and cites the relevant source."
+      },
+      {
+        "qid": "q-003",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately reflects the information from the grounding snippets, particularly from source_ids 004 and 015, but it does not fully incorporate all key facts from both expected sources."
+      },
+      {
+        "qid": "q-004",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the role of NegativePatternRetriever in storing and retrieving rejected approaches, but it does not fully cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-005",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 1,
+        "citation": 1,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer correctly identifies CompositeCanonRetriever as the retriever that combines the specified elements, but it does not cover key facts from all expected source_ids and only cites one source."
+      },
+      {
+        "qid": "q-006",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the injection process and mentions relevant components, but it does not fully cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-007",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the process of absorbing and embedding notes in the settle stage, referencing the relevant snippets. However, it does not fully cover all key facts from both expected source_ids."
+      },
+      {
+        "qid": "q-008",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 1,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately reflects the information from the expected source, directly addresses the question, covers all key facts, but only cites one source."
+      },
+      {
+        "qid": "q-009",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes how semantic search operates using note_embeddings and pgvector cosine distance, but it does not cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-010",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 3,
+        "total": 12,
+        "normalized": 1.0,
+        "comment": "The answer accurately reflects the process described in the grounding snippets, directly addresses the question, covers all key facts from the expected sources, and includes proper citations."
+      },
+      {
+        "qid": "q-011",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the calculation of the 30-second countdown using the apply_at field from RetractionSignal, but it does not reference all expected source_ids."
+      },
+      {
+        "qid": "q-012",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 0,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer accurately describes the process of garden observation becoming a canonical concept, but it does not cite any of the expected source_ids, which affects completeness and citation."
+      },
+      {
+        "qid": "q-013",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 1,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes how the Canonicalization Index Subscriber detects alias collisions and redirect cycles, referencing the relevant source. It covers all key aspects from the expected source."
+      },
+      {
+        "qid": "q-014",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the process to avoid migration conflicts and is supported by the grounding snippets, but it does not fully cover all key facts from both expected source_ids."
+      },
+      {
+        "qid": "q-015",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 1,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately reflects the structure of the fact note frontmatter as described in the grounding snippet, directly addresses the question, covers all key aspects, and cites the relevant source."
+      },
+      {
+        "qid": "q-016",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the differences in signal processing between CanonRetriever and NegativePatternRetriever, citing relevant sources, but it does not fully cover all key facts from the expected sources."
+      },
+      {
+        "qid": "q-017",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the differences between the native loop and the short-circuit path, but it does not fully cover all key facts from the expected source. It cites the relevant source but lacks comprehensive detail from all exp"
+      },
+      {
+        "qid": "q-018",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 0,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer accurately describes the procedures of SettleWorker and IngestCompiler based on the grounding snippets, but it fails to cite any source_ids and does not cover all key facts from the expected sources."
+      },
+      {
+        "qid": "q-019",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 2,
+        "total": 11,
+        "normalized": 0.917,
+        "comment": "The answer accurately describes canon_watcher as real-time monitoring and canon-lint as post-detection, supported by the grounding snippets. However, it only cites two source_ids instead of all expected."
+      },
+      {
+        "qid": "q-020",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 2,
+        "total": 11,
+        "normalized": 0.917,
+        "comment": "The answer accurately describes the differences in frontmatter for event notes and fact notes, covering key details from the expected sources, but it lacks direct citations from the grounding snippets."
+      }
+    ]
+  },
+  "exp2_orchestrator": {
+    "overall": {
+      "n": 20,
+      "mean_faithfulness": 2.65,
+      "mean_relevance": 2.95,
+      "mean_completeness": 1.95,
+      "mean_citation": 1.5,
+      "mean_total": 9.05,
+      "mean_normalized": 0.754
+    },
+    "per_question": [
+      {
+        "qid": "q-001",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 1,
+        "citation": 1,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer accurately describes the BSVibe monorepo's structure and cites the relevant source, but it does not cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-002",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 3,
+        "total": 12,
+        "normalized": 1.0,
+        "comment": "The answer accurately reflects the information from the grounding snippet, directly addresses the question, covers all key facts from the expected source, and includes proper citation."
+      },
+      {
+        "qid": "q-003",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately reflects the information from the relevant source but does not cover all key facts from both expected sources."
+      },
+      {
+        "qid": "q-004",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes where rejected approaches are stored and how they are retrieved, but it does not cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-005",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer correctly identifies CompositeCanonRetriever and provides relevant details, but it does not cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-006",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 3,
+        "total": 11,
+        "normalized": 0.917,
+        "comment": "The answer accurately reflects the information from the grounding snippets, directly addresses the question, and cites the relevant source. However, it does not cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-007",
+        "difficulty": "multi_doc",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer accurately describes the embedding process but misses key details from both expected sources and incorrectly cites a non-relevant source."
+      },
+      {
+        "qid": "q-008",
+        "difficulty": "simple_fact",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 1,
+        "citation": 1,
+        "total": 7,
+        "normalized": 0.583,
+        "comment": "The answer is mostly faithful to the grounding but lacks specific details from the expected source. It addresses the question directly but does not cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-009",
+        "difficulty": "simple_fact",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer partially reflects the grounding snippets but inaccurately attributes the function of the canonicalization index and note store, missing the specific mention of the NoteVectorBackend and PgNoteVectorBackend."
+      },
+      {
+        "qid": "q-010",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 1,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately reflects the processes described in the grounding snippets, directly addresses the question, covers key facts from the expected sources, but only cites one source."
+      },
+      {
+        "qid": "q-011",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 1,
+        "citation": 1,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer accurately describes the calculation of the 30-second countdown based on the apply_at field, but it does not reference all expected source_ids."
+      },
+      {
+        "qid": "q-012",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the process of garden observation promotion to a canonical concept and cites the relevant source, but it does not fully cover all key facts from the expected source."
+      },
+      {
+        "qid": "q-013",
+        "difficulty": "simple_fact",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 1,
+        "citation": 1,
+        "total": 7,
+        "normalized": 0.583,
+        "comment": "The answer correctly identifies the role of CanonicalizationIndexSubscriber in detecting issues but does not fully address alias collisions and redirect cycles as described in the expected source. It also lacks coverage of the key facts fro"
+      },
+      {
+        "qid": "q-014",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately describes the migration process and its relation to the worker, but it does not reference the second expected source_id, which limits completeness."
+      },
+      {
+        "qid": "q-015",
+        "difficulty": "simple_fact",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 3,
+        "total": 12,
+        "normalized": 1.0,
+        "comment": "The answer accurately reflects the details from the grounding snippet, directly addresses the question, covers all key facts, and includes the correct citation."
+      },
+      {
+        "qid": "q-016",
+        "difficulty": "compare",
+        "faithfulness": 2,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 8,
+        "normalized": 0.667,
+        "comment": "The answer correctly describes the differences in processing signals between CanonRetriever and NegativePatternRetriever, but it does not fully cover all key facts from the expected sources and only cites one source."
+      },
+      {
+        "qid": "q-017",
+        "difficulty": "compare",
+        "faithfulness": 1,
+        "relevance": 2,
+        "completeness": 1,
+        "citation": 2,
+        "total": 6,
+        "normalized": 0.5,
+        "comment": "The answer contains inaccuracies regarding the roles of the native loop and KnowledgeAnswerOrchestrator, and it does not fully address the differences as expected from the source. It cites some sources but misrepresents their content."
+      },
+      {
+        "qid": "q-018",
+        "difficulty": "multi_doc",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 2,
+        "total": 10,
+        "normalized": 0.833,
+        "comment": "The answer accurately describes the procedures of SettleWorker and IngestCompiler, but it does not mention the interaction point between them as indicated in the expected sources."
+      },
+      {
+        "qid": "q-019",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 2,
+        "citation": 1,
+        "total": 9,
+        "normalized": 0.75,
+        "comment": "The answer accurately identifies canon_watcher as real-time monitoring and canon-lint as post-detection, but it only cites one source and does not cover all expected sources."
+      },
+      {
+        "qid": "q-020",
+        "difficulty": "compare",
+        "faithfulness": 3,
+        "relevance": 3,
+        "completeness": 3,
+        "citation": 3,
+        "total": 12,
+        "normalized": 1.0,
+        "comment": "The answer accurately describes the differences in frontmatter for event notes and fact notes, covering all key facts from the expected sources and providing proper citations."
+      }
+    ]
+  }
+}
