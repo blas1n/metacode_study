@@ -17,7 +17,7 @@
 | B4 | Retriever (Top-k) 설정 | ✅ §1 표 | 보고서 §1 |
 | B5 | Prompt 명시 | ✅ §1 + 부록 A | 보고서 §1 |
 | B6 | LLM 명시 | ✅ §1 표 | 보고서 §1 |
-| B7 | Baseline 실제 동작 시연 (Q→A) | ✅ §2 + 노트북 01 §3 | `01_baseline_and_questions.ipynb` cell 4 |
+| B7 | Baseline 실제 동작 시연 (Q→A) | ✅ §2 + 노트북 §3 | `notebooks/week4_rag_evaluation.ipynb` §3 |
 | C | 성능 개선 실험 ≥ 2 | ✅ **2 (+공통 baseline)** | §3 EXP-1, §4 EXP-2 |
 | C-각 | 변경/기대/결과/해석 4단 | ✅ 각 실험마다 표로 | §3, §4 |
 | D | **모든 검색 단계에 top-k + 점수 + title 노출** | ✅ 노트북·보고서 전반 | 부록 B |
@@ -114,7 +114,7 @@
 
 ### 노트북 + 결과 위치
 
-- [`02_experiments_comparison.ipynb`](../notebooks/02_experiments_comparison.ipynb) §3 — 결정적 사례 retrieval 결과 + 답변 비교 (top-K 전부 sim/rank/title 표시)
+- [`week4_rag_evaluation.ipynb`](../notebooks/week4_rag_evaluation.ipynb) §5.3 — 결정적 사례 retrieval 결과 + 답변 비교 (top-K 전부 sim/rank/title 표시)
 - [`data/results/exp1_hybrid.json`](../data/results/exp1_hybrid.json) — 20문항 raw 결과
 
 ---
@@ -173,7 +173,7 @@ citation 단독으로는 명확히 향상 (1.20 → 1.50, **+25%**). 다른 기�
 
 ### 노트북 + 결과 위치
 
-- [`02_experiments_comparison.ipynb`](../notebooks/02_experiments_comparison.ipynb) §4 — baseline vs orchestrator 답변 직접 비교
+- [`week4_rag_evaluation.ipynb`](../notebooks/week4_rag_evaluation.ipynb) §5.4 — baseline vs orchestrator 답변 직접 비교
 - [`data/results/exp2_orchestrator.json`](../data/results/exp2_orchestrator.json)
 
 ---
@@ -232,9 +232,9 @@ in-line. Do NOT repeat or paraphrase the same statement multiple times.
 
 | 산출물 | top-K 노출 여부 | 위치 |
 |---|---|---|
-| `01_baseline_and_questions.ipynb` 셀 4 | ✅ sim + source_id + title 5건 × 3문항 | embedded cell output |
-| `02_experiments_comparison.ipynb` §3 (exp1) | ✅ RRF score + matched_via + per-method rank + title | embedded cell output |
-| `02_experiments_comparison.ipynb` §4 (exp2) | ✅ baseline 과 exp2 답변 모두 source 인용 노출 | embedded cell output |
+| `week4_rag_evaluation.ipynb` §3 | ✅ sim + source_id + title 5건 × 3문항 | embedded cell output |
+| `week4_rag_evaluation.ipynb` §5.3 (exp1) | ✅ RRF score + matched_via + per-method rank + title | embedded cell output |
+| `week4_rag_evaluation.ipynb` §5.4 (exp2) | ✅ baseline 과 exp2 답변 모두 source 인용 노출 | embedded cell output |
 | `data/results/baseline.json` | ✅ 모든 질문의 hits[0..4] 에 source_id/similarity/title | raw JSON |
 | `data/results/exp1_hybrid.json` | ✅ 추가로 bm25_rank/vector_rank/graph_rank/matched_via | raw JSON |
 | `data/results/exp2_orchestrator.json` | ✅ hits + grounding 두 형태로 노출 | raw JSON |
@@ -258,6 +258,5 @@ python assignments/week3-rag-db/scripts/build_graph_db.py
 python assignments/week4-rag-eval/scripts/run_experiments.py
 
 # 노트북 열어 결과 확인 (모든 셀에 출력이 embed 됨)
-# notebooks/01_baseline_and_questions.ipynb
-# notebooks/02_experiments_comparison.ipynb
+# notebooks/week4_rag_evaluation.ipynb
 ```

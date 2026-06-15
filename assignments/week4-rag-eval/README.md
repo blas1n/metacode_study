@@ -33,8 +33,7 @@
 | `scripts/knowledge_orchestrator.py` | EXP-2 — bsvibe `knowledge_orchestrator.py` 이식 |
 | `scripts/judge.py` | LLM-as-judge (gpt-4o-mini, 4기준) |
 | `scripts/run_experiments.py` | 전체 파이프라인 실행 → JSON 산출 |
-| `notebooks/01_baseline_and_questions.ipynb` | Baseline + 질문셋 시연 (top-K 출력 embed) |
-| `notebooks/02_experiments_comparison.ipynb` | 세 setup 비교 (정량 + 결정적 사례) |
+| `notebooks/week4_rag_evaluation.ipynb` | 전체 흐름 (baseline + 질문셋 + 두 실험 비교) |
 | `reports/week4_report.md` | 메인 보고서 (체크리스트·실험·분석) |
 | `tests/test_hybrid_search.py` | RRF 로직 단위 테스트 |
 
