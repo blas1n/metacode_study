@@ -1,0 +1,1920 @@
+{
+  "name": "exp1_hybrid",
+  "label": "hybrid retriever (Vector+BM25+Graph, RRF) + baseline prompt",
+  "settings": {
+    "text_splitter": "paragraph-boundary + max 420 chars (week2 chunking)",
+    "chunk_size": 420,
+    "chunk_overlap": 0,
+    "embedding_model": "ollama/bge-m3",
+    "embedding_dim": 1024,
+    "vector_store": "pgvector (rag_chunks, vector(1024), ivfflat lists=10)",
+    "retriever": "hybrid: BM25 + Vector(bge-m3) + Graph(NetworkX), RRF k=60, top_k=5",
+    "llm_model": "ollama/llama3.2:3b",
+    "llm_temperature": 0.0,
+    "prompt": "baseline (system + concatenated context + question)",
+    "mirrors_retriever": "bsvibe-app backend/knowledge/retrieval/hybrid_search.py @ a6648ac"
+  },
+  "elapsed_s": 56.7,
+  "n": 20,
+  "results": [
+    {
+      "qid": "q-001",
+      "question": "BSVibe 모노레포는 어떤 구성으로 돌아가나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-001"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-001",
+          "similarity": 0.0492,
+          "title": "BSVibe monorepo layout and local stack",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 1,
+          "score": 0.0492,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-030",
+          "similarity": 0.0484,
+          "title": "compose.prod.yaml overrides dev defaults for prod env-driven startup",
+          "bm25_rank": 2,
+          "vector_rank": 2,
+          "graph_rank": 2,
+          "score": 0.0484,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-004",
+          "similarity": 0.0476,
+          "title": "Resolved decisions are retrieved from settled garden notes",
+          "bm25_rank": 3,
+          "vector_rank": 3,
+          "graph_rank": 3,
+          "score": 0.0476,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-031",
+          "similarity": 0.0308,
+          "title": "Deploy README documents the migrate-on-boot and single-migrator contract",
+          "bm25_rank": 5,
+          "vector_rank": 5,
+          "score": 0.0308,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-vault-001",
+          "similarity": 0.0156,
+          "title": "Fact note frontmatter — typed triple with supersedes chain",
+          "bm25_rank": 4,
+          "score": 0.0156,
+          "matched_via": [
+            "bm25"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-001] BSVibe is implemented as a unified monorepo with a FastAPI backend and Next.js PWA. The README documents Docker Compose startup, backend health probe, PWA entrypoint, and test commands, so source-derived RAG should include both implementation and operational setup context.",
+        "[bsvibe-src-030] compose.prod.yaml layers on top of compose.yaml. It substitutes env-driven values for BSVIBE_DATABASE_URL, redis url, KMS key, and Supabase config; drops public Postgres and Redis port publishing with the docker-compose !reset tag; sets BSVIBE_WORKER_MODE to db_polling; and pins GIT_SHA so the running stack reports its build. Required vars are marked with the ?:err syntax so missing secrets fail fast.",
+        "[bsvibe-src-004] ResolvedDecisionsRetriever reads decision_resolution notes from garden/seedling, filters out tombstoned notes, matches signal tokens against question, answer, and intent text, and emits prior decision statements. This confirms that decision memories are a concrete source type for BSVibe RAG.",
+        "[bsvibe-src-031] deploy/README.md is the prod runbook. The backend image entrypoint runs alembic upgrade head exactly once and then execs uvicorn; on restart alembic sees alembic_version at head and no-ops. The worker container overrides the entrypoint and goes straight to python -m backend.workers, so the two containers never race the same migration.",
+        "[bsvibe-vault-001] Real fact note shape from extractor test fixture: frontmatter declares type=fact, subject/predicate/object as wikilinks, valid_from/valid_to, source_type=explicit, and supersedes a prior fact id. Body is the human-readable summary. Example: type: fact, title: 'Blasin의 현재 역할', subject: [[Blasin]], predicate: has_role, object: [[AX Team Lead]], valid_from: 2024-06, supersedes: [[fact-blasin-backend-dev]]."
+      ],
+      "answer": "BSVibe 모노레포는 FastAPI backend와 Next.js PWA를 포함하여 unified monorepo로 구축되어 있습니다. Docker Compose를 사용하여 프로젝트를 시작하고, 배포를 위해 compose.prod.yaml와 compose.yaml 두 가지 파일을 사용합니다.\n\ncompose.prod.yaml은 compose.yaml에 추가된 환경 변수를 사용하여 BSVibe의 환경을 설정합니다. 이 includes BSVIBE_DATABASE_URL, redis url, KMS key 및 Supabase config를 포함합니다. 또한, Docker Compose의 !reset 태그를 사용하여 public Postgres와 Redis 포트를 publishing하지 않습니다.\n\n다른方面, deploy/README.md에는 prod runbook이 포함되어 있습니다. 이 runbook은 배포 프로세스를 설명하고, backend image entrypoint가 alembic upgrade head을 exactly 한 번만 실행하고, uvicorn을 실행합니다. worker container는 entrypoint를 override하여 python -m backend.workers를 실행합니다.\n\n이러한 구성으로 BSVibe 모노레포는 FastAPI backend와 Next.js PWA를 포함하여 unified monorepo로 구축되어 있습니다. Docker Compose를 사용하여 프로젝트를 시작하고, 배포를 위해 compose.prod.yaml와 compose.yaml 두 가지 파일을 사용합니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-002",
+      "question": "workspace 단위로 vault와 retriever를 어떻게 묶나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-002"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0492,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 1,
+          "score": 0.0492,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-011",
+          "similarity": 0.0484,
+          "title": "Semantic note retrieval searches pgvector note embeddings",
+          "bm25_rank": 2,
+          "vector_rank": 2,
+          "graph_rank": 2,
+          "score": 0.0484,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-007",
+          "similarity": 0.0469,
+          "title": "Agent runtime wires workspace retriever into execution and knowledge-only route",
+          "bm25_rank": 3,
+          "vector_rank": 5,
+          "graph_rank": 4,
+          "score": 0.0469,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.0459,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 4,
+          "vector_rank": 7,
+          "graph_rank": 5,
+          "score": 0.0459,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-025",
+          "similarity": 0.0441,
+          "title": "Settle runtime factories build per-settlement extractor and embedding hook",
+          "bm25_rank": 8,
+          "vector_rank": 8,
+          "graph_rank": 8,
+          "score": 0.0441,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-011] SemanticNoteRetriever embeds incoming signals and searches a NoteVectorBackend, while PgNoteVectorBackend stores/searches note_embeddings by workspace_id and embedding_model using pgvector cosine distance. Semantic search is auxiliary, capped, similarity-filtered, and workspace-scoped.",
+        "[bsvibe-src-007] The agent runtime builds a workspace-scoped KnowledgeFactory retriever, optionally composes SemanticNoteRetriever when embeddings are configured, injects retriever into executor/native loops, and routes knowledge_only frames to KnowledgeAnswerOrchestrator. This proves RAG context is consumed at runtime, not only stored.",
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset.",
+        "[bsvibe-src-025] settle_runtime exposes two factories the SettleWorker depends on: build_settle_entity_extractor_factory creates a per-settlement IngestCompiler routed through the same GatewayDispatcher the chat path uses with the workspace's single active non-executor account, and build_note_embed_hook embeds the absorbed note summary with the deployment embedder and upserts the vector into pgvector note_embeddings keyed by vault pa th."
+      ],
+      "answer": "workspace 단위로 vault와 retriever를 묶는 방법은 KnowledgeFactory가 제공하는 기능입니다. \n\nKnowledgeFactory는 workspace-scoped Vault와 GardenWriter objects, 그리고 workspace-scoped retriever를 expose합니다. 이 retriever는 runtime components에 의해 사용되며, workspace scoping이 RAG metadata의 first-class requirement입니다.\n\nKnowledgeFactory는 vault를 region/workspace_id로 루트하고, workspace-scoped retriever를 제공합니다. 이 retriever는 SemanticNoteRetriever와 PgNoteVectorBackend를 포함하여 다양한 구성 요소를 포함할 수 있습니다.\n\nworkspace-scoped retriever는 CanonConceptRetriever와 settle_runtime의 SettleWorker에 의해 사용됩니다. CanonConceptRetriever는 candidate tags를 추출하고 canonicalization index를 통해 resolve합니다. settle_runtime은 IngestCompiler와 GatewayDispatcher를 통해 note embeddings을 upsert합니다.\n\n因此, workspace 단위로 vault와 retriever를 묶는 방법은 KnowledgeFactory를 사용하여 workspace-scoped retriever를 expose하고, runtime components가 이 retriever를 사용하는 것을 garant하는 것입니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-003",
+      "question": "이미 결정된 내용을 다음 run에서 재사용하려면 어디를 봐야 하나요?",
+      "difficulty": "multi_doc",
+      "expected_source_ids": [
+        "bsvibe-src-004",
+        "bsvibe-src-015"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-004",
+          "similarity": 0.0303,
+          "title": "Resolved decisions are retrieved from settled garden notes",
+          "bm25_rank": 4,
+          "vector_rank": 8,
+          "score": 0.0303,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-031",
+          "similarity": 0.0302,
+          "title": "Deploy README documents the migrate-on-boot and single-migrator contract",
+          "vector_rank": 10,
+          "score": 0.0302,
+          "matched_via": [
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-009",
+          "similarity": 0.0296,
+          "title": "IngestCompiler compiles imported seed content per chunk",
+          "bm25_rank": 9,
+          "vector_rank": 6,
+          "score": 0.0296,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-001",
+          "similarity": 0.0164,
+          "title": "BSVibe monorepo layout and local stack",
+          "bm25_rank": 1,
+          "score": 0.0164,
+          "matched_via": [
+            "bm25"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-015",
+          "similarity": 0.0164,
+          "title": "Cross-run decision reuse is tested through seed and verification fold",
+          "vector_rank": 1,
+          "score": 0.0164,
+          "matched_via": [
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-004] ResolvedDecisionsRetriever reads decision_resolution notes from garden/seedling, filters out tombstoned notes, matches signal tokens against question, answer, and intent text, and emits prior decision statements. This confirms that decision memories are a concrete source type for BSVibe RAG.",
+        "[bsvibe-src-031] deploy/README.md is the prod runbook. The backend image entrypoint runs alembic upgrade head exactly once and then execs uvicorn; on restart alembic sees alembic_version at head and no-ops. The worker container overrides the entrypoint and goes straight to python -m backend.workers, so the two containers never race the same migration.",
+        "[bsvibe-src-009] IngestCompiler splits seed items into chunks, emits progress events, finds related context once per chunk, plans updates with an LLM, and writes notes. The code explicitly warns not to hoist related-context lookup outside the chunk loop, so cleaned data should retain chunk-level provenance.",
+        "[bsvibe-src-001] BSVibe is implemented as a unified monorepo with a FastAPI backend and Next.js PWA. The README documents Docker Compose startup, backend health probe, PWA entrypoint, and test commands, so source-derived RAG should include both implementation and operational setup context.",
+        "[bsvibe-src-015] The B13 glue test resolves a decision through the API, drains SettleWorker into the vault, constructs a fresh KnowledgeFactory retriever for a second run, and asserts the prior decision appears in both first-turn LLM messages and persisted verification contract. This is strong evidence that decision memory is runtime-critical data."
+      ],
+      "answer": "Decision memories가 runtime-critical 데이터인 것을 확인한 후, 이미 결정된 내용을 다음 run에서 재사용하려면 `BSVibe RAG`의 prior decision statements을 확인해야 합니다.\n\nprior decision statements은 `ResolvedDecisionsRetriever`에서 생성됩니다. 이 코드는 decision_resolution notes를 읽고 tombstoned notes를 필터링합니다. 이후, signal tokens을 question, answer, intent text와 매칭합니다. 마지막으로, prior decision statements을.emit합니다.\n\n이 prior decision statements은 decision memories가 runtime-critical 데이터인 것을 확인하는 데 사용됩니다. 따라서, 이미 결정된 내용을 다음 run에서 재사용하려면 `ResolvedDecisionsRetriever`의 prior decision statements을 확인해야 합니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 0.5
+      }
+    },
+    {
+      "qid": "q-004",
+      "question": "파운더가 거절한 접근(부정 사례)은 어디에 저장되고 어떻게 검색되나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-005"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-005",
+          "similarity": 0.0318,
+          "title": "Negative patterns preserve founder rejection feedback",
+          "bm25_rank": 5,
+          "vector_rank": 1,
+          "score": 0.0318,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-006",
+          "similarity": 0.0299,
+          "title": "Composite retriever merges multiple knowledge sources behind one protocol",
+          "bm25_rank": 6,
+          "vector_rank": 8,
+          "score": 0.0299,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-001",
+          "similarity": 0.0164,
+          "title": "BSVibe monorepo layout and local stack",
+          "bm25_rank": 1,
+          "score": 0.0164,
+          "matched_via": [
+            "bm25"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0161,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 2,
+          "score": 0.0161,
+          "matched_via": [
+            "bm25"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-022",
+          "similarity": 0.0161,
+          "title": "RetractionSignal locks the wire shape of every founder-issued correction",
+          "vector_rank": 2,
+          "score": 0.0161,
+          "matched_via": [
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-005] NegativePatternRetriever reads negative_pattern garden notes emitted when a founder discards a deliverable with a reason. It surfaces relevant avoid guidance by signal overlap, which means rejected approaches should be modeled as their own retrieval source instead of mixed into generic notes.",
+        "[bsvibe-src-006] CompositeCanonRetriever combines several CanonRetriever sources, dedupes statements, preserves source order, caps total output, and degrades when one source fails. The RAG dataset should therefore track note_type/source_type so retrieval can rank canonical concepts before decisions and negative patterns.",
+        "[bsvibe-src-001] BSVibe is implemented as a unified monorepo with a FastAPI backend and Next.js PWA. The README documents Docker Compose startup, backend health probe, PWA entrypoint, and test commands, so source-derived RAG should include both implementation and operational setup context.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-022] RetractionSignal is the frozen, extra=forbid Pydantic model every retract or correct flows through end to end. Identity (id, workspace_id, actor_id) is the idempotency key; node_ref is the stable id from the Inside graph; apply_at = issued_at + 30s anchors the undo deadline. Reason is optional, 280 chars max, toast-friendly. The frozen contract is the audit record."
+      ],
+      "answer": "Founders가 거절한 접근(부정 사례)을 저장하고 검색하는 방법은 NegativePatternRetriever에서 handled됩니다. \n\nNegativePatternRetriever는 부정 사례를 표면화하여 관련 피드백을 제공합니다. 이 피드백은 부정 사례가 있는 deliverable에 대한 founder의 이유를 포함합니다.\n\n부정 사례가 저장되고 검색되는 방법은 다음과 같습니다:\n\n1. NegativePatternRetriever는 부정 사례를 저장하는 garden notes를 emits합니다.\n2. garden notes에는 부정 사례가 있는 deliverable와 관련된 피드백이 포함됩니다.\n3. garden notes는 NegativePatternRetriever에서 표면화되어 피드백을 제공합니다.\n\nTherefore, founders가 거절한 접근(부정 사례)을 저장하고 검색하는 방법은 NegativePatternRetriever를 통해 표면화되어 피드백을 제공하는 것입니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-005",
+      "question": "canonical concept, decision, negative pattern을 한 번에 합치는 retriever는 무엇인가요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-006"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.0489,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 1,
+          "vector_rank": 2,
+          "graph_rank": 1,
+          "score": 0.0489,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-006",
+          "similarity": 0.0474,
+          "title": "Composite retriever merges multiple knowledge sources behind one protocol",
+          "bm25_rank": 5,
+          "vector_rank": 1,
+          "graph_rank": 4,
+          "score": 0.0474,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-004",
+          "similarity": 0.0471,
+          "title": "Resolved decisions are retrieved from settled garden notes",
+          "bm25_rank": 3,
+          "vector_rank": 5,
+          "graph_rank": 3,
+          "score": 0.0471,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-005",
+          "similarity": 0.0462,
+          "title": "Negative patterns preserve founder rejection feedback",
+          "bm25_rank": 4,
+          "vector_rank": 3,
+          "graph_rank": 8,
+          "score": 0.0462,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-012",
+          "similarity": 0.0439,
+          "title": "PWA Knowledge API exposes concepts, observations, graph, retract, and correct",
+          "bm25_rank": 7,
+          "vector_rank": 8,
+          "graph_rank": 10,
+          "score": 0.0439,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset.",
+        "[bsvibe-src-006] CompositeCanonRetriever combines several CanonRetriever sources, dedupes statements, preserves source order, caps total output, and degrades when one source fails. The RAG dataset should therefore track note_type/source_type so retrieval can rank canonical concepts before decisions and negative patterns.",
+        "[bsvibe-src-004] ResolvedDecisionsRetriever reads decision_resolution notes from garden/seedling, filters out tombstoned notes, matches signal tokens against question, answer, and intent text, and emits prior decision statements. This confirms that decision memories are a concrete source type for BSVibe RAG.",
+        "[bsvibe-src-005] NegativePatternRetriever reads negative_pattern garden notes emitted when a founder discards a deliverable with a reason. It surfaces relevant avoid guidance by signal overlap, which means rejected approaches should be modeled as their own retrieval source instead of mixed into generic notes.",
+        "[bsvibe-src-012] The PWA knowledge API calls /api/v1/inside endpoints for canonical concepts, observations, graph data, concept detail, retract/correct actions, and undo. This defines the user-facing source categories that the RAG dataset should preserve for inspection and correction workflows."
+      ],
+      "answer": "CompositeCanonRetriever가 canonical concept, decision, negative pattern을 한 번에 합친 retriever입니다.",
+      "retrieval_metrics": {
+        "hit@1": false,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 2,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-006",
+      "question": "agent runtime은 workspace retriever를 어떻게 주입하나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-007"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-007",
+          "similarity": 0.0489,
+          "title": "Agent runtime wires workspace retriever into execution and knowledge-only route",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 2,
+          "score": 0.0489,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0481,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 2,
+          "vector_rank": 4,
+          "graph_rank": 1,
+          "score": 0.0481,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-011",
+          "similarity": 0.0466,
+          "title": "Semantic note retrieval searches pgvector note embeddings",
+          "bm25_rank": 4,
+          "vector_rank": 6,
+          "graph_rank": 3,
+          "score": 0.0466,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.031,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 5,
+          "graph_rank": 4,
+          "score": 0.031,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-025",
+          "similarity": 0.0304,
+          "title": "Settle runtime factories build per-settlement extractor and embedding hook",
+          "bm25_rank": 9,
+          "vector_rank": 3,
+          "score": 0.0304,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-007] The agent runtime builds a workspace-scoped KnowledgeFactory retriever, optionally composes SemanticNoteRetriever when embeddings are configured, injects retriever into executor/native loops, and routes knowledge_only frames to KnowledgeAnswerOrchestrator. This proves RAG context is consumed at runtime, not only stored.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-011] SemanticNoteRetriever embeds incoming signals and searches a NoteVectorBackend, while PgNoteVectorBackend stores/searches note_embeddings by workspace_id and embedding_model using pgvector cosine distance. Semantic search is auxiliary, capped, similarity-filtered, and workspace-scoped.",
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset.",
+        "[bsvibe-src-025] settle_runtime exposes two factories the SettleWorker depends on: build_settle_entity_extractor_factory creates a per-settlement IngestCompiler routed through the same GatewayDispatcher the chat path uses with the workspace's single active non-executor account, and build_note_embed_hook embeds the absorbed note summary with the deployment embedder and upserts the vector into pgvector note_embeddings keyed by vault pa th."
+      ],
+      "answer": "agent runtime은 workspace retriever를 executor/native loop에 inject하기 위해 KnowledgeFactory retriever를 사용합니다. KnowledgeFactory는 workspace-scoped retriever를 생성하고, SemanticNoteRetriever와 CanonConceptRetriever와 같은 다른 retriever를 구성할 수 있습니다.\n\nworkspace retriever가 주입되는 방법은 다음과 같습니다.\n\n1. KnowledgeFactory retriever가 생성됩니다.\n2. KnowledgeFactory retriever는 executor/native loop에 inject됩니다.\n3. SemanticNoteRetriever와 CanonConceptRetriever와 같은 다른 retriever가 구성됩니다.\n4. workspace retriever가 routes knowledge_only frames를 KnowledgeAnswerOrchestrator로 전달합니다.\n\n이러한 방법은 RAG (Reasoning Agent Framework) context가 runtime에서 소비되는 것을 확인하는 데 도움이 됩니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-007",
+      "question": "settle 단계에서 vault 노트를 어떻게 흡수하고 임베딩하나요?",
+      "difficulty": "multi_doc",
+      "expected_source_ids": [
+        "bsvibe-src-008",
+        "bsvibe-src-025"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-008",
+          "similarity": 0.0489,
+          "title": "Settle worker writes vault notes, promotes concepts, and embeds notes",
+          "bm25_rank": 1,
+          "vector_rank": 2,
+          "graph_rank": 1,
+          "score": 0.0489,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-025",
+          "similarity": 0.0484,
+          "title": "Settle runtime factories build per-settlement extractor and embedding hook",
+          "bm25_rank": 2,
+          "vector_rank": 1,
+          "graph_rank": 3,
+          "score": 0.0484,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-015",
+          "similarity": 0.0479,
+          "title": "Cross-run decision reuse is tested through seed and verification fold",
+          "bm25_rank": 3,
+          "vector_rank": 3,
+          "graph_rank": 2,
+          "score": 0.0479,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-023",
+          "similarity": 0.0453,
+          "title": "EventBus enumerates lifecycle, vault, and ingest events for streaming",
+          "bm25_rank": 5,
+          "vector_rank": 4,
+          "graph_rank": 10,
+          "score": 0.0453,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-016",
+          "similarity": 0.031,
+          "title": "RetractionService orchestrates ontology corrections with a 30s undo window",
+          "bm25_rank": 4,
+          "graph_rank": 5,
+          "score": 0.031,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-008] Worker runtime constructs SettleWorker with KnowledgeSettleSink, entity extractor fallback, garden promoter factory, and note embedding hook. This is the ingestion path that turns workflow activity into vault knowledge and vector-searchable notes.",
+        "[bsvibe-src-025] settle_runtime exposes two factories the SettleWorker depends on: build_settle_entity_extractor_factory creates a per-settlement IngestCompiler routed through the same GatewayDispatcher the chat path uses with the workspace's single active non-executor account, and build_note_embed_hook embeds the absorbed note summary with the deployment embedder and upserts the vector into pgvector note_embeddings keyed by vault pa th.",
+        "[bsvibe-src-015] The B13 glue test resolves a decision through the API, drains SettleWorker into the vault, constructs a fresh KnowledgeFactory retriever for a second run, and asserts the prior decision appears in both first-turn LLM messages and persisted verification contract. This is strong evidence that decision memory is runtime-critical data.",
+        "[bsvibe-src-023] The EventBus module defines EventType enums for plugin and skill lifecycle, vault writes (SEED_WRITTEN, GARDEN_WRITTEN, ACTION_LOGGED), vault mutations (NOTE_UPDATED, NOTE_DELETED), scheduler triggers, agent tool calls, and ingest compile batch events. Everything that needs to be surfaced as a real-time stream goes through one typed enum so the bus stays uniform across subsystems.",
+        "[bsvibe-src-016] RetractionService persists a RetractionSignal to ontology_corrections, opens a 30s DB-backed undo window, and lets apply_pending sweep tombstone the note via GardenWriter once the deadline passes. Issue and undo are idempotent on signal id, and the per-workspace _garden_lock prevents interleaving with concurrent canon merges or settle writes."
+      ],
+      "answer": "Settle 단계에서 vault 노트를 흡수하고 임베딩하는 방법은 다음과 같습니다.\n\n1. **Note Embed Hook**: Settle 단계에서 Note Embed Hook을 사용하여 노트의 summary를 흡수합니다. Note Embed Hook은 deployment embedder와 함께 노트의 summary를 임베딩하고, vector을 pgvector note_embeddings에 업데이트합니다.\n2. **Vault Pa**: 노트가 흡수된 후, vector을 pgvector note_embeddings에 업데이트하여 vault pa에 저장합니다.\n3. **Garden Writer**: RetractionService가 30초 DB-backed undo window이 만료되면, apply_pending sweep tombstone을 사용하여 노트를 garden writer로 임베딩합니다.\n\n이러한 과정은 Settle 단계에서 workflow activity를 vault knowledge와 vector-searchable notes로 전환하는 ingestion path의 일부입니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-008",
+      "question": "ingest 시 chunk 크기 한도를 어떻게 잡나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-010"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-009",
+          "similarity": 0.0489,
+          "title": "IngestCompiler compiles imported seed content per chunk",
+          "bm25_rank": 1,
+          "vector_rank": 2,
+          "graph_rank": 1,
+          "score": 0.0489,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-010",
+          "similarity": 0.0484,
+          "title": "Chunking budget protects local LLM ingestion",
+          "bm25_rank": 3,
+          "vector_rank": 1,
+          "graph_rank": 2,
+          "score": 0.0484,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-023",
+          "similarity": 0.0318,
+          "title": "EventBus enumerates lifecycle, vault, and ingest events for streaming",
+          "bm25_rank": 2,
+          "graph_rank": 4,
+          "score": 0.0318,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-025",
+          "similarity": 0.0313,
+          "title": "Settle runtime factories build per-settlement extractor and embedding hook",
+          "bm25_rank": 5,
+          "graph_rank": 3,
+          "score": 0.0313,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-vault-003",
+          "similarity": 0.0303,
+          "title": "Person note frontmatter — related list with ambiguity marker",
+          "bm25_rank": 4,
+          "vector_rank": 8,
+          "score": 0.0303,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-009] IngestCompiler splits seed items into chunks, emits progress events, finds related context once per chunk, plans updates with an LLM, and writes notes. The code explicitly warns not to hoist related-context lookup outside the chunk loop, so cleaned data should retain chunk-level provenance.",
+        "[bsvibe-src-010] The chunking module uses a conservative default char budget, reserves model context for prompts/output, caps Ollama budgets, truncates oversized items, and separates partitioning from retrieval. This supports RAG data cleaning rules around chunk size and local-model constraints.",
+        "[bsvibe-src-023] The EventBus module defines EventType enums for plugin and skill lifecycle, vault writes (SEED_WRITTEN, GARDEN_WRITTEN, ACTION_LOGGED), vault mutations (NOTE_UPDATED, NOTE_DELETED), scheduler triggers, agent tool calls, and ingest compile batch events. Everything that needs to be surfaced as a real-time stream goes through one typed enum so the bus stays uniform across subsystems.",
+        "[bsvibe-src-025] settle_runtime exposes two factories the SettleWorker depends on: build_settle_entity_extractor_factory creates a per-settlement IngestCompiler routed through the same GatewayDispatcher the chat path uses with the workspace's single active non-executor account, and build_note_embed_hook embeds the absorbed note summary with the deployment embedder and upserts the vector into pgvector note_embeddings keyed by vault pa th.",
+        "[bsvibe-vault-003] Real person note shape: type=person, title, related list of wikilinks where a trailing ? marks the link as AMBIGUOUS. Example: type: person, title: Bob, related: [[Alice]], [[Charlie]]?. The extractor turns related into related_to edges; ambiguous markers should propagate as a confidence field on the chunk metadata so retrieval can downweight uncertain links."
+      ],
+      "answer": "IngestCompiler의 chunk 크기 한도를 잡는 방법은 [2] (bsvibe-src-010)에서 설명되어 있습니다. \n\nchunk 크기 한도는 model context와 prompt/output를 위해 reserved character budget, Ollama budgets를 제한하고 oversized item을 truncate합니다. 또한 partitioning과 retrieval을 separate합니다.\n\n이러한 rules는 RAG data cleaning rule에 따라 chunk size와 local-model constraint에 따라 작동합니다.",
+      "retrieval_metrics": {
+        "hit@1": false,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 2,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-009",
+      "question": "semantic 검색은 어떤 컬럼/인덱스로 동작하나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-011"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-011",
+          "similarity": 0.0492,
+          "title": "Semantic note retrieval searches pgvector note embeddings",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 1,
+          "score": 0.0492,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-007",
+          "similarity": 0.0479,
+          "title": "Agent runtime wires workspace retriever into execution and knowledge-only route",
+          "bm25_rank": 2,
+          "vector_rank": 4,
+          "graph_rank": 2,
+          "score": 0.0479,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0464,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 4,
+          "vector_rank": 7,
+          "graph_rank": 3,
+          "score": 0.0464,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.0464,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 5,
+          "vector_rank": 5,
+          "graph_rank": 4,
+          "score": 0.0464,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-009",
+          "similarity": 0.0448,
+          "title": "IngestCompiler compiles imported seed content per chunk",
+          "bm25_rank": 10,
+          "vector_rank": 6,
+          "graph_rank": 5,
+          "score": 0.0448,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-011] SemanticNoteRetriever embeds incoming signals and searches a NoteVectorBackend, while PgNoteVectorBackend stores/searches note_embeddings by workspace_id and embedding_model using pgvector cosine distance. Semantic search is auxiliary, capped, similarity-filtered, and workspace-scoped.",
+        "[bsvibe-src-007] The agent runtime builds a workspace-scoped KnowledgeFactory retriever, optionally composes SemanticNoteRetriever when embeddings are configured, injects retriever into executor/native loops, and routes knowledge_only frames to KnowledgeAnswerOrchestrator. This proves RAG context is consumed at runtime, not only stored.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset.",
+        "[bsvibe-src-009] IngestCompiler splits seed items into chunks, emits progress events, finds related context once per chunk, plans updates with an LLM, and writes notes. The code explicitly warns not to hoist related-context lookup outside the chunk loop, so cleaned data should retain chunk-level provenance."
+      ],
+      "answer": "Semantic search는 pgvector.cosine distance를 사용하여 note_embeddings를 저장하고 검색합니다. 따라서 semantic search는 workspace_id와 embedding_model을 사용하여 note_embeddings를 검색합니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-010",
+      "question": "파운더가 잘못된 노드를 retract하면 어떤 흐름으로 처리되나요?",
+      "difficulty": "multi_doc",
+      "expected_source_ids": [
+        "bsvibe-src-016",
+        "bsvibe-src-022",
+        "bsvibe-src-024"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-027",
+          "similarity": 0.0323,
+          "title": "RetractModal renders the pre-flight confirmation for an ontology retract",
+          "vector_rank": 3,
+          "graph_rank": 1,
+          "score": 0.0323,
+          "matched_via": [
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-029",
+          "similarity": 0.0318,
+          "title": "UndoToast derives the 30s countdown from server wall-clock apply_at",
+          "vector_rank": 4,
+          "graph_rank": 2,
+          "score": 0.0318,
+          "matched_via": [
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-022",
+          "similarity": 0.0315,
+          "title": "RetractionSignal locks the wire shape of every founder-issued correction",
+          "vector_rank": 1,
+          "graph_rank": 6,
+          "score": 0.0315,
+          "matched_via": [
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-005",
+          "similarity": 0.0315,
+          "title": "Negative patterns preserve founder rejection feedback",
+          "bm25_rank": 5,
+          "vector_rank": 2,
+          "score": 0.0315,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-016",
+          "similarity": 0.0308,
+          "title": "RetractionService orchestrates ontology corrections with a 30s undo window",
+          "vector_rank": 5,
+          "graph_rank": 5,
+          "score": 0.0308,
+          "matched_via": [
+            "graph",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-027] RetractModal is the founder-facing confirmation surface before a retract lands. It shows the node name, a calm one-sentence consequence, an optional reason field capped at 280 chars, and Cancel plus Retract actions. Cascade-dependents are wired structurally but hidden when empty. The modal owns only its UI state; the actual POST and toast wiring stay in the parent so retract and correct share one undo affordance.",
+        "[bsvibe-src-029] UndoToast renders a calm 30 second Undo affordance after a retract or correct lands. A 1000ms tick re-derives the remainder from apply_at minus now so a paused tab snaps back to the correct wall-clock remainder on resume. apply_at is the server-stamped ISO-8601 deadline from RetractionSignal; the client never trusts its own clock for issued_at, so a stale modal still gets the right remainder.",
+        "[bsvibe-src-022] RetractionSignal is the frozen, extra=forbid Pydantic model every retract or correct flows through end to end. Identity (id, workspace_id, actor_id) is the idempotency key; node_ref is the stable id from the Inside graph; apply_at = issued_at + 30s anchors the undo deadline. Reason is optional, 280 chars max, toast-friendly. The frozen contract is the audit record.",
+        "[bsvibe-src-005] NegativePatternRetriever reads negative_pattern garden notes emitted when a founder discards a deliverable with a reason. It surfaces relevant avoid guidance by signal overlap, which means rejected approaches should be modeled as their own retrieval source instead of mixed into generic notes.",
+        "[bsvibe-src-016] RetractionService persists a RetractionSignal to ontology_corrections, opens a 30s DB-backed undo window, and lets apply_pending sweep tombstone the note via GardenWriter once the deadline passes. Issue and undo are idempotent on signal id, and the per-workspace _garden_lock prevents interleaving with concurrent canon merges or settle writes."
+      ],
+      "answer": "Founders가 잘못된 노드를 retract할 때는 RetractionSignal을 통해 처리됩니다. \n\nRetractionSignal은 RetractionService에 의해 persistence가 수행되고, 30초 후에 DB-backed undo window가 열리고, Issue와 Undo가 idempotent한 signal ID에 따라 처리됩니다.\n\n이러한 흐름은 다음과 같습니다.\n\n1. Founder가 잘못된 노드를 retract할 때, RetractionSignal이 생성됩니다.\n2. RetractionService는 RetractionSignal을 ontology_corrections에 persistence합니다.\n3. 30초 후, RetractionService는 DB-backed undo window를 열고, Issue와 Undo가 idempotent한 signal ID에 따라 처리합니다.\n4. Issue와 Undo가 처리되면, GardenWriter를 통해 note이 tombstone으로 sweeped becomes.\n\n이 흐름은 founder가 잘못된 노드를 retract할 때, audit record를 유지하고, founder의 hành động을 history로 남기고, future의 canon merges나 settle writes와 interleaving을 방지하기 위해 사용됩니다.",
+      "retrieval_metrics": {
+        "hit@1": false,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 3,
+        "recall_loose": 0.667
+      }
+    },
+    {
+      "qid": "q-011",
+      "question": "undo 30초 카운트다운은 어디서 어떻게 계산되나요?",
+      "difficulty": "multi_doc",
+      "expected_source_ids": [
+        "bsvibe-src-029",
+        "bsvibe-src-028"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-029",
+          "similarity": 0.0484,
+          "title": "UndoToast derives the 30s countdown from server wall-clock apply_at",
+          "bm25_rank": 4,
+          "vector_rank": 1,
+          "graph_rank": 1,
+          "score": 0.0484,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-016",
+          "similarity": 0.0481,
+          "title": "RetractionService orchestrates ontology corrections with a 30s undo window",
+          "bm25_rank": 1,
+          "vector_rank": 4,
+          "graph_rank": 2,
+          "score": 0.0481,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-022",
+          "similarity": 0.0476,
+          "title": "RetractionSignal locks the wire shape of every founder-issued correction",
+          "bm25_rank": 2,
+          "vector_rank": 2,
+          "graph_rank": 5,
+          "score": 0.0476,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-028",
+          "similarity": 0.0476,
+          "title": "InspectorActions runs the idle to modal to toast state machine for retract and correct",
+          "bm25_rank": 3,
+          "vector_rank": 3,
+          "graph_rank": 3,
+          "score": 0.0476,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-012",
+          "similarity": 0.0457,
+          "title": "PWA Knowledge API exposes concepts, observations, graph, retract, and correct",
+          "bm25_rank": 5,
+          "vector_rank": 8,
+          "graph_rank": 4,
+          "score": 0.0457,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-029] UndoToast renders a calm 30 second Undo affordance after a retract or correct lands. A 1000ms tick re-derives the remainder from apply_at minus now so a paused tab snaps back to the correct wall-clock remainder on resume. apply_at is the server-stamped ISO-8601 deadline from RetractionSignal; the client never trusts its own clock for issued_at, so a stale modal still gets the right remainder.",
+        "[bsvibe-src-016] RetractionService persists a RetractionSignal to ontology_corrections, opens a 30s DB-backed undo window, and lets apply_pending sweep tombstone the note via GardenWriter once the deadline passes. Issue and undo are idempotent on signal id, and the per-workspace _garden_lock prevents interleaving with concurrent canon merges or settle writes.",
+        "[bsvibe-src-022] RetractionSignal is the frozen, extra=forbid Pydantic model every retract or correct flows through end to end. Identity (id, workspace_id, actor_id) is the idempotency key; node_ref is the stable id from the Inside graph; apply_at = issued_at + 30s anchors the undo deadline. Reason is optional, 280 chars max, toast-friendly. The frozen contract is the audit record.",
+        "[bsvibe-src-028] InspectorActions is the integration point between the Inside view inspector panel and the M3a write endpoints. It renders Correct and Retract buttons, drives the modals, and owns the 30 second undo toast lifecycle. The state machine moves idle to modal to toast countdown to toast terminal so the panel host stays read-shaped and only hands down a node ref plus an onAfterApply hook.",
+        "[bsvibe-src-012] The PWA knowledge API calls /api/v1/inside endpoints for canonical concepts, observations, graph data, concept detail, retract/correct actions, and undo. This defines the user-facing source categories that the RAG dataset should preserve for inspection and correction workflows."
+      ],
+      "answer": "undo 30초 카운트다운은 RetractionSignal의 apply_at 필드에 의해 계산됩니다. apply_at는 issued_at (발행 시간)과 30초를 더한 값으로, 이 값이 지속되는지 확인하기 위해 사용됩니다.\n\napply_at = issued_at + 30s\n\n이 값은 server-stamped ISO-8601 deadline로, client의 clock을 trusts하지 않기 때문에 stale modal에 대해도 correct wall-clock remainder가 유지됩니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-012",
+      "question": "garden 관찰이 canonical concept으로 승격되는 과정은요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-017"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.0471,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 3,
+          "vector_rank": 4,
+          "graph_rank": 4,
+          "score": 0.0471,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0453,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 10,
+          "vector_rank": 6,
+          "graph_rank": 3,
+          "score": 0.0453,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-016",
+          "similarity": 0.0452,
+          "title": "RetractionService orchestrates ontology corrections with a 30s undo window",
+          "bm25_rank": 6,
+          "vector_rank": 5,
+          "graph_rank": 8,
+          "score": 0.0452,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-012",
+          "similarity": 0.0448,
+          "title": "PWA Knowledge API exposes concepts, observations, graph, retract, and correct",
+          "bm25_rank": 7,
+          "vector_rank": 8,
+          "graph_rank": 6,
+          "score": 0.0448,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-006",
+          "similarity": 0.0444,
+          "title": "Composite retriever merges multiple knowledge sources behind one protocol",
+          "bm25_rank": 8,
+          "vector_rank": 10,
+          "graph_rank": 5,
+          "score": 0.0444,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-016] RetractionService persists a RetractionSignal to ontology_corrections, opens a 30s DB-backed undo window, and lets apply_pending sweep tombstone the note via GardenWriter once the deadline passes. Issue and undo are idempotent on signal id, and the per-workspace _garden_lock prevents interleaving with concurrent canon merges or settle writes.",
+        "[bsvibe-src-012] The PWA knowledge API calls /api/v1/inside endpoints for canonical concepts, observations, graph data, concept detail, retract/correct actions, and undo. This defines the user-facing source categories that the RAG dataset should preserve for inspection and correction workflows.",
+        "[bsvibe-src-006] CompositeCanonRetriever combines several CanonRetriever sources, dedupes statements, preserves source order, caps total output, and degrades when one source fails. The RAG dataset should therefore track note_type/source_type so retrieval can rank canonical concepts before decisions and negative patterns."
+      ],
+      "answer": "garden 관찰이 canonical concept으로 승격되는 과정은 다음과 같습니다.\n\n1. garden observatory에서 note를 생성합니다.\n2. CanonRetriever는 candidate tags를.extract하고 canonicalization index를 통해 note를 resolve합니다.\n3. CanonRetriever는 active concept display statement을 return합니다.\n4. KnowledgeFactory는 workspace-scoped retriever를 construct하여 garden observatory와 vault를 expose합니다.\n5. RetractionService는 retraction signal을 ontology_corrections에 persist하고 30s DB-backed undo window을 open합니다.\n6. apply_pending sweep tombstone은 note를 GardenWriter 통해 undo합니다.\n7. PWA knowledge API는 /api/v1/inside endpoints를 call하여 canonical concepts, observations, graph data, concept detail, retract/correct actions, and undo와 같은 user-facing source categories를 retrieve합니다.\n\n이 과정에서 garden observatory가 canonical concept으로 승격되는 것은 KnowledgeFactory의 workspace-scoped retriever와 RetractionService의 retraction signal persistence에 의해 결정됩니다.",
+      "retrieval_metrics": {
+        "hit@1": false,
+        "hit@3": false,
+        "hit@5": false,
+        "first_match_rank": null,
+        "recall_loose": 0.0
+      }
+    },
+    {
+      "qid": "q-013",
+      "question": "alias collision이나 redirect cycle 같은 카논 품질 문제는 어떻게 감지하나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-src-018"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-018",
+          "similarity": 0.0492,
+          "title": "canon-lint surfaces orphan tags, alias collisions, and redirect anomalies",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 1,
+          "score": 0.0492,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0315,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 3,
+          "vector_rank": 4,
+          "score": 0.0315,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-006",
+          "similarity": 0.0308,
+          "title": "Composite retriever merges multiple knowledge sources behind one protocol",
+          "bm25_rank": 7,
+          "vector_rank": 3,
+          "score": 0.0308,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-001",
+          "similarity": 0.0161,
+          "title": "BSVibe monorepo layout and local stack",
+          "bm25_rank": 2,
+          "score": 0.0161,
+          "matched_via": [
+            "bm25"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-019",
+          "similarity": 0.0161,
+          "title": "CanonWatcher bridges external vault edits into the canonicalization index",
+          "vector_rank": 2,
+          "score": 0.0161,
+          "matched_via": [
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-018] The lint module scans the canonicalization index and note store to emit read-only findings: orphan garden tags, alias collisions across active concepts, and redirect chain anomalies including cycles and missing targets. Findings carry severity (error vs warning) but never mutate the vault; the canon-lint plugin renders them as a markdown report.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-006] CompositeCanonRetriever combines several CanonRetriever sources, dedupes statements, preserves source order, caps total output, and degrades when one source fails. The RAG dataset should therefore track note_type/source_type so retrieval can rank canonical concepts before decisions and negative patterns.",
+        "[bsvibe-src-001] BSVibe is implemented as a unified monorepo with a FastAPI backend and Next.js PWA. The README documents Docker Compose startup, backend health probe, PWA entrypoint, and test commands, so source-derived RAG should include both implementation and operational setup context.",
+        "[bsvibe-src-019] CanonWatcher uses a watchdog Observer to detect external edits under concepts/, proposals/, actions/, and decisions/ paths and emits NOTE_UPDATED or NOTE_DELETED events. CanonicalizationIndexSubscriber listens and invalidates the affected paths. Self-host only and gated by runtime_config.canon_watcher_enabled; SaaS deployments where every write flows through the API leave it disabled."
+      ],
+      "answer": "Canonicalization Index Subscriber가 alias collision이나 redirect cycle 같은 카논 품질 문제를 감지하는 방법은 다음과 같습니다.\n\nCanonicalization Index Subscriber는 CanonWatcher와 함께 작동합니다. CanonWatcher는 external edits를 감지하고 NOTE_UPDATED 또는 NOTE_DELETED 이벤트를.emit합니다. Canonicalization Index Subscriber는 CanonWatcher의 이벤트를 lắng nghe하여 affected paths를 확인합니다.\n\nCanonicalization Index Subscriber가 alias collision이나 redirect cycle 같은 카논 품질 문제를 감지하는 방법은 다음과 같습니다.\n\n1. CanonWatcher가 external edits를 감지하고 NOTE_UPDATED 또는 NOTE_DELETED 이벤트를 emit합니다.\n2. Canonicalization Index Subscriber가 CanonWatcher의 이벤트를 lắng nghe하여 affected paths를 확인합니다.\n3. Canonicalization Index Subscriber가 alias collision이나 redirect cycle 같은 카논 품질 문제를ตรวจสอบ합니다.\n4. Canonicalization Index Subscriber가 발견된 문제를 Finding에 등록합니다.\n\nFinding은 canonicalization index와 note store에서 emit되는 read-only finding입니다. Finding은 severity (error vs warning)가 있지만 vault를 mutate하지 않습니다. Canon-lint plugin은 Finding을 markdown report로 rendering합니다.\n\n따라서, alias collision이나 redirect cycle 같은 카논 품질 문제는 Canonicalization Index Subscriber가 감지하고 Finding에 등록하여 canonicalization index와 note store에서 emit되는 read-only finding으로 rendering됩니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-014",
+      "question": "prod 환경에서 마이그레이션이 worker와 충돌하지 않게 하려면 어떻게 해야 하나요?",
+      "difficulty": "multi_doc",
+      "expected_source_ids": [
+        "bsvibe-src-031",
+        "bsvibe-src-030"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-030",
+          "similarity": 0.0482,
+          "title": "compose.prod.yaml overrides dev defaults for prod env-driven startup",
+          "bm25_rank": 1,
+          "vector_rank": 5,
+          "graph_rank": 1,
+          "score": 0.0482,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-031",
+          "similarity": 0.0325,
+          "title": "Deploy README documents the migrate-on-boot and single-migrator contract",
+          "bm25_rank": 2,
+          "vector_rank": 1,
+          "score": 0.0325,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0303,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 4,
+          "vector_rank": 8,
+          "score": 0.0303,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-008",
+          "similarity": 0.0302,
+          "title": "Settle worker writes vault notes, promotes concepts, and embeds notes",
+          "bm25_rank": 10,
+          "vector_rank": 3,
+          "score": 0.0302,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-025",
+          "similarity": 0.0161,
+          "title": "Settle runtime factories build per-settlement extractor and embedding hook",
+          "vector_rank": 2,
+          "score": 0.0161,
+          "matched_via": [
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-030] compose.prod.yaml layers on top of compose.yaml. It substitutes env-driven values for BSVIBE_DATABASE_URL, redis url, KMS key, and Supabase config; drops public Postgres and Redis port publishing with the docker-compose !reset tag; sets BSVIBE_WORKER_MODE to db_polling; and pins GIT_SHA so the running stack reports its build. Required vars are marked with the ?:err syntax so missing secrets fail fast.",
+        "[bsvibe-src-031] deploy/README.md is the prod runbook. The backend image entrypoint runs alembic upgrade head exactly once and then execs uvicorn; on restart alembic sees alembic_version at head and no-ops. The worker container overrides the entrypoint and goes straight to python -m backend.workers, so the two containers never race the same migration.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-008] Worker runtime constructs SettleWorker with KnowledgeSettleSink, entity extractor fallback, garden promoter factory, and note embedding hook. This is the ingestion path that turns workflow activity into vault knowledge and vector-searchable notes.",
+        "[bsvibe-src-025] settle_runtime exposes two factories the SettleWorker depends on: build_settle_entity_extractor_factory creates a per-settlement IngestCompiler routed through the same GatewayDispatcher the chat path uses with the workspace's single active non-executor account, and build_note_embed_hook embeds the absorbed note summary with the deployment embedder and upserts the vector into pgvector note_embeddings keyed by vault pa th."
+      ],
+      "answer": "prod 환경에서 마이그레이션을 worker와 충돌하지 않게 하려면 alembic upgrade head를 worker container의 entrypoint보다 먼저 실행해야 합니다.\n\nalembic upgrade head는 alembic_version이 HEAD로 설정되어 있기 때문에, worker container의 entrypoint은 alembic_version이 HEAD로 설정된 후에만 실행됩니다. 따라서, worker container의 entrypoint보다 alembic upgrade head를 먼저 실행하면 worker container의 entrypoint가 실행되기 전에 alembic_version이 업데이트되도록 할 수 있습니다.\n\n따라서, prod 환경에서 마이그레이션을 worker와 충돌하지 않게 하려면, backend image entrypoint의 alembic upgrade head를 worker container의 entrypoint보다 먼저 실행해야 합니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-015",
+      "question": "fact 노트 frontmatter는 어떻게 생겼나요?",
+      "difficulty": "simple_fact",
+      "expected_source_ids": [
+        "bsvibe-vault-001"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-vault-001",
+          "similarity": 0.0477,
+          "title": "Fact note frontmatter — typed triple with supersedes chain",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 7,
+          "score": 0.0477,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-005",
+          "similarity": 0.0444,
+          "title": "Negative patterns preserve founder rejection feedback",
+          "bm25_rank": 6,
+          "vector_rank": 7,
+          "graph_rank": 10,
+          "score": 0.0444,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0315,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 3,
+          "graph_rank": 4,
+          "score": 0.0315,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-007",
+          "similarity": 0.0308,
+          "title": "Agent runtime wires workspace retriever into execution and knowledge-only route",
+          "bm25_rank": 8,
+          "graph_rank": 2,
+          "score": 0.0308,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.0303,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 4,
+          "graph_rank": 8,
+          "score": 0.0303,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-vault-001] Real fact note shape from extractor test fixture: frontmatter declares type=fact, subject/predicate/object as wikilinks, valid_from/valid_to, source_type=explicit, and supersedes a prior fact id. Body is the human-readable summary. Example: type: fact, title: 'Blasin의 현재 역할', subject: [[Blasin]], predicate: has_role, object: [[AX Team Lead]], valid_from: 2024-06, supersedes: [[fact-blasin-backend-dev]].",
+        "[bsvibe-src-005] NegativePatternRetriever reads negative_pattern garden notes emitted when a founder discards a deliverable with a reason. It surfaces relevant avoid guidance by signal overlap, which means rejected approaches should be modeled as their own retrieval source instead of mixed into generic notes.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-007] The agent runtime builds a workspace-scoped KnowledgeFactory retriever, optionally composes SemanticNoteRetriever when embeddings are configured, injects retriever into executor/native loops, and routes knowledge_only frames to KnowledgeAnswerOrchestrator. This proves RAG context is consumed at runtime, not only stored.",
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset."
+      ],
+      "answer": " fact 노트의 frontmatter는 다음과 같은 형태로 생깁니다.\n\n```\ntype: fact\ntitle: 'Blasin의 현재 역할'\nsubject: [[Blasin]]\npredicate: has_role\nobject: [[AX Team Lead]]\nvalid_from: 2024-06\nsupersedes: [[fact-blasin-backend-dev]]\n```\n\n이 frontmatter는 fact 노트를 나타내며, type은 fact로 지정되어 있으며 title, subject, predicate, object, valid_from, supersedes라는 속성들이 있습니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-016",
+      "question": "CanonRetriever와 NegativePatternRetriever는 신호를 처리하는 방식이 어떻게 다른가요?",
+      "difficulty": "compare",
+      "expected_source_ids": [
+        "bsvibe-src-003",
+        "bsvibe-src-005"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-005",
+          "similarity": 0.0479,
+          "title": "Negative patterns preserve founder rejection feedback",
+          "bm25_rank": 5,
+          "vector_rank": 1,
+          "graph_rank": 2,
+          "score": 0.0479,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-006",
+          "similarity": 0.0472,
+          "title": "Composite retriever merges multiple knowledge sources behind one protocol",
+          "bm25_rank": 6,
+          "vector_rank": 2,
+          "graph_rank": 3,
+          "score": 0.0472,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.0469,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 3,
+          "vector_rank": 3,
+          "graph_rank": 6,
+          "score": 0.0469,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-004",
+          "similarity": 0.0455,
+          "title": "Resolved decisions are retrieved from settled garden notes",
+          "bm25_rank": 4,
+          "vector_rank": 7,
+          "graph_rank": 7,
+          "score": 0.0455,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0325,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 2,
+          "graph_rank": 1,
+          "score": 0.0325,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-005] NegativePatternRetriever reads negative_pattern garden notes emitted when a founder discards a deliverable with a reason. It surfaces relevant avoid guidance by signal overlap, which means rejected approaches should be modeled as their own retrieval source instead of mixed into generic notes.",
+        "[bsvibe-src-006] CompositeCanonRetriever combines several CanonRetriever sources, dedupes statements, preserves source order, caps total output, and degrades when one source fails. The RAG dataset should therefore track note_type/source_type so retrieval can rank canonical concepts before decisions and negative patterns.",
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset.",
+        "[bsvibe-src-004] ResolvedDecisionsRetriever reads decision_resolution notes from garden/seedling, filters out tombstoned notes, matches signal tokens against question, answer, and intent text, and emits prior decision statements. This confirms that decision memories are a concrete source type for BSVibe RAG.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement."
+      ],
+      "answer": "CanonRetriever와 NegativePatternRetriever는 신호를 처리하는 방식이 다르며, 그 이유는 각자의 목적과 기능에 따라 다르기 때문입니다.\n\nCanonRetriever는 CanonConceptRetriever의 결과를 기반으로하여 신호를 처리합니다. CanonConceptRetriever는 work signal에서 candidate tags를 추출하고 canonicalization index를 통해它们를.resolve합니다. CanonRetriever는 이러한 resolved concept display statements을 반환합니다.\n\nNegativePatternRetriever는 negative pattern garden notes를 읽어 negative pattern을 surface합니다. Negative pattern은 reject된 접근 방식을 모델링하는 것을 목표로 합니다. Negative Pattern Retriever는 신호의 overlap을 사용하여 avoid guidance을 제공합니다. 이는 reject된 접근 방식을 generic note에 混합하지 않고, 그 próp selves를 retrieval source로 modeling하도록 의미합니다.\n\n因此, CanonRetriever와 NegativePatternRetriever는 신호를 처리하는 방식이 다르며, CanonRetriever는 resolved concept display statements을 반환하고, Negative Pattern Retriever는 negative pattern garden notes를 읽어 negative pattern을 surface합니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-017",
+      "question": "agent_runtime의 native loop와 KnowledgeAnswerOrchestrator의 short-circuit 경로는 어떤 점이 다른가요?",
+      "difficulty": "compare",
+      "expected_source_ids": [
+        "bsvibe-src-007"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-007",
+          "similarity": 0.0492,
+          "title": "Agent runtime wires workspace retriever into execution and knowledge-only route",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 1,
+          "score": 0.0492,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-002",
+          "similarity": 0.0476,
+          "title": "KnowledgeFactory binds knowledge to workspace and region",
+          "bm25_rank": 4,
+          "vector_rank": 2,
+          "graph_rank": 3,
+          "score": 0.0476,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-023",
+          "similarity": 0.0318,
+          "title": "EventBus enumerates lifecycle, vault, and ingest events for streaming",
+          "bm25_rank": 2,
+          "graph_rank": 4,
+          "score": 0.0318,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-008",
+          "similarity": 0.0304,
+          "title": "Settle worker writes vault notes, promotes concepts, and embeds notes",
+          "bm25_rank": 9,
+          "vector_rank": 3,
+          "score": 0.0304,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-005",
+          "similarity": 0.0303,
+          "title": "Negative patterns preserve founder rejection feedback",
+          "bm25_rank": 7,
+          "graph_rank": 5,
+          "score": 0.0303,
+          "matched_via": [
+            "bm25",
+            "graph"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-007] The agent runtime builds a workspace-scoped KnowledgeFactory retriever, optionally composes SemanticNoteRetriever when embeddings are configured, injects retriever into executor/native loops, and routes knowledge_only frames to KnowledgeAnswerOrchestrator. This proves RAG context is consumed at runtime, not only stored.",
+        "[bsvibe-src-002] KnowledgeFactory is the central per-workspace/per-region constructor. It roots every vault at region/workspace_id, exposes workspace-scoped Vault and GardenWriter objects, and constructs the workspace-scoped retriever used by runtime components. This makes workspace scoping a first-class RAG metadata requirement.",
+        "[bsvibe-src-023] The EventBus module defines EventType enums for plugin and skill lifecycle, vault writes (SEED_WRITTEN, GARDEN_WRITTEN, ACTION_LOGGED), vault mutations (NOTE_UPDATED, NOTE_DELETED), scheduler triggers, agent tool calls, and ingest compile batch events. Everything that needs to be surfaced as a real-time stream goes through one typed enum so the bus stays uniform across subsystems.",
+        "[bsvibe-src-008] Worker runtime constructs SettleWorker with KnowledgeSettleSink, entity extractor fallback, garden promoter factory, and note embedding hook. This is the ingestion path that turns workflow activity into vault knowledge and vector-searchable notes.",
+        "[bsvibe-src-005] NegativePatternRetriever reads negative_pattern garden notes emitted when a founder discards a deliverable with a reason. It surfaces relevant avoid guidance by signal overlap, which means rejected approaches should be modeled as their own retrieval source instead of mixed into generic notes."
+      ],
+      "answer": " agent_runtime의 native loop과 KnowledgeAnswerOrchestrator의 short-circuit 경로는 다음과 같은 차이가 있습니다.\n\n1. **Native Loop**: \n   - native loop은 executor/native loops에서 retriever를 inject합니다.\n   - retriever는 workspace-scoped KnowledgeFactory retriever를 통해 생성됩니다.\n   - retriever는 knowledge_only frames을 KnowledgeAnswerOrchestrator에게 전달합니다.\n\n2. **KnowledgeAnswerOrchestrator의 Short-Circuit 경로**:\n   - short-circuit 경로는 knowledge_only frames이 KnowledgeAnswerOrchestrator에 전달되면, KnowledgeAnswerOrchestrator가 그 frames을 처리하고, 그 결과를 KnowledgeFactory retriever에게 전달합니다.\n   - KnowledgeAnswerOrchestrator는 short-circuit 경로를 통해 knowledge_only frames을 KnowledgeFactory retriever에게 전달하여, KnowledgeFactory retriever가 frames을 further processing할 수 있습니다.\n\n因此, native loop은 executor/native loops에서 retriever를 inject하고, retriever가 workspace-scoped KnowledgeFactory retriever를 통해 생성됩니다. 반면, KnowledgeAnswerOrchestrator의 short-circuit 경로는 knowledge_only frames이 KnowledgeAnswerOrchestrator에 전달되면, KnowledgeAnswerOrchestrator가 그 frames을 처리하고, 그 결과를 KnowledgeFactory retriever에게 전달합니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-018",
+      "question": "SettleWorker의 절차와 IngestCompiler의 절차는 각각 어떤 단계를 거치고 어디서 만나나요?",
+      "difficulty": "multi_doc",
+      "expected_source_ids": [
+        "bsvibe-src-008",
+        "bsvibe-src-009",
+        "bsvibe-src-025"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-008",
+          "similarity": 0.0472,
+          "title": "Settle worker writes vault notes, promotes concepts, and embeds notes",
+          "bm25_rank": 8,
+          "vector_rank": 2,
+          "graph_rank": 1,
+          "score": 0.0472,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-009",
+          "similarity": 0.0465,
+          "title": "IngestCompiler compiles imported seed content per chunk",
+          "bm25_rank": 9,
+          "vector_rank": 3,
+          "graph_rank": 2,
+          "score": 0.0465,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-025",
+          "similarity": 0.0323,
+          "title": "Settle runtime factories build per-settlement extractor and embedding hook",
+          "vector_rank": 1,
+          "graph_rank": 3,
+          "score": 0.0323,
+          "matched_via": [
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-001",
+          "similarity": 0.0313,
+          "title": "BSVibe monorepo layout and local stack",
+          "bm25_rank": 1,
+          "vector_rank": 7,
+          "score": 0.0313,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-015",
+          "similarity": 0.0312,
+          "title": "Cross-run decision reuse is tested through seed and verification fold",
+          "vector_rank": 4,
+          "graph_rank": 4,
+          "score": 0.0312,
+          "matched_via": [
+            "graph",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-008] Worker runtime constructs SettleWorker with KnowledgeSettleSink, entity extractor fallback, garden promoter factory, and note embedding hook. This is the ingestion path that turns workflow activity into vault knowledge and vector-searchable notes.",
+        "[bsvibe-src-009] IngestCompiler splits seed items into chunks, emits progress events, finds related context once per chunk, plans updates with an LLM, and writes notes. The code explicitly warns not to hoist related-context lookup outside the chunk loop, so cleaned data should retain chunk-level provenance.",
+        "[bsvibe-src-025] settle_runtime exposes two factories the SettleWorker depends on: build_settle_entity_extractor_factory creates a per-settlement IngestCompiler routed through the same GatewayDispatcher the chat path uses with the workspace's single active non-executor account, and build_note_embed_hook embeds the absorbed note summary with the deployment embedder and upserts the vector into pgvector note_embeddings keyed by vault pa th.",
+        "[bsvibe-src-001] BSVibe is implemented as a unified monorepo with a FastAPI backend and Next.js PWA. The README documents Docker Compose startup, backend health probe, PWA entrypoint, and test commands, so source-derived RAG should include both implementation and operational setup context.",
+        "[bsvibe-src-015] The B13 glue test resolves a decision through the API, drains SettleWorker into the vault, constructs a fresh KnowledgeFactory retriever for a second run, and asserts the prior decision appears in both first-turn LLM messages and persisted verification contract. This is strong evidence that decision memory is runtime-critical data."
+      ],
+      "answer": "SettleWorker와 IngestCompiler은 BSVibe의 인가 과정에서 중요한 역할을 합니다. SettleWorker와 IngestCompiler의 절차는 다음과 같습니다.\n\n**SettleWorker**\n\n1. KnowledgeSettleSink를 통해 knowledge를 수신합니다.\n2. Entity extractor fallback을 통해 entity를 추출합니다.\n3. Garden promoter factory를 통해 garden promoter를 생성합니다.\n4. Note embedding hook을 통해 note embedding을 처리합니다.\n\n**IngestCompiler**\n\n1. Seed item을 chunk으로 나눕니다.\n2. Chunk loop 내에서 progress event를 emits합니다.\n3. Chunk loop 내에서 related context를 찾습니다.\n4. LLM에 plan update를 applies합니다.\n5. Note를 작성하고, note embedding을 upsert합니다.\n\nSettleWorker와 IngestCompiler의 절차는 각각 distinct한 단계를 거치며, SettleWorker는 knowledge를 수신하고 entity를 추출하며, IngestCompiler는 seed item을 chunk으로 나눕니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-019",
+      "question": "canon_watcher와 canon-lint 중 어느 쪽이 실시간 감시이고 어느 쪽이 사후 검출인가요?",
+      "difficulty": "compare",
+      "expected_source_ids": [
+        "bsvibe-src-018",
+        "bsvibe-src-019"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-018",
+          "similarity": 0.0484,
+          "title": "canon-lint surfaces orphan tags, alias collisions, and redirect anomalies",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "graph_rank": 4,
+          "score": 0.0484,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-src-003",
+          "similarity": 0.0479,
+          "title": "Canonical concept retrieval uses promoted active concepts only",
+          "bm25_rank": 3,
+          "vector_rank": 3,
+          "graph_rank": 2,
+          "score": 0.0479,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-src-019",
+          "similarity": 0.0476,
+          "title": "CanonWatcher bridges external vault edits into the canonicalization index",
+          "bm25_rank": 2,
+          "vector_rank": 2,
+          "graph_rank": 5,
+          "score": 0.0476,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-src-006",
+          "similarity": 0.0463,
+          "title": "Composite retriever merges multiple knowledge sources behind one protocol",
+          "bm25_rank": 9,
+          "vector_rank": 5,
+          "graph_rank": 1,
+          "score": 0.0463,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-016",
+          "similarity": 0.0303,
+          "title": "RetractionService orchestrates ontology corrections with a 30s undo window",
+          "bm25_rank": 4,
+          "vector_rank": 8,
+          "score": 0.0303,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-018] The lint module scans the canonicalization index and note store to emit read-only findings: orphan garden tags, alias collisions across active concepts, and redirect chain anomalies including cycles and missing targets. Findings carry severity (error vs warning) but never mutate the vault; the canon-lint plugin renders them as a markdown report.",
+        "[bsvibe-src-003] CanonConceptRetriever extracts candidate tags from work signals, resolves them through the canonicalization index, and returns active concept display statements. It is bounded, workspace-scoped, graceful-empty, and never raises into verification, so promoted concepts should be separated from raw notes in the dataset.",
+        "[bsvibe-src-019] CanonWatcher uses a watchdog Observer to detect external edits under concepts/, proposals/, actions/, and decisions/ paths and emits NOTE_UPDATED or NOTE_DELETED events. CanonicalizationIndexSubscriber listens and invalidates the affected paths. Self-host only and gated by runtime_config.canon_watcher_enabled; SaaS deployments where every write flows through the API leave it disabled.",
+        "[bsvibe-src-006] CompositeCanonRetriever combines several CanonRetriever sources, dedupes statements, preserves source order, caps total output, and degrades when one source fails. The RAG dataset should therefore track note_type/source_type so retrieval can rank canonical concepts before decisions and negative patterns.",
+        "[bsvibe-src-016] RetractionService persists a RetractionSignal to ontology_corrections, opens a 30s DB-backed undo window, and lets apply_pending sweep tombstone the note via GardenWriter once the deadline passes. Issue and undo are idempotent on signal id, and the per-workspace _garden_lock prevents interleaving with concurrent canon merges or settle writes."
+      ],
+      "answer": "canon_watcher가 실시간 감시를 하고, canon-lint는 사후 검출을 합니다. \n\ncanon_watcher는 external edits를 감지하고 NOTE_UPDATED 또는 NOTE_DELETED 이벤트를.emit합니다. CanonicalizationIndexSubscriber는 affected paths를.invalidate합니다.\n\ncanon-lint는 canonicalization index와 note store를 scan하여 read-only findings를 emit합니다. Findings는 severity(error vs warning)가 있지만 vault를 mutate하지 않습니다. CanonConceptRetriever와 CompositeCanonRetriever는 canonical concepts를 extract하고, canon-lint plugin은 markdown report로 rendering합니다.\n\ncanon_watcher는 self-host only이고 runtime_config.canon_watcher_enabled에 gated됩니다. SaaS deployments에서는 canon_watcher가 disabled입니다. \n\ncanon-lint는 real-time 감시를 하지 않습니다. 사후 검출을 하기 때문에, external edits가 발생할 때까지 canonicalization index와 note store의 state가 유지되었습니다.",
+      "retrieval_metrics": {
+        "hit@1": true,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 1,
+        "recall_loose": 1.0
+      }
+    },
+    {
+      "qid": "q-020",
+      "question": "event note 와 fact note 의 frontmatter 차이는 무엇인가요?",
+      "difficulty": "compare",
+      "expected_source_ids": [
+        "bsvibe-vault-001",
+        "bsvibe-vault-002"
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "source_id": "bsvibe-src-011",
+          "similarity": 0.0448,
+          "title": "Semantic note retrieval searches pgvector note embeddings",
+          "bm25_rank": 7,
+          "vector_rank": 7,
+          "graph_rank": 7,
+          "score": 0.0448,
+          "matched_via": [
+            "bm25",
+            "graph",
+            "vector"
+          ]
+        },
+        {
+          "rank": 2,
+          "source_id": "bsvibe-vault-001",
+          "similarity": 0.0328,
+          "title": "Fact note frontmatter — typed triple with supersedes chain",
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "score": 0.0328,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 3,
+          "source_id": "bsvibe-vault-002",
+          "similarity": 0.0323,
+          "title": "Event note frontmatter — attendees and belongs_to wikilink lists",
+          "bm25_rank": 2,
+          "vector_rank": 2,
+          "score": 0.0323,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 4,
+          "source_id": "bsvibe-vault-003",
+          "similarity": 0.031,
+          "title": "Person note frontmatter — related list with ambiguity marker",
+          "bm25_rank": 3,
+          "vector_rank": 6,
+          "score": 0.031,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        },
+        {
+          "rank": 5,
+          "source_id": "bsvibe-src-023",
+          "similarity": 0.031,
+          "title": "EventBus enumerates lifecycle, vault, and ingest events for streaming",
+          "bm25_rank": 5,
+          "vector_rank": 4,
+          "score": 0.031,
+          "matched_via": [
+            "bm25",
+            "vector"
+          ]
+        }
+      ],
+      "grounding": [
+        "[bsvibe-src-011] SemanticNoteRetriever embeds incoming signals and searches a NoteVectorBackend, while PgNoteVectorBackend stores/searches note_embeddings by workspace_id and embedding_model using pgvector cosine distance. Semantic search is auxiliary, capped, similarity-filtered, and workspace-scoped.",
+        "[bsvibe-vault-001] Real fact note shape from extractor test fixture: frontmatter declares type=fact, subject/predicate/object as wikilinks, valid_from/valid_to, source_type=explicit, and supersedes a prior fact id. Body is the human-readable summary. Example: type: fact, title: 'Blasin의 현재 역할', subject: [[Blasin]], predicate: has_role, object: [[AX Team Lead]], valid_from: 2024-06, supersedes: [[fact-blasin-backend-dev]].",
+        "[bsvibe-vault-002] Real event note shape: type=event, title, attendees list of wikilinks, belongs_to list of wikilinks, optional knowledge_layer=episodic. Body holds free-form meeting notes. Example: type: event, title: 'Team Standup', attendees: [[Alice]], [[Bob]], belongs_to: [[Project X]]. RAG chunking must preserve list semantics so retrieval can answer 'who attended X' from the frontmatter, not just the body.",
+        "[bsvibe-vault-003] Real person note shape: type=person, title, related list of wikilinks where a trailing ? marks the link as AMBIGUOUS. Example: type: person, title: Bob, related: [[Alice]], [[Charlie]]?. The extractor turns related into related_to edges; ambiguous markers should propagate as a confidence field on the chunk metadata so retrieval can downweight uncertain links.",
+        "[bsvibe-src-023] The EventBus module defines EventType enums for plugin and skill lifecycle, vault writes (SEED_WRITTEN, GARDEN_WRITTEN, ACTION_LOGGED), vault mutations (NOTE_UPDATED, NOTE_DELETED), scheduler triggers, agent tool calls, and ingest compile batch events. Everything that needs to be surfaced as a real-time stream goes through one typed enum so the bus stays uniform across subsystems."
+      ],
+      "answer": "event note와 fact note의 frontmatter는 다음과 같은 차이가 있습니다.\n\n- event note: \n  - type=event\n  - title\n  - attendees list of wikilinks\n  - belongs_to list of wikilinks\n  - optional knowledge_layer=episodic\n  - body holds free-form meeting notes\n\n- fact note:\n  - type=fact\n  - subject/predicate/object as wikilinks\n  - valid_from/valid_to\n  - source_type=explicit\n  - supersedes a prior fact id\n  - body is the human-readable summary",
+      "retrieval_metrics": {
+        "hit@1": false,
+        "hit@3": true,
+        "hit@5": true,
+        "first_match_rank": 2,
+        "recall_loose": 1.0
+      }
+    }
+  ]
+}

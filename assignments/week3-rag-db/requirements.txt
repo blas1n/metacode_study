@@ -1,0 +1,24 @@
+# Week3 RAG 외부 DB — bsvibe-app 스택에 맞춘 추가 의존성.
+# 루트 .venv 에 설치합니다 (코스 langchain 패키지와 공존):
+#   source .venv/bin/activate
+#   pip install -r assignments/week3-rag-db/requirements.txt
+#
+# 버전은 bsvibe-app/main/uv.lock 과 정렬. langchain-openai 는 openai 2.x 와
+# 공존시키기 위해 0.3.35 로 상향(코스 langchain 0.3 라인 유지).
+
+litellm==1.86.0
+openai==2.38.0
+asyncpg>=0.29
+pgvector>=0.3.0
+structlog>=24
+sqlalchemy[asyncio]>=2.0
+langchain-openai==0.3.35
+
+# 그래프 시각화 (NetworkX 는 코스 .venv 에 이미 포함)
+matplotlib>=3.8
+
+# 테스트
+pytest>=8
+pytest-asyncio>=0.23
+pytest-cov>=5
+ruff>=0.6

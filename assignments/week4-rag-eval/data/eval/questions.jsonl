@@ -1,0 +1,20 @@
+{"qid":"q-001","question":"BSVibe 모노레포는 어떤 구성으로 돌아가나요?","expected_source_ids":["bsvibe-src-001"],"difficulty":"simple_fact","note":"단순 사실 조회 — 한 문서에서 답이 나옴"}
+{"qid":"q-002","question":"workspace 단위로 vault와 retriever를 어떻게 묶나요?","expected_source_ids":["bsvibe-src-002"],"difficulty":"simple_fact","note":"단순 사실 조회"}
+{"qid":"q-003","question":"이미 결정된 내용을 다음 run에서 재사용하려면 어디를 봐야 하나요?","expected_source_ids":["bsvibe-src-004","bsvibe-src-015"],"difficulty":"multi_doc","note":"다중 문서 종합 — retriever 구현 + 실제 테스트 두 소스가 같이 필요"}
+{"qid":"q-004","question":"파운더가 거절한 접근(부정 사례)은 어디에 저장되고 어떻게 검색되나요?","expected_source_ids":["bsvibe-src-005"],"difficulty":"simple_fact"}
+{"qid":"q-005","question":"canonical concept, decision, negative pattern을 한 번에 합치는 retriever는 무엇인가요?","expected_source_ids":["bsvibe-src-006"],"difficulty":"simple_fact"}
+{"qid":"q-006","question":"agent runtime은 workspace retriever를 어떻게 주입하나요?","expected_source_ids":["bsvibe-src-007"],"difficulty":"simple_fact"}
+{"qid":"q-007","question":"settle 단계에서 vault 노트를 어떻게 흡수하고 임베딩하나요?","expected_source_ids":["bsvibe-src-008","bsvibe-src-025"],"difficulty":"multi_doc","note":"다중 문서 종합 — worker + runtime factory 두 곳을 합쳐야 그림이 그려짐"}
+{"qid":"q-008","question":"ingest 시 chunk 크기 한도를 어떻게 잡나요?","expected_source_ids":["bsvibe-src-010"],"difficulty":"simple_fact"}
+{"qid":"q-009","question":"semantic 검색은 어떤 컬럼/인덱스로 동작하나요?","expected_source_ids":["bsvibe-src-011"],"difficulty":"simple_fact"}
+{"qid":"q-010","question":"파운더가 잘못된 노드를 retract하면 어떤 흐름으로 처리되나요?","expected_source_ids":["bsvibe-src-016","bsvibe-src-022","bsvibe-src-024"],"difficulty":"multi_doc","note":"다중 문서 종합 — service / signal / audit-events 셋 다 거쳐야 전체 흐름"}
+{"qid":"q-011","question":"undo 30초 카운트다운은 어디서 어떻게 계산되나요?","expected_source_ids":["bsvibe-src-029","bsvibe-src-028"],"difficulty":"multi_doc","note":"다중 문서 종합 — UndoToast(UI) + InspectorActions(state machine)"}
+{"qid":"q-012","question":"garden 관찰이 canonical concept으로 승격되는 과정은요?","expected_source_ids":["bsvibe-src-017"],"difficulty":"simple_fact"}
+{"qid":"q-013","question":"alias collision이나 redirect cycle 같은 카논 품질 문제는 어떻게 감지하나요?","expected_source_ids":["bsvibe-src-018"],"difficulty":"simple_fact"}
+{"qid":"q-014","question":"prod 환경에서 마이그레이션이 worker와 충돌하지 않게 하려면 어떻게 해야 하나요?","expected_source_ids":["bsvibe-src-031","bsvibe-src-030"],"difficulty":"multi_doc","note":"다중 문서 종합 — deploy runbook + prod compose 둘 다"}
+{"qid":"q-015","question":"fact 노트 frontmatter는 어떻게 생겼나요?","expected_source_ids":["bsvibe-vault-001"],"difficulty":"simple_fact"}
+{"qid":"q-016","question":"CanonRetriever와 NegativePatternRetriever는 신호를 처리하는 방식이 어떻게 다른가요?","expected_source_ids":["bsvibe-src-003","bsvibe-src-005"],"difficulty":"compare","note":"조건 비교 — 두 retriever 의 동작 방식을 대조"}
+{"qid":"q-017","question":"agent_runtime의 native loop와 KnowledgeAnswerOrchestrator의 short-circuit 경로는 어떤 점이 다른가요?","expected_source_ids":["bsvibe-src-007"],"difficulty":"compare","note":"조건 비교 — runtime 내 두 분기 비교. 본문에 둘 다 등장"}
+{"qid":"q-018","question":"SettleWorker의 절차와 IngestCompiler의 절차는 각각 어떤 단계를 거치고 어디서 만나나요?","expected_source_ids":["bsvibe-src-008","bsvibe-src-009","bsvibe-src-025"],"difficulty":"multi_doc","note":"다중 문서 종합 + 비교 — 두 파이프라인의 단계를 모아 비교"}
+{"qid":"q-019","question":"canon_watcher와 canon-lint 중 어느 쪽이 실시간 감시이고 어느 쪽이 사후 검출인가요?","expected_source_ids":["bsvibe-src-018","bsvibe-src-019"],"difficulty":"compare","note":"조건 비교 — 두 모듈을 역할로 구분"}
+{"qid":"q-020","question":"event note 와 fact note 의 frontmatter 차이는 무엇인가요?","expected_source_ids":["bsvibe-vault-001","bsvibe-vault-002"],"difficulty":"compare","note":"조건 비교 — 두 노트 타입의 스키마 차이"}
