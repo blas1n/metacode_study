@@ -23,8 +23,6 @@
 | D | **모든 검색 단계에 top-k + 점수 + title 노출** | ✅ 노트북·보고서 전반 | 부록 B |
 | E | 정량 + 정성 평가 둘 다 | ✅ Hit@k/MRR + LLM-as-judge 4기준 | §5 |
 
-> **Note** — week3 에서 top-K 노출 누락으로 감점이 있었습니다. 이번에는 모든 retrieval 결과에 `source_id` 와 함께 `title` 을 항상 노출하고, baseline 과 두 실험의 raw 결과 JSON (`data/results/`) 을 그대로 commit 합니다.
-
 ---
 
 ## 1. Baseline RAG 구성
@@ -226,7 +224,7 @@ Be CONCISE — answer in 3-6 sentences total, and cite knowledge with [source_id
 in-line. Do NOT repeat or paraphrase the same statement multiple times.
 ```
 
-## 부록 B — Top-K 노출 확인 (감점 재발 방지)
+## 부록 B — Top-K 노출 확인
 
 요구: "모든 검색 단계에서 top-k 결과 + 점수 + 문서 title 노출". 본 과제의 모든 산출물에서 다음을 검증:
 
