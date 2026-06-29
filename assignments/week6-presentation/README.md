@@ -18,18 +18,19 @@ bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대�
 2. Problem — 한 사람이 여러 제품을 굴릴 때 진짜 비용
 3. Solution — 한 줄 약속
 4. How it works — 던지세요 → 일한다 → 증거 → 기억
-5. Brief — 한눈에 현황판
-6. Delivery Report — 유리상자처럼 투명한 결과
+5. Brief — 진행/결정 대기/이력 3 lane
+6. Delivery Report — 유리상자처럼 투명한 결과 (5 블록)
 7. Decide — 결정이 필요할 때만
 8. Safe Mode — 승인 후에만 외부 나감
-9. Under the hood — 실행 · 라우팅 · 가드레일 · 기억
-10. Knowledge Graph — 학습 구조 (hybrid retrieval)
-11. 어디서든 — 웹 + 커넥터들
-12. 기술 스택
-13. 라이브 데모 cue
-14. Closing — 한 줄 약속
+9. Executor Worker — 사용자의 claude/codex/opencode 그대로 결합
+10. Under the hood — 실행 · 라우팅 · 가드레일 · 기억
+11. Knowledge Graph — 학습 구조 (hybrid retrieval, retract)
+12. 어디서든 — 웹 + plugins 10종
+13. 기술 스택
+14. 라이브 데모 cue
+15. Closing — 한 줄 약속
 
-내용은 모두 `bsvibe-site` (bsvibe.dev) 의 marketing copy 와 `bsvibe-app` 의 실제 코드와 정렬됩니다 — 발표 중 검증 가능.
+내용은 모두 `bsvibe-app` 의 실제 코드와 정렬 (`backend/api/auth/routes.py`, `backend/api/v1/messages.py`, `backend/executors/worker/{claude_code,codex,opencode}.py`, `apps/pwa/components/{shell/DirectAction,deliverables/DeliveryReport}.tsx`, `apps/pwa/lib/api/brief.ts`). 발표 중 어느 청중이 "이게 실제로 그렇게 동작해요?" 라고 물어도 코드로 검증 가능.
 
 ## 렌더 방법
 
