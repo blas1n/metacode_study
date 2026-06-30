@@ -4,7 +4,7 @@ theme: default
 size: 16:9
 paginate: true
 header: 'BSVibe — 믿음이 아닌, 증명.'
-footer: '메타코드 부트캠프 · 7주차 최종 발표'
+footer: '메타코드 부트캠프 · 최종 발표'
 style: |
   section {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -73,7 +73,7 @@ style: |
 
 <p class="sub">믿음이 아닌, 증명.</p>
 
-<p class="meta">메타코드 부트캠프 · 7주차 최종 발표<br/>김동휘 · qazasa123@gmail.com</p>
+<p class="meta">메타코드 부트캠프 · 최종 발표<br/>김동휘 · qazasa123@gmail.com</p>
 
 ---
 
