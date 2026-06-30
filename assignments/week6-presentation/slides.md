@@ -107,7 +107,7 @@ style: |
 <span class="pill">혼자서, 여러 제품</span>
 </div>
 
-<p class="muted" style="margin-top:24px">app.bsvibe.dev · 1인 사장님을 위한 운영 도구</p>
+<p class="muted" style="margin-top:24px">app.bsvibe.dev</p>
 
 ---
 
@@ -115,7 +115,7 @@ style: |
 
 | 단계 | 무엇이 일어나나 |
 |---|---|
-| **① 던지세요** | 어디서든 ⌘K 또는 **다이렉트** 한 줄. 메일·GitHub 이슈가 들어오면 자리에 없어도 시작 |
+| **① 던지세요** | **다이렉트** 버튼으로 한 줄. 메일·GitHub 이슈가 들어오면 자리에 없어도 시작 |
 | **② AI 가 일합니다** | 계획·실행·확인을 스스로 반복. 갈림길에선 물어보고, 답을 받으면 그 자리에서 이어감 |
 | **③ 근거를 냅니다** | "끝났다" 를 그냥 믿지 않음. 어떤 방법으로 어떻게 확인했는지 결과까지 함께 |
 | **④ 기억합니다** | 한 번 바로잡은 것이 쌓임. 다음부터 같은 실수는 알아서 피함 |
@@ -296,7 +296,7 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 데모 흐름
 
 1. **요약** — 작업 중 / 결정 대기 / 지난 작업 한 화면
-2. **다이렉트** — ⌘K 입력창에 한 줄
+2. **다이렉트** — 입력창에 한 줄
 3. **전달물 리포트** — 요청 → 만든 것 → 어떻게 확인했나 → 변경 코드
 4. **지식** — 학습된 지식 그래프 시각화
 5. **철회** — 잘못 학습한 노드 한 클릭 → 30 초 되돌리기 토스트
@@ -305,14 +305,10 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 
 ---
 
-## 한 줄 약속
+<div style="text-align:center; margin-top:180px;">
 
-<div class="lead" style="font-size:1.4rem; text-align:center; margin-top:60px;">
+# 감사합니다
 
-**감독할 일이 시간이 지날수록 줄어듭니다.**
-
-이것이 단 하나의 약속입니다.
+<p class="lead" style="font-size:1.4rem; margin-top:32px;">Q&A</p>
 
 </div>
-
-<p class="muted" style="text-align:center; margin-top:48px;">감사합니다 · Q&A</p>

@@ -28,7 +28,7 @@ bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대�
 12. 어디서든 — 웹 + plugins 10종
 13. 기술 스택
 14. 라이브 데모 cue
-15. Closing — 한 줄 약속
+15. 감사합니다 · Q&A
 
 내용은 모두 `bsvibe-app` 의 실제 코드와 정렬 (`backend/api/auth/routes.py`, `backend/api/v1/messages.py`, `backend/executors/worker/{claude_code,codex,opencode}.py`, `apps/pwa/components/{shell/DirectAction,deliverables/DeliveryReport}.tsx`, `apps/pwa/lib/api/brief.ts`). 발표 중 어느 청중이 "이게 실제로 그렇게 동작해요?" 라고 물어도 코드로 검증 가능.
 
