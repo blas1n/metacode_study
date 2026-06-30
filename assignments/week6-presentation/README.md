@@ -18,13 +18,13 @@ bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대�
 2. Problem — 한 사람이 여러 제품을 굴릴 때 진짜 비용
 3. Solution — 한 줄 약속
 4. How it works — 던지세요 → 일한다 → 증거 → 기억
-5. Brief — 진행/결정 대기/이력 3 lane
-6. Delivery Report — 유리상자처럼 투명한 결과 (5 블록)
-7. Decide — 결정이 필요할 때만
-8. Safe Mode — 승인 후에만 외부 나감
-9. Executor Worker — 사용자의 claude/codex/opencode 그대로 결합
+5. 요약 — 작업 한눈에 (작업 중/결정 대기/지난 작업)
+6. 전달물 리포트 — 유리상자처럼 투명한 결과 (5 블록)
+7. 결정 — 필요할 때만
+8. 안전 모드 — 승인 후에만 외부 나감
+9. 쓰던 LLM 도구를 그대로 — claude code / codex / opencode 결합
 10. Under the hood — 실행 · 라우팅 · 가드레일 · 기억
-11. Knowledge Graph — 학습 구조 (hybrid retrieval, retract)
+11. 지식 그래프 — 학습 구조 + 철회/되돌리기
 12. 어디서든 — 웹 + plugins 10종
 13. 기술 스택
 14. 라이브 데모 cue
@@ -66,7 +66,7 @@ VS Code 의 **Marp for VS Code** 확장 설치 → `slides.md` 열기 → 우상
 
 ## 발표 직전 체크리스트
 
-- [ ] `app.bsvibe.dev` 로그인 + 데모 워크스페이스 준비 (Inside view 그래프 충분히 학습됨)
+- [ ] `app.bsvibe.dev` 로그인 + 데모 작업 공간 준비 (지식 화면의 그래프에 노드 충분히 학습)
 - [ ] 데모용 워크스페이스 분리 (실수로 retract 해도 복구 쉽도록)
 - [ ] 마이크 + 화면 공유 사전 점검
 - [ ] 비상 plan: 라이브 안 되면 사전 녹화 영상
