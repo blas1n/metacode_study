@@ -310,11 +310,13 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 
 - **프론트엔드**: Next.js 14 PWA — Vercel 호스팅 (app.bsvibe.dev)
 - **백엔드**: FastAPI + PostgreSQL — 자체 호스팅
-- **벡터 검색**: pgvector — 사용자가 등록한 임베딩 저장
+- **벡터 검색**: pgvector
 - **지식 그래프**: NetworkX
-- **임베딩 · 답변 LLM (일반)**: **사용자가 모델 계정으로 등록** — openai · anthropic · ollama 등 자유 선택 (LiteLLM 기반)
-- **답변 생성 (코딩 에이전트)**: 사용자 컴퓨터의 `claude code` / `codex` / `opencode` 워커
 - **검색**: 의미 + 키워드 + 그래프 **세 갈래 랭킹 결합**
+- **답변 생성**: **추상화된 인터페이스 — 사용자가 아래 중 선택** (여러 개 등록 후 작업별 라우팅도 가능)
+    · API 키 등록형 — openai · anthropic · ollama 등 (LiteLLM 기반)
+    · 내 컴퓨터의 CLI 워커 — `claude code` · `codex` · `opencode`
+- **임베딩**: 같은 방식으로 사용자가 등록 (provider · 모델 자유)
 - **로그인**: Supabase
 
 <p class="muted" style="margin-top:14px">모델·임베딩 하드코딩 없음 — bsvibe 는 dispatch 만, 선택은 사용자.</p>

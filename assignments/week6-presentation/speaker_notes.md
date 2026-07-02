@@ -169,15 +169,14 @@ UI 화면 이름 (i18n 공식):
 
 > 프론트는 Next.js PWA, 백엔드는 FastAPI + PostgreSQL, 벡터 검색은 pgvector, 그래프는 NetworkX. 여기까지는 표준.
 >
-> 강조하고 싶은 두 가지가 있어요.
+> 강조하고 싶은 부분은 **답변 생성이 추상화된 인터페이스** 라는 점이에요. 사용자가 아래 중 원하는 걸 골라서 씁니다 — 둘 다 설정해야 하는 게 아니라 **선택**이고, 여러 개 등록해서 작업별로 라우팅할 수도 있어요.
 >
-> **첫째, LLM 이 두 축입니다.**
-> - 일반 LLM 은 **사용자가 모델 계정으로 등록** — openai · anthropic · ollama 등 원하는 걸 자유롭게. LiteLLM 기반이라 provider 는 뭐든 됩니다.
-> - 코딩 에이전트는 앞 슬라이드에서 본 claude code · codex · opencode 워커.
+> - **옵션 1** — API 키를 등록해서 일반 LLM 을 붙임 (openai · anthropic · ollama 등). LiteLLM 기반이라 provider 는 뭐든 됩니다.
+> - **옵션 2** — 앞 슬라이드에서 본 것처럼 내 컴퓨터의 CLI 워커 (claude code · codex · opencode) 를 붙임.
 >
-> **둘째, 임베딩도 사용자가 등록** — 어떤 임베딩 모델 쓸지, 어떤 provider 쓸지 다 사용자가 정해요. bsvibe 가 특정 모델을 강요하지 않습니다.
+> **임베딩도 똑같이** — 사용자가 provider · 모델을 등록. 특정 모델을 강요하지 않아요.
 >
-> 이게 무엇을 의미하냐면 — bsvibe 는 dispatch 메커니즘만, 선택은 100% 사용자의 몫. 검색은 의미 + 키워드 + 그래프 **세 갈래 랭킹 결합**. 로그인은 Supabase.
+> 즉 bsvibe 는 dispatch 메커니즘만 제공하고, 선택은 100% 사용자의 몫. 로그인은 Supabase.
 
 ### 15. 라이브 데모 cue
 
