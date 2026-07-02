@@ -1,6 +1,6 @@
 # 6주차 과제: 최종 발표 자료
 
-bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대상. 약 10–12분 + Q&A 5분.
+bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대상. 전체 20–25분 (발표 약 16분 + Q&A 5–10분).
 
 > 이전 주차 산출물 (week2~5) 은 포함하지 않습니다. 발표는 **bsvibe 라는 제품 자체** 에 집중.
 
@@ -24,11 +24,12 @@ bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대�
 8. 안전 모드 — 승인 후에만 외부 나감
 9. 쓰던 LLM 도구를 그대로 — claude code / codex / opencode 결합
 10. Under the hood — 실행 · 라우팅 · 가드레일 · 기억
-11. 지식 그래프 — 학습 구조 + 철회/되돌리기
-12. 어디서든 — 웹 + plugins 10종
-13. 기술 스택
-14. 라이브 데모 cue
-15. 감사합니다 · Q&A
+11. **안에서 어떻게 굴러가나** — 컴포넌트 3층 + 요청 흐름 6단계
+12. 지식 그래프 — 학습 구조 + 철회/되돌리기
+13. 어디서든 — 웹 + plugins 10종
+14. 기술 스택 — LLM/임베딩 사용자 등록 + 로그인 Supabase
+15. 라이브 데모 cue
+16. 감사합니다 · Q&A
 
 내용은 모두 `bsvibe-app` 의 실제 코드와 정렬 (`backend/api/auth/routes.py`, `backend/api/v1/messages.py`, `backend/executors/worker/{claude_code,codex,opencode}.py`, `apps/pwa/components/{shell/DirectAction,deliverables/DeliveryReport}.tsx`, `apps/pwa/lib/api/brief.ts`). 발표 중 어느 청중이 "이게 실제로 그렇게 동작해요?" 라고 물어도 코드로 검증 가능.
 
@@ -59,9 +60,9 @@ VS Code 의 **Marp for VS Code** 확장 설치 → `slides.md` 열기 → 우상
 
 ## 발표 시나리오 (요약)
 
-- **총 시간**: 발표 약 11분 + Q&A 5분
+- **총 시간**: 전체 20–25분 (발표 약 16분 + Q&A 5–10분)
 - **타이밍**: 슬라이드별 시간 배분은 `speaker_notes.md` 참고
-- **데모**: 슬라이드 13 에서 `app.bsvibe.dev` 로 전환 (라이브 또는 사전 녹화 둘 다 가능)
+- **데모**: 슬라이드 15 에서 `app.bsvibe.dev` 로 전환 (라이브 또는 사전 녹화 둘 다 가능)
 - **Q&A**: 기술/제품/품질/로드맵 4 분류 예상 질문 + 답안 `speaker_notes.md` 표 참고
 
 ## 발표 직전 체크리스트

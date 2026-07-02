@@ -219,8 +219,50 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 <div class="grid">
 <div class="card"><h3>실행 엔진</h3><p>계획·실행·확인을 반복. 갈림길에서 끊고, 답을 받으면 이어감.</p></div>
 <div class="card"><h3>비용 최적 라우팅</h3><p>어떤 도구·어떤 모델을 쓸지 작업에 맞게 자동 선택.</p></div>
-<div class="card"><h3>안전 가드레일</h3><p>안전 모드 · 검증 약속 · 작업 공간별 권한 분리.</p></div>
+<div class="card"><h3>안전 가드레일</h3><p>안전 모드 · 검증 약속 · 작업 공간별 격리.</p></div>
 <div class="card"><h3>기억 · 개인화</h3><p>모든 결정·관찰을 한 곳에 저장 → 지식 그래프로 연결.</p></div>
+</div>
+
+---
+
+## 안에서 어떻게 굴러가나
+
+<style scoped>
+.arch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:6px; }
+.arch .col { border:1px solid #cbd5e1; border-radius:10px; padding:12px 14px; background:#f8fafc; }
+.arch .col h3 { color:#1e3a8a; font-size:0.95rem; margin:0 0 6px; }
+.arch .col p { color:#334155; font-size:0.85rem; margin:1px 0; line-height:1.45; }
+.flow { border-top:1px dashed #cbd5e1; padding-top:12px; margin-top:14px; }
+.flow p { color:#334155; font-size:0.9rem; line-height:1.55; margin:2px 0; }
+.step { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.78rem; font-weight:700; padding:2px 9px; border-radius:999px; margin-right:6px; }
+</style>
+
+<div class="arch">
+<div class="col">
+<h3>프론트 (사용자 화면)</h3>
+<p>Next.js PWA — 모바일 우선</p>
+<p>요약 · 결정 · 지식 · 리포트</p>
+</div>
+<div class="col">
+<h3>백엔드 (파이프라인)</h3>
+<p>FastAPI + 백그라운드 워커</p>
+<p>인테이크 → 프레이밍 → 실행 → 검증 → 전달</p>
+</div>
+<div class="col">
+<h3>저장소 (기억)</h3>
+<p>PostgreSQL — 사실·상태·감사 로그</p>
+<p>pgvector — 의미 검색 임베딩</p>
+<p>NetworkX — 지식 그래프</p>
+</div>
+</div>
+
+<div class="flow">
+<p><span class="step">1</span> 사용자가 <b>다이렉트</b> 로 한 줄 던짐</p>
+<p><span class="step">2</span> 백엔드가 <b>프레이밍</b> — 지식으로 답할지, 실행이 필요한지 분기</p>
+<p><span class="step">3</span> 실행이 필요하면 <b>워커</b> 에 배분 (내 컴퓨터의 코딩 CLI 또는 일반 LLM)</p>
+<p><span class="step">4</span> 결과가 나오면 <b>검증 약속</b> 을 실제로 돌려 관측</p>
+<p><span class="step">5</span> 관측 = 판정 → <b>전달물 리포트</b> 생성</p>
+<p><span class="step">6</span> 결정·관찰이 <b>지식 그래프</b> 에 반영 → 다음 요청이 재사용</p>
 </div>
 
 ---
@@ -272,15 +314,15 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 ## 기술 스택 (간단)
 
 - **프론트엔드**: Next.js 14 PWA — Vercel 호스팅 (app.bsvibe.dev)
-- **백엔드**: FastAPI + SQLModel + asyncpg — 자체 호스팅 (Mac Mini)
-- **벡터 DB**: PostgreSQL + pgvector (1024차원)
-- **지식 그래프**: NetworkX + 표준화 엔진
-- **임베딩**: `bge-m3` (멀티링구얼) via Ollama
-- **답변 생성**: 사용자 컴퓨터의 `claude code` / `codex` / `opencode`
+- **백엔드**: FastAPI + PostgreSQL — 자체 호스팅
+- **벡터 검색**: pgvector — 사용자가 등록한 임베딩 저장
+- **지식 그래프**: NetworkX
+- **임베딩 · 답변 LLM (일반)**: **사용자가 모델 계정으로 등록** — openai · anthropic · ollama 등 자유 선택 (LiteLLM 기반)
+- **답변 생성 (코딩 에이전트)**: 사용자 컴퓨터의 `claude code` / `codex` / `opencode` 워커
 - **검색**: 의미 + 키워드 + 그래프 **세 갈래 랭킹 결합**
-- **로그인**: Supabase GoTrue (Google · GitHub 소셜)
-- **권한**: 작업 공간 · 역할 기반
-- **인프라**: 모노레포 · Docker Compose · 1인 운영
+- **로그인**: Supabase
+
+<p class="muted" style="margin-top:14px">모델·임베딩 하드코딩 없음 — bsvibe 는 dispatch 만, 선택은 사용자.</p>
 
 ---
 
