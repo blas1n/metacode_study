@@ -207,39 +207,21 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 
 ---
 
-## Under the hood
-
-<style scoped>
-.grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px; }
-.card { border:1px solid #cbd5e1; border-radius:10px; padding:13px 16px; background:#f8fafc; }
-.card h3 { color:#1e3a8a; font-size:1.0rem; margin:0 0 6px; }
-.card p { color:#334155; font-size:0.9rem; margin:0; line-height:1.5; }
-</style>
-
-<div class="grid">
-<div class="card"><h3>실행 엔진</h3><p>계획·실행·확인을 반복. 갈림길에서 끊고, 답을 받으면 이어감.</p></div>
-<div class="card"><h3>비용 최적 라우팅</h3><p>어떤 도구·어떤 모델을 쓸지 작업에 맞게 자동 선택.</p></div>
-<div class="card"><h3>안전 가드레일</h3><p>안전 모드 · 검증 약속 · 작업 공간별 격리.</p></div>
-<div class="card"><h3>기억 · 개인화</h3><p>모든 결정·관찰을 한 곳에 저장 → 지식 그래프로 연결.</p></div>
-</div>
-
----
-
 ## 안에서 어떻게 굴러가나
 
 <style scoped>
-.arch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:6px; }
-.arch .col { border:1px solid #cbd5e1; border-radius:10px; padding:12px 14px; background:#f8fafc; }
-.arch .col h3 { color:#1e3a8a; font-size:0.95rem; margin:0 0 6px; }
-.arch .col p { color:#334155; font-size:0.85rem; margin:1px 0; line-height:1.45; }
-.flow { border-top:1px dashed #cbd5e1; padding-top:12px; margin-top:14px; }
-.flow p { color:#334155; font-size:0.9rem; line-height:1.55; margin:2px 0; }
-.step { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.78rem; font-weight:700; padding:2px 9px; border-radius:999px; margin-right:6px; }
+.arch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:2px; }
+.arch .col { border:1px solid #cbd5e1; border-radius:10px; padding:10px 14px; background:#f8fafc; }
+.arch .col h3 { color:#1e3a8a; font-size:0.92rem; margin:0 0 5px; }
+.arch .col p { color:#334155; font-size:0.82rem; margin:1px 0; line-height:1.4; }
+.flow { border-top:1px dashed #cbd5e1; padding-top:10px; margin-top:12px; }
+.flow p { color:#334155; font-size:0.85rem; line-height:1.5; margin:2px 0; }
+.step { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:999px; margin-right:5px; }
 </style>
 
 <div class="arch">
 <div class="col">
-<h3>프론트 (사용자 화면)</h3>
+<h3>프론트 (화면)</h3>
 <p>Next.js PWA — 모바일 우선</p>
 <p>요약 · 결정 · 지식 · 리포트</p>
 </div>
@@ -250,20 +232,67 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 </div>
 <div class="col">
 <h3>저장소 (기억)</h3>
-<p>PostgreSQL — 사실·상태·감사 로그</p>
-<p>pgvector — 의미 검색 임베딩</p>
+<p>PostgreSQL — 사실·상태·감사</p>
+<p>pgvector — 의미 검색</p>
 <p>NetworkX — 지식 그래프</p>
 </div>
 </div>
 
 <div class="flow">
-<p><span class="step">1</span> 사용자가 <b>다이렉트</b> 로 한 줄 던짐</p>
-<p><span class="step">2</span> 백엔드가 <b>프레이밍</b> — 지식으로 답할지, 실행이 필요한지 분기</p>
-<p><span class="step">3</span> 실행이 필요하면 <b>워커</b> 에 배분 (내 컴퓨터의 코딩 CLI 또는 일반 LLM)</p>
-<p><span class="step">4</span> 결과가 나오면 <b>검증 약속</b> 을 실제로 돌려 관측</p>
-<p><span class="step">5</span> 관측 = 판정 → <b>전달물 리포트</b> 생성</p>
-<p><span class="step">6</span> 결정·관찰이 <b>지식 그래프</b> 에 반영 → 다음 요청이 재사용</p>
+<p><span class="step">1</span> <b>다이렉트</b> 로 한 줄 → 인테이크</p>
+<p><span class="step">2</span> 백엔드 <b>프레이밍</b> → 지식 답변 vs 실행 분기 · 작업에 맞는 도구 라우팅</p>
+<p><span class="step">3</span> <b>워커</b> 가 계획·실행·확인 반복 → 갈림길에서 <b>결정</b>·<b>안전 모드</b> 로 사용자 승인 요청</p>
+<p><span class="step">4</span> <b>검증 약속</b> 을 실제 돌려 관측 → 관측 = 판정</p>
+<p><span class="step">5</span> <b>전달물 리포트</b> 생성 · 결정/관찰이 <b>지식 그래프</b> 에 반영 → 다음 요청 재사용</p>
 </div>
+
+---
+
+## 한 요청의 여정 — 실제 화면
+
+<style scoped>
+.flow5 { display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; margin-top:6px; }
+.frame { border:1px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; text-align:center; }
+.frame img { width:100%; height:150px; object-fit:cover; object-position:top; border-radius:4px; display:block; }
+.frame .n { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.72rem; font-weight:700; padding:1px 8px; border-radius:999px; margin:6px 0 3px; }
+.frame .cap { color:#334155; font-size:0.82rem; font-weight:600; line-height:1.35; margin:0 0 3px; }
+.frame .sub { color:#64748b; font-size:0.72rem; line-height:1.3; margin:0; }
+</style>
+
+<div class="flow5">
+<div class="frame">
+<img src="assets/01_compose.png" alt="다이렉트 입력">
+<div class="n">1</div>
+<p class="cap">다이렉트</p>
+<p class="sub">한 줄 던지기</p>
+</div>
+<div class="frame">
+<img src="assets/02_brief.png" alt="요약">
+<div class="n">2</div>
+<p class="cap">요약</p>
+<p class="sub">작업 중에 반영</p>
+</div>
+<div class="frame">
+<img src="assets/03_decisions.png" alt="결정">
+<div class="n">3</div>
+<p class="cap">결정</p>
+<p class="sub">답안 후보 · 승인</p>
+</div>
+<div class="frame">
+<img src="assets/04_delivery_report.png" alt="전달물 리포트">
+<div class="n">4</div>
+<p class="cap">전달물 리포트</p>
+<p class="sub">근거와 결과</p>
+</div>
+<div class="frame">
+<img src="assets/05_inside.png" alt="지식">
+<div class="n">5</div>
+<p class="cap">지식</p>
+<p class="sub">그래프에 반영</p>
+</div>
+</div>
+
+<p class="muted" style="margin-top:14px; text-align:center;">한 줄 던지고 → 리포트 받고 → 지식으로 남는 다섯 화면. 라이브 데모에서 그대로 봅니다.</p>
 
 ---
 
