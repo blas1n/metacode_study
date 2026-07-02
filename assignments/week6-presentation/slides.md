@@ -292,19 +292,14 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 
 </div>
 
-쓰던 도구 그대로 연결 (실제 ship 된 10종):
+쓰던 도구를 그대로 연결. 예를 들면:
 
 <div class="pillrow">
 <span class="pill">GitHub</span>
 <span class="pill">Slack</span>
-<span class="pill">Notion</span>
-<span class="pill">Linear</span>
 <span class="pill">Discord</span>
-<span class="pill">Sentry</span>
-<span class="pill">Telegram</span>
-<span class="pill">Trello</span>
+<span class="pill">Notion</span>
 <span class="pill">Email</span>
-<span class="pill">Audit</span>
 </div>
 
 <p class="muted" style="margin-top:18px">대부분 한 번 로그인 — 그 다음은 작업 공간이 알아서 폴링·웹훅 처리.</p>

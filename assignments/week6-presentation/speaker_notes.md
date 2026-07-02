@@ -163,7 +163,7 @@ UI 화면 이름 (i18n 공식):
 ### 13. 어디서든, 무엇과도
 
 > 웹 기반이라 설치 없이 브라우저만 있으면 데스크톱·모바일 같은 경험.
-> 실제 ship 된 10종 — GitHub, Slack, Notion, Linear, Discord, Sentry, Telegram, Trello, Email, Audit. 대부분 한 번 로그인이면 됩니다.
+> 쓰던 도구를 그대로 연결 — GitHub, Slack, Discord, Notion, Email 같은 것들. 대부분 한 번 로그인이면 됩니다.
 
 ### 14. 기술 스택
 
