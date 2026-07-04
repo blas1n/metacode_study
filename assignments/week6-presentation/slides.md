@@ -276,19 +276,20 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 .layer .row { display:flex; gap:6px; flex-wrap:wrap; }
 .box { flex:1 1 0; min-width:0; border:1px solid #cbd5e1; border-radius:6px; padding:6px 9px; background:#f8fafc; font-size:0.78rem; color:#334155; line-height:1.35; }
 .box b { color:#1e3a8a; }
-.pipe { background:#eef2ff; border-color:#c7d2fe; text-align:center; }
-.pipe b { color:#4338ca; }
-.arrow { text-align:center; color:#94a3b8; font-size:0.75rem; margin:2px 0 2px 100px; letter-spacing:6px; }
-.notes { border-top:1px dashed #cbd5e1; margin-top:10px; padding-top:8px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
-.notes .n { font-size:0.75rem; color:#334155; line-height:1.4; }
-.notes .n b { color:#a16207; display:block; font-size:0.8rem; margin-bottom:2px; }
+.pipe { background:#eef2ff; border-color:#c7d2fe; text-align:center; padding:5px 6px; }
+.pipe b { color:#4338ca; display:block; font-size:0.78rem; }
+.pipe .m { color:#4b5563; font-size:0.62rem; line-height:1.25; margin-top:2px; }
+.arrow { text-align:center; color:#94a3b8; font-size:0.72rem; margin:1px 0 1px 100px; letter-spacing:6px; }
+.notes { border-top:1px dashed #cbd5e1; margin-top:8px; padding-top:6px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+.notes .n { font-size:0.72rem; color:#334155; line-height:1.35; }
+.notes .n b { color:#a16207; display:block; font-size:0.76rem; margin-bottom:1px; }
 </style>
 
 <div class="sys">
 
 <div class="layer">
 <div class="lbl">클라이언트</div>
-<div class="box"><b>PWA · Next.js 14</b> — 모바일 우선. 화면: 요약 · 결정 · 지식 · 스킬 · 리포트 · 다이렉트</div>
+<div class="box"><b>PWA · Next.js 14</b> — 모바일 우선. 요약 · 결정 · 지식 · 스킬 · 리포트 · 다이렉트</div>
 </div>
 
 <p class="arrow">↕ HTTPS</p>
@@ -296,11 +297,11 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 <div class="layer">
 <div class="lbl">백엔드</div>
 <div class="row">
-<div class="box pipe"><b>인테이크</b></div>
-<div class="box pipe"><b>프레이밍</b></div>
-<div class="box pipe"><b>실행</b></div>
-<div class="box pipe"><b>검증</b></div>
-<div class="box pipe"><b>전달</b></div>
+<div class="box pipe"><b>인테이크</b><p class="m">요청을 큐에 받기</p></div>
+<div class="box pipe"><b>프레이밍</b><p class="m">답변만? 실행 필요? 도구 선정</p></div>
+<div class="box pipe"><b>실행</b><p class="m">계획·행동·확인 반복 loop</p></div>
+<div class="box pipe"><b>검증</b><p class="m">약속한 검사 실제로 돌리기</p></div>
+<div class="box pipe"><b>전달</b><p class="m">리포트 + 지식·스킬 반영</p></div>
 </div>
 </div>
 
@@ -318,9 +319,9 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 </div>
 
 <div class="notes">
-<div class="n"><b>실행 단계가 호출</b>답변 LLM = 사용자 선택 (API 키형 openai · anthropic · ollama <b style="color:#334155;">또는</b> CLI 워커 claude code · codex · opencode)</div>
+<div class="n"><b>실행 단계가 호출</b>답변 LLM = 사용자 선택 (openai · anthropic · ollama <b style="color:#334155;">또는</b> claude code · codex · opencode)</div>
 <div class="n"><b>인테이크로 유입</b>커넥터 (GitHub · Slack · Discord · Notion · Email) 가 폴링·웹훅으로 자동 요청</div>
-<div class="n"><b>인증 · 임베딩</b>로그인 = Supabase · 임베딩 모델도 사용자 등록 (LiteLLM 기반)</div>
+<div class="n"><b>인증 · 임베딩</b>로그인 = Supabase · 임베딩도 사용자 등록 (LiteLLM 기반)</div>
 </div>
 
 ---
