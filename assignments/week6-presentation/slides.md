@@ -176,18 +176,26 @@ style: |
 
 ## 전달물 리포트 — 유리상자처럼 투명한 결과
 
-<div class="surface">
+<style scoped>
+.rp table { font-size:0.82rem; }
+.rp table th, .rp table td { padding: 4px 8px; }
+.rp .note { color:#334155; font-size:0.88rem; line-height:1.5; margin:10px 0 0; border-left:3px solid #3b82f6; padding:4px 12px; background:#f1f5f9; border-radius:0 4px 4px 0; }
+</style>
+
+<div class="surface rp">
 <div class="text">
 
-모든 결과는 한 장 짜리 **전달물 리포트** 로 도착 (다섯 블록):
+한 장 짜리 **전달물 리포트** 로 도착 — 다섯 블록.
 
 | 블록 | 의미 |
 |---|---|
 | 헤더 | 제목 · 유형 · 판정 · 날짜 |
 | 요청 | 내가 던졌던 그 한 줄 |
-| 만든 것 | 실제로 만든 파일 내용 |
-| 어떻게 확인했나 | 검사 계획 + 실행 결과 |
-| 변경 코드 | 코드 변경 내역 링크 |
+| 만든 것 | 파일 내용 인라인 |
+| 확인 | 검사 계획 + 실행 결과 |
+| 변경 코드 | diff 링크 |
+
+<p class="note"><b>확인 없이 "통과" 못 박음</b> — "이 작업은 이렇게 확인하겠다" 가 데이터로 강제.</p>
 
 </div>
 <div class="shot">
@@ -195,8 +203,6 @@ style: |
 <p class="cap">전달물 리포트 (Delivery Report)</p>
 </div>
 </div>
-
-> **확인 없이 "통과" 라고 못 박는 길이 코드 자체에서 막혀 있음** — "이 작업은 이렇게 확인하겠다" 가 데이터로 강제됩니다.
 
 ---
 
@@ -261,44 +267,68 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 
 ---
 
-## 안에서 어떻게 굴러가나
+## 안에서 어떻게 굴러가나 — 소프트웨어 구조
 
 <style scoped>
-.arch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:2px; }
-.arch .col { border:1px solid #cbd5e1; border-radius:10px; padding:10px 14px; background:#f8fafc; }
-.arch .col h3 { color:#1e3a8a; font-size:0.92rem; margin:0 0 5px; }
-.arch .col p { color:#334155; font-size:0.82rem; margin:1px 0; line-height:1.4; }
-.flow { border-top:1px dashed #cbd5e1; padding-top:10px; margin-top:12px; }
-.flow p { color:#334155; font-size:0.85rem; line-height:1.5; margin:2px 0; }
-.step { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:999px; margin-right:5px; }
+.sys { display:grid; grid-template-columns:1fr; gap:8px; margin-top:2px; }
+.layer { display:grid; grid-template-columns:130px 1fr; gap:12px; align-items:center; }
+.layer .lbl { color:#1e3a8a; font-size:0.82rem; font-weight:700; text-align:right; padding-right:6px; border-right:2px solid #cbd5e1; }
+.layer .row { display:flex; gap:8px; flex-wrap:wrap; }
+.box { flex:1 1 0; min-width:0; border:1px solid #cbd5e1; border-radius:8px; padding:7px 10px; background:#f8fafc; font-size:0.82rem; color:#334155; }
+.box b { color:#1e3a8a; display:block; font-size:0.85rem; margin-bottom:2px; }
+.box .m { color:#64748b; font-size:0.72rem; margin-top:2px; line-height:1.35; }
+.pipe { background:#eef2ff; border-color:#c7d2fe; }
+.pipe b { color:#4338ca; }
+.arrow { text-align:center; color:#94a3b8; font-size:0.8rem; margin:0; letter-spacing:6px; }
+.side { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.side .box { background:#fefce8; border-color:#fde68a; }
+.side .box b { color:#a16207; }
 </style>
 
-<div class="arch">
-<div class="col">
-<h3>프론트 (화면)</h3>
-<p>Next.js PWA — 모바일 우선</p>
-<p>요약 · 결정 · 지식 · 리포트</p>
-</div>
-<div class="col">
-<h3>백엔드 (파이프라인)</h3>
-<p>FastAPI + 백그라운드 워커</p>
-<p>인테이크 → 프레이밍 → 실행 → 검증 → 전달</p>
-</div>
-<div class="col">
-<h3>저장소 (기억)</h3>
-<p>PostgreSQL — 사실·상태·감사</p>
-<p>pgvector — 의미 검색</p>
-<p>NetworkX — 지식 그래프</p>
+<div class="sys">
+
+<div class="layer">
+<div class="lbl">클라이언트</div>
+<div class="row">
+<div class="box"><b>PWA (Next.js)</b>요약 · 결정 · 지식 · 스킬 · 리포트<div class="m">모바일 우선 · 다이렉트 입력</div></div>
 </div>
 </div>
 
-<div class="flow">
-<p><span class="step">1</span> <b>다이렉트</b> 로 한 줄 → 인테이크</p>
-<p><span class="step">2</span> 백엔드 <b>프레이밍</b> → 지식 답변 vs 실행 분기 · 작업에 맞는 도구 라우팅</p>
-<p><span class="step">3</span> <b>워커</b> 가 계획·실행·확인 반복 → 갈림길에서 <b>결정</b>·<b>안전 모드</b> 로 사용자 승인 요청</p>
-<p><span class="step">4</span> <b>검증 약속</b> 을 실제 돌려 관측 → 관측 = 판정</p>
-<p><span class="step">5</span> <b>전달물 리포트</b> 생성 · 결정/관찰이 <b>지식 그래프</b> 에 반영 → 다음 요청 재사용</p>
+<p class="arrow">↓ HTTPS ↑</p>
+
+<div class="layer">
+<div class="lbl">백엔드 파이프라인</div>
+<div class="row">
+<div class="box pipe"><b>인테이크</b><div class="m">/messages 수신</div></div>
+<div class="box pipe"><b>프레이밍</b><div class="m">지식 답변 vs 실행 분기 + 도구 라우팅</div></div>
+<div class="box pipe"><b>실행</b><div class="m">계획·행동·확인 loop</div></div>
+<div class="box pipe"><b>검증</b><div class="m">약속 실행 → 관측 판정</div></div>
+<div class="box pipe"><b>전달</b><div class="m">리포트 · 지식 반영</div></div>
 </div>
+</div>
+
+<p class="arrow">↓  ↓  ↓</p>
+
+<div class="layer">
+<div class="lbl">사용자 등록 자원</div>
+<div class="side">
+<div class="box"><b>답변 LLM</b>API 키형 (openai · anthropic · ollama) · CLI 워커 (claude code · codex · opencode)</div>
+<div class="box"><b>외부 커넥터</b>GitHub · Slack · Discord · Notion · Email — 폴링/웹훅으로 인테이크 유입</div>
+</div>
+</div>
+
+<div class="layer">
+<div class="lbl">저장소</div>
+<div class="row">
+<div class="box"><b>PostgreSQL</b><div class="m">사실 · 상태 · 감사 로그</div></div>
+<div class="box"><b>pgvector</b><div class="m">임베딩 (의미 검색)</div></div>
+<div class="box"><b>NetworkX</b><div class="m">지식 그래프</div></div>
+</div>
+</div>
+
+</div>
+
+<p class="muted" style="margin-top:8px; font-size:0.78rem;">실행 엔진 · 도구 라우팅 · 안전 가드레일 · 기억 — 위 5 단계 파이프라인 안에 다 담겨 있음.</p>
 
 ---
 
