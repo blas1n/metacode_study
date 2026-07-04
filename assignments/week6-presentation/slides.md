@@ -251,15 +251,15 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 ## 한 요청의 여정 — 실제 화면
 
 <style scoped>
-.flow5 { display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; margin-top:6px; }
+.flow6 { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:2px; }
 .frame { border:1px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; text-align:center; }
-.frame img { width:100%; height:150px; object-fit:cover; object-position:top; border-radius:4px; display:block; }
-.frame .n { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.72rem; font-weight:700; padding:1px 8px; border-radius:999px; margin:6px 0 3px; }
-.frame .cap { color:#334155; font-size:0.82rem; font-weight:600; line-height:1.35; margin:0 0 3px; }
-.frame .sub { color:#64748b; font-size:0.72rem; line-height:1.3; margin:0; }
+.frame img { width:100%; height:130px; object-fit:cover; object-position:top; border-radius:4px; display:block; }
+.frame .n { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.72rem; font-weight:700; padding:1px 8px; border-radius:999px; margin:5px 0 2px; }
+.frame .cap { color:#334155; font-size:0.82rem; font-weight:600; line-height:1.35; margin:0 0 2px; }
+.frame .sub { color:#64748b; font-size:0.7rem; line-height:1.3; margin:0; }
 </style>
 
-<div class="flow5">
+<div class="flow6">
 <div class="frame">
 <img src="assets/01_compose.png" alt="다이렉트 입력">
 <div class="n">1</div>
@@ -290,9 +290,15 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 <p class="cap">지식</p>
 <p class="sub">그래프에 반영</p>
 </div>
+<div class="frame">
+<img src="assets/06_skills.png" alt="스킬">
+<div class="n">6</div>
+<p class="cap">스킬</p>
+<p class="sub">재사용 절차로 축적</p>
+</div>
 </div>
 
-<p class="muted" style="margin-top:14px; text-align:center;">한 줄 던지고 → 리포트 받고 → 지식으로 남는 다섯 화면. 라이브 데모에서 그대로 봅니다.</p>
+<p class="muted" style="margin-top:10px; text-align:center;">한 줄 던지고 → 리포트 받고 → 지식·스킬로 남는 여섯 화면. 라이브 데모에서 그대로 봅니다.</p>
 
 ---
 
