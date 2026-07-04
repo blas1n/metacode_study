@@ -63,6 +63,16 @@ style: |
   .muted { color: #64748b; font-size: 0.88rem; }
   .pillrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
   .pill { padding: 5px 12px; border-radius: 999px; background: #eef2ff; color: #1e3a8a; font-size: 0.85rem; font-weight: 600; }
+  .surface { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 24px; align-items: start; margin-top: 4px; }
+  .surface .text ul { margin: 4px 0 0; }
+  .surface .text li { font-size: 0.98rem; }
+  .surface .shot { border: 1px solid #cbd5e1; border-radius: 8px; padding: 5px; background: #f8fafc; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .surface .shot img { width: 100%; display: block; border-radius: 4px; }
+  .surface .shot .cap { color: #64748b; font-size: 0.72rem; text-align: center; margin: 4px 0 0; }
+  .thumbrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  .thumbrow .shot { border: 1px solid #cbd5e1; border-radius: 8px; padding: 5px; background: #f8fafc; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .thumbrow .shot img { width: 100%; display: block; border-radius: 4px; }
+  .thumbrow .shot .cap { color: #64748b; font-size: 0.72rem; text-align: center; margin: 4px 0 0; }
 ---
 
 <!-- _class: cover -->
@@ -113,6 +123,17 @@ style: |
 
 ## 어떻게 작동하나요
 
+<style scoped>
+.howgrid { display:grid; grid-template-columns:1.35fr 1fr; gap:22px; align-items:start; margin-top:2px; }
+.howgrid table { font-size:0.86rem; }
+.howgrid .shot { border:1px solid #cbd5e1; border-radius:8px; padding:5px; background:#f8fafc; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.howgrid .shot img { width:100%; display:block; border-radius:4px; }
+.howgrid .shot .cap { color:#64748b; font-size:0.72rem; text-align:center; margin:5px 0 0; }
+</style>
+
+<div class="howgrid">
+<div>
+
 | 단계 | 무엇이 일어나나 |
 |---|---|
 | **① 던지세요** | **다이렉트** 버튼으로 한 줄. 메일·GitHub 이슈가 들어오면 자리에 없어도 시작 |
@@ -120,11 +141,21 @@ style: |
 | **③ 근거를 냅니다** | "끝났다" 를 그냥 믿지 않음. 어떤 방법으로 어떻게 확인했는지 결과까지 함께 |
 | **④ 기억합니다** | 한 번 바로잡은 것이 쌓임. 다음부터 같은 실수는 알아서 피함 |
 
+</div>
+<div class="shot">
+<img src="assets/01_compose.png" alt="다이렉트">
+<p class="cap">① 던지세요 — 다이렉트 한 줄</p>
+</div>
+</div>
+
 > 감독할 일이 시간이 지날수록 **줄어듭니다.**
 
 ---
 
 ## 요약 — 작업 한눈에
+
+<div class="surface">
+<div class="text">
 
 운영 콘솔이 아니라, **사람이 말하듯 설명하는 현황판**. 세 줄로 정리:
 
@@ -132,21 +163,38 @@ style: |
 - **결정 대기** — 갈림길에서 올라온 안건, 그리고 밖으로 내보내기 전 승인 대기
 - **지난 작업** — 끝난 일과 전달물이 시간 순서대로
 
-> 처리 안 된 것이 모두 한 화면에 모입니다. 티켓 같은 게 아니라 평범한 한국말로.
+> 처리 안 된 것이 모두 한 화면에 모입니다.
+
+</div>
+<div class="shot">
+<img src="assets/02_brief.png" alt="요약 화면">
+<p class="cap">요약 (Brief) — 세 줄 현황판</p>
+</div>
+</div>
 
 ---
 
 ## 전달물 리포트 — 유리상자처럼 투명한 결과
 
+<div class="surface">
+<div class="text">
+
 모든 결과는 한 장 짜리 **전달물 리포트** 로 도착 (다섯 블록):
 
 | 블록 | 의미 |
 |---|---|
-| 헤더 | 제목 · 유형 · 판정(통과/실패) · 날짜 |
-| 요청 | 내가 던졌던 그 한 줄 그대로 |
-| 만든 것 | 실제로 만든 파일 내용이 곧장 화면에 |
-| 어떻게 확인했나 | 어떤 검사를 약속했고 그 검사를 돌린 결과 |
-| 변경 코드 | 코드 변경 내역으로 바로 이동 |
+| 헤더 | 제목 · 유형 · 판정 · 날짜 |
+| 요청 | 내가 던졌던 그 한 줄 |
+| 만든 것 | 실제로 만든 파일 내용 |
+| 어떻게 확인했나 | 검사 계획 + 실행 결과 |
+| 변경 코드 | 코드 변경 내역 링크 |
+
+</div>
+<div class="shot">
+<img src="assets/04_delivery_report.png" alt="전달물 리포트">
+<p class="cap">전달물 리포트 (Delivery Report)</p>
+</div>
+</div>
 
 > **확인 없이 "통과" 라고 못 박는 길이 코드 자체에서 막혀 있음** — "이 작업은 이렇게 확인하겠다" 가 데이터로 강제됩니다.
 
@@ -154,16 +202,22 @@ style: |
 
 ## 결정 — 필요할 때만 부릅니다
 
-<div class="lead">
+<div class="surface">
+<div class="text">
 
-취향·범위·방향 같은 **혼자 정하면 안 되는 갈림길** 만 사용자에게 올라옵니다. AI 가 단순히 묻기만 하는 게 아니라 **답안 후보까지 같이 제안** 합니다.
+취향·범위·방향 같은 **혼자 정하면 안 되는 갈림길** 만 올라옵니다. AI 가 단순히 묻기만 하는 게 아니라 **답안 후보까지 같이 제안**.
+
+- 후보 답안 제시 — "이렇게 하면 어떨까요?"
+- 후보 중 선택 또는 **직접 입력**
+- 답한 순간 그 자리에서 작업 이어짐
+- 그 선택은 **결정 답안** 으로 기억 → 다음 케이스 자동 재사용
 
 </div>
-
-- AI 가 갈림길을 발견하면 후보 답안을 만들어 제시 — "이렇게 하면 어떨까요?"
-- 사용자는 후보 중 하나를 고르거나 **직접 입력** 으로 답
-- 답하는 순간 그 자리에서 작업이 이어짐 — 다른 화면으로 옮길 필요 없음
-- 그 선택은 **결정 답안** 으로 기억돼 다음 비슷한 케이스에 자동 재사용
+<div class="shot">
+<img src="assets/03_decisions.png" alt="결정 대기 목록">
+<p class="cap">결정 대기 — 승인·거절·수정 후 통과</p>
+</div>
+</div>
 
 > _"매번 같은 걸 다시 묻지 않는다"_ — 결정 화면의 기술적 실체.
 
@@ -248,74 +302,30 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 
 ---
 
-## 한 요청의 여정 — 실제 화면
+## 남는 것 — 지식 · 스킬
 
-<style scoped>
-.flow6 { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:2px; }
-.frame { border:1px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; text-align:center; }
-.frame img { width:100%; height:130px; object-fit:cover; object-position:top; border-radius:4px; display:block; }
-.frame .n { display:inline-block; background:#eef2ff; color:#1e3a8a; font-size:0.72rem; font-weight:700; padding:1px 8px; border-radius:999px; margin:5px 0 2px; }
-.frame .cap { color:#334155; font-size:0.82rem; font-weight:600; line-height:1.35; margin:0 0 2px; }
-.frame .sub { color:#64748b; font-size:0.7rem; line-height:1.3; margin:0; }
-</style>
+<div class="surface">
+<div class="text">
 
-<div class="flow6">
-<div class="frame">
-<img src="assets/01_compose.png" alt="다이렉트 입력">
-<div class="n">1</div>
-<p class="cap">다이렉트</p>
-<p class="sub">한 줄 던지기</p>
+작업이 끝나도 두 갈래 자산이 남습니다.
+
+- **지식** — 사실. 결정 답안 · 관찰 메모 · 거절 패턴. 반복되면 **표준 개념** 으로 승격. 다음 요청이 자동으로 인용.
+- **스킬** — 방법. 반복 절차가 재사용 자산으로 승격. 다음엔 처음부터 짜지 않아도 됨.
+
+검색은 **세 갈래 결합** (의미 · 키워드 · 그래프 이웃). 잘못 학습한 노드는 한 클릭 **철회** — 30 초 안에 **되돌리기**.
+
 </div>
-<div class="frame">
-<img src="assets/02_brief.png" alt="요약">
-<div class="n">2</div>
-<p class="cap">요약</p>
-<p class="sub">작업 중에 반영</p>
-</div>
-<div class="frame">
-<img src="assets/03_decisions.png" alt="결정">
-<div class="n">3</div>
-<p class="cap">결정</p>
-<p class="sub">답안 후보 · 승인</p>
-</div>
-<div class="frame">
-<img src="assets/04_delivery_report.png" alt="전달물 리포트">
-<div class="n">4</div>
-<p class="cap">전달물 리포트</p>
-<p class="sub">근거와 결과</p>
-</div>
-<div class="frame">
+<div class="thumbrow" style="grid-template-columns:1fr; gap:10px;">
+<div class="shot">
 <img src="assets/05_knowledge.png" alt="지식">
-<div class="n">5</div>
-<p class="cap">지식</p>
-<p class="sub">그래프에 반영</p>
+<p class="cap">지식 — 개념·결정·거절 패턴 그래프</p>
 </div>
-<div class="frame">
+<div class="shot">
 <img src="assets/06_skills.png" alt="스킬">
-<div class="n">6</div>
-<p class="cap">스킬</p>
-<p class="sub">재사용 절차로 축적</p>
+<p class="cap">스킬 — 재사용 가능한 절차</p>
 </div>
 </div>
-
-<p class="muted" style="margin-top:10px; text-align:center;">한 줄 던지고 → 리포트 받고 → 지식·스킬로 남는 여섯 화면. 라이브 데모에서 그대로 봅니다.</p>
-
----
-
-## 기억의 구조 — 지식 그래프
-
-<div class="lead">
-
-사용자가 한 모든 결정과 AI 의 모든 관찰이 **하나의 지식 그래프** 로 쌓입니다.
-
 </div>
-
-- **관찰 메모** (날 것의 기록) → 일정 횟수 반복되면 → **표준 개념** 으로 승격
-- **결정 답안** — 갈림길에서 내린 답이 다음 작업에서 자동 검색
-- **거절 패턴** — 거절한 접근이 다음에 같은 실수를 막음
-- **세 갈래 검색 결합** (의미 검색 + 키워드 검색 + 그래프 이웃) 으로 즉시 인용
-
-> **지식** 화면에서 학습한 그래프를 직접 봅니다. 잘못 학습한 노드는 한 클릭으로 **철회** — 30 초 안에 **되돌리기** 가능.
 
 ---
 

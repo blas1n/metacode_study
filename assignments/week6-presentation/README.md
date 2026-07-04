@@ -17,19 +17,18 @@ bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대�
 1. Cover — BSVibe · "믿음이 아닌, 증명."
 2. Problem — 한 사람이 여러 제품을 굴릴 때 진짜 비용
 3. Solution — 한 줄 약속
-4. How it works — 던지세요 → 일한다 → 증거 → 기억
-5. 요약 — 작업 한눈에 (작업 중/결정 대기/지난 작업)
-6. 전달물 리포트 — 유리상자처럼 투명한 결과 (5 블록)
-7. 결정 — 필요할 때만
+4. How it works — 4단계 + 다이렉트 프리뷰 스크린샷
+5. 요약 (작업 중/결정 대기/지난 작업) + brief 스크린샷
+6. 전달물 리포트 (5 블록) + delivery-report 스크린샷
+7. 결정 (필요할 때만 + AI 가 답안 후보 제안) + decisions 스크린샷
 8. 안전 모드 — 승인 후에만 외부 나감
 9. 쓰던 LLM 도구를 그대로 — claude code / codex / opencode 결합
-10. **안에서 어떻게 굴러가나** — 컴포넌트 3층 + 요청 흐름 5단계 (실행·라우팅·가드레일·기억 통합)
-11. **한 요청의 여정** — 실제 화면 6컷 스토리보드 (다이렉트 → 요약 → 결정 → 전달물 리포트 → 지식 → 스킬)
-12. 지식 그래프 — 학습 구조 + 철회/되돌리기
-13. 어디서든 — 웹 + 대표 커넥터 (GitHub · Slack · Discord · Notion · Email)
-14. 기술 스택 — 답변 생성은 추상화된 인터페이스 (LLM · 임베딩 사용자 선택) + Supabase 로그인
-15. 라이브 데모 cue
-16. 감사합니다 · Q&A
+10. **안에서 어떻게 굴러가나** — 컴포넌트 3층 + 요청 흐름 5단계
+11. **남는 것 — 지식 · 스킬** (두 갈래 자산) + knowledge + skills 스크린샷
+12. 어디서든 — 웹 + 대표 커넥터 (GitHub · Slack · Discord · Notion · Email)
+13. 기술 스택 — 답변 생성은 추상화된 인터페이스 + Supabase 로그인
+14. 라이브 데모 cue
+15. 감사합니다 · Q&A
 
 내용은 모두 `bsvibe-app` 의 실제 코드와 정렬 (`backend/api/auth/routes.py`, `backend/api/v1/messages.py`, `backend/executors/worker/{claude_code,codex,opencode}.py`, `apps/pwa/components/{shell/DirectAction,deliverables/DeliveryReport}.tsx`, `apps/pwa/lib/api/brief.ts`). 발표 중 어느 청중이 "이게 실제로 그렇게 동작해요?" 라고 물어도 코드로 검증 가능.
 
