@@ -1,6 +1,6 @@
 # 6주차 과제: 최종 발표 자료
 
-bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대상. 전체 20–25분 (발표 약 16분 + Q&A 5–10분).
+bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대상. 전체 20–25분 (발표 약 14분 + Q&A 6–11분). 데모는 슬라이드에서 뺐고 시간 남으면 즉흥 시연.
 
 > 이전 주차 산출물 (week2~5) 은 포함하지 않습니다. 발표는 **bsvibe 라는 제품 자체** 에 집중.
 
@@ -26,8 +26,7 @@ bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대�
 10. **안에서 어떻게 굴러가나** — 소프트웨어 구조도 (3층 + 5단계 파이프라인) + 하단 부가 (LLM/커넥터/로그인)
 11. **남는 것 — 지식 · 스킬** (두 갈래 자산) + knowledge + skills 스크린샷
 12. 어디서든 — 웹 + 대표 커넥터 (GitHub · Slack · Discord · Notion · Email)
-13. 라이브 데모 cue
-14. 감사합니다 · Q&A
+13. 감사합니다 · Q&A (시간 남으면 즉흥 데모)
 
 내용은 모두 `bsvibe-app` 의 실제 코드와 정렬 (`backend/api/auth/routes.py`, `backend/api/v1/messages.py`, `backend/executors/worker/{claude_code,codex,opencode}.py`, `apps/pwa/components/{shell/DirectAction,deliverables/DeliveryReport}.tsx`, `apps/pwa/lib/api/brief.ts`). 발표 중 어느 청중이 "이게 실제로 그렇게 동작해요?" 라고 물어도 코드로 검증 가능.
 

@@ -375,28 +375,6 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 
 ---
 
-## 라이브 데모
-
-<div class="lead" style="text-align:center; margin-top:36px;">
-
-**app.bsvibe.dev**
-
-</div>
-
-<div style="text-align:center; margin-top:24px;">
-
-데모 흐름
-
-1. **요약** — 작업 중 / 결정 대기 / 지난 작업 한 화면
-2. **다이렉트** — 입력창에 한 줄
-3. **전달물 리포트** — 요청 → 만든 것 → 어떻게 확인했나 → 변경 코드
-4. **지식** — 학습된 지식 그래프 시각화
-5. **철회** — 잘못 학습한 노드 한 클릭 → 30 초 되돌리기 토스트
-
-</div>
-
----
-
 <div style="text-align:center; margin-top:180px;">
 
 # 감사합니다
