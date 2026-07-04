@@ -285,7 +285,7 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 <p class="sub">근거와 결과</p>
 </div>
 <div class="frame">
-<img src="assets/05_inside.png" alt="지식">
+<img src="assets/05_knowledge.png" alt="지식">
 <div class="n">5</div>
 <p class="cap">지식</p>
 <p class="sub">그래프에 반영</p>
