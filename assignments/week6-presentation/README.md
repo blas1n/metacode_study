@@ -23,12 +23,11 @@ bsvibe-app 제품 소개 발표 — 메타코드 부트캠프 학우/강사 대�
 7. 결정 (필요할 때만 + AI 가 답안 후보 제안) + decisions 스크린샷
 8. 안전 모드 — 승인 후에만 외부 나감
 9. 쓰던 LLM 도구를 그대로 — claude code / codex / opencode 결합
-10. **안에서 어떻게 굴러가나** — 컴포넌트 3층 + 요청 흐름 5단계
+10. **안에서 어떻게 굴러가나** — 소프트웨어 구조도 (3층 + 5단계 파이프라인) + 하단 부가 (LLM/커넥터/로그인)
 11. **남는 것 — 지식 · 스킬** (두 갈래 자산) + knowledge + skills 스크린샷
 12. 어디서든 — 웹 + 대표 커넥터 (GitHub · Slack · Discord · Notion · Email)
-13. 기술 스택 — 답변 생성은 추상화된 인터페이스 + Supabase 로그인
-14. 라이브 데모 cue
-15. 감사합니다 · Q&A
+13. 라이브 데모 cue
+14. 감사합니다 · Q&A
 
 내용은 모두 `bsvibe-app` 의 실제 코드와 정렬 (`backend/api/auth/routes.py`, `backend/api/v1/messages.py`, `backend/executors/worker/{claude_code,codex,opencode}.py`, `apps/pwa/components/{shell/DirectAction,deliverables/DeliveryReport}.tsx`, `apps/pwa/lib/api/brief.ts`). 발표 중 어느 청중이 "이게 실제로 그렇게 동작해요?" 라고 물어도 코드로 검증 가능.
 

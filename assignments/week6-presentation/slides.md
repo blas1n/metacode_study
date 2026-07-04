@@ -270,65 +270,58 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 ## 안에서 어떻게 굴러가나 — 소프트웨어 구조
 
 <style scoped>
-.sys { display:grid; grid-template-columns:1fr; gap:8px; margin-top:2px; }
-.layer { display:grid; grid-template-columns:130px 1fr; gap:12px; align-items:center; }
-.layer .lbl { color:#1e3a8a; font-size:0.82rem; font-weight:700; text-align:right; padding-right:6px; border-right:2px solid #cbd5e1; }
-.layer .row { display:flex; gap:8px; flex-wrap:wrap; }
-.box { flex:1 1 0; min-width:0; border:1px solid #cbd5e1; border-radius:8px; padding:7px 10px; background:#f8fafc; font-size:0.82rem; color:#334155; }
-.box b { color:#1e3a8a; display:block; font-size:0.85rem; margin-bottom:2px; }
-.box .m { color:#64748b; font-size:0.72rem; margin-top:2px; line-height:1.35; }
-.pipe { background:#eef2ff; border-color:#c7d2fe; }
+.sys { display:grid; grid-template-columns:1fr; gap:4px; margin-top:0; }
+.layer { display:grid; grid-template-columns:100px 1fr; gap:10px; align-items:center; }
+.layer .lbl { color:#1e3a8a; font-size:0.78rem; font-weight:700; text-align:right; padding-right:6px; border-right:2px solid #cbd5e1; }
+.layer .row { display:flex; gap:6px; flex-wrap:wrap; }
+.box { flex:1 1 0; min-width:0; border:1px solid #cbd5e1; border-radius:6px; padding:6px 9px; background:#f8fafc; font-size:0.78rem; color:#334155; line-height:1.35; }
+.box b { color:#1e3a8a; }
+.pipe { background:#eef2ff; border-color:#c7d2fe; text-align:center; }
 .pipe b { color:#4338ca; }
-.arrow { text-align:center; color:#94a3b8; font-size:0.8rem; margin:0; letter-spacing:6px; }
-.side { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.side .box { background:#fefce8; border-color:#fde68a; }
-.side .box b { color:#a16207; }
+.arrow { text-align:center; color:#94a3b8; font-size:0.75rem; margin:2px 0 2px 100px; letter-spacing:6px; }
+.notes { border-top:1px dashed #cbd5e1; margin-top:10px; padding-top:8px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.notes .n { font-size:0.75rem; color:#334155; line-height:1.4; }
+.notes .n b { color:#a16207; display:block; font-size:0.8rem; margin-bottom:2px; }
 </style>
 
 <div class="sys">
 
 <div class="layer">
 <div class="lbl">클라이언트</div>
-<div class="row">
-<div class="box"><b>PWA (Next.js)</b>요약 · 결정 · 지식 · 스킬 · 리포트<div class="m">모바일 우선 · 다이렉트 입력</div></div>
-</div>
+<div class="box"><b>PWA · Next.js 14</b> — 모바일 우선. 화면: 요약 · 결정 · 지식 · 스킬 · 리포트 · 다이렉트</div>
 </div>
 
-<p class="arrow">↓ HTTPS ↑</p>
+<p class="arrow">↕ HTTPS</p>
 
 <div class="layer">
-<div class="lbl">백엔드 파이프라인</div>
+<div class="lbl">백엔드</div>
 <div class="row">
-<div class="box pipe"><b>인테이크</b><div class="m">/messages 수신</div></div>
-<div class="box pipe"><b>프레이밍</b><div class="m">지식 답변 vs 실행 분기 + 도구 라우팅</div></div>
-<div class="box pipe"><b>실행</b><div class="m">계획·행동·확인 loop</div></div>
-<div class="box pipe"><b>검증</b><div class="m">약속 실행 → 관측 판정</div></div>
-<div class="box pipe"><b>전달</b><div class="m">리포트 · 지식 반영</div></div>
+<div class="box pipe"><b>인테이크</b></div>
+<div class="box pipe"><b>프레이밍</b></div>
+<div class="box pipe"><b>실행</b></div>
+<div class="box pipe"><b>검증</b></div>
+<div class="box pipe"><b>전달</b></div>
 </div>
 </div>
 
-<p class="arrow">↓  ↓  ↓</p>
-
-<div class="layer">
-<div class="lbl">사용자 등록 자원</div>
-<div class="side">
-<div class="box"><b>답변 LLM</b>API 키형 (openai · anthropic · ollama) · CLI 워커 (claude code · codex · opencode)</div>
-<div class="box"><b>외부 커넥터</b>GitHub · Slack · Discord · Notion · Email — 폴링/웹훅으로 인테이크 유입</div>
-</div>
-</div>
+<p class="arrow">↓</p>
 
 <div class="layer">
 <div class="lbl">저장소</div>
 <div class="row">
-<div class="box"><b>PostgreSQL</b><div class="m">사실 · 상태 · 감사 로그</div></div>
-<div class="box"><b>pgvector</b><div class="m">임베딩 (의미 검색)</div></div>
-<div class="box"><b>NetworkX</b><div class="m">지식 그래프</div></div>
+<div class="box"><b>PostgreSQL</b> — 사실 · 상태 · 감사</div>
+<div class="box"><b>pgvector</b> — 임베딩 (의미 검색)</div>
+<div class="box"><b>NetworkX</b> — 지식 그래프</div>
 </div>
 </div>
 
 </div>
 
-<p class="muted" style="margin-top:8px; font-size:0.78rem;">실행 엔진 · 도구 라우팅 · 안전 가드레일 · 기억 — 위 5 단계 파이프라인 안에 다 담겨 있음.</p>
+<div class="notes">
+<div class="n"><b>실행 단계가 호출</b>답변 LLM = 사용자 선택 (API 키형 openai · anthropic · ollama <b style="color:#334155;">또는</b> CLI 워커 claude code · codex · opencode)</div>
+<div class="n"><b>인테이크로 유입</b>커넥터 (GitHub · Slack · Discord · Notion · Email) 가 폴링·웹훅으로 자동 요청</div>
+<div class="n"><b>인증 · 임베딩</b>로그인 = Supabase · 임베딩 모델도 사용자 등록 (LiteLLM 기반)</div>
+</div>
 
 ---
 
@@ -378,24 +371,6 @@ bsvibe 가 LLM 을 강요하지 않습니다. **사용자가 이미 깔아 쓰�
 </div>
 
 <p class="muted" style="margin-top:18px">대부분 한 번 로그인 — 그 다음은 작업 공간이 알아서 폴링·웹훅 처리.</p>
-
----
-
-## 기술 스택 (간단)
-
-<style scoped>
-ul { margin: 6px 0; }
-li { margin: 3px 0; line-height: 1.45; font-size: 0.95rem; }
-li li { font-size: 0.9rem; }
-</style>
-
-- **웹 스택**: Next.js 14 PWA (Vercel) + FastAPI + PostgreSQL
-- **저장 · 검색**: pgvector · NetworkX · 세 갈래 랭킹 (의미 + 키워드 + 그래프)
-- **답변 생성**: 추상화된 인터페이스 — 사용자가 선택
-  - API 키 등록형 — openai · anthropic · ollama (LiteLLM)
-  - 내 컴퓨터의 CLI 워커 — claude code · codex · opencode
-- **임베딩**: 마찬가지로 사용자가 등록
-- **로그인**: Supabase
 
 ---
 
